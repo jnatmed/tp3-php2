@@ -9,7 +9,7 @@
         <form action="/save_data" method = 'POST'>
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
             <p>
-            <label for="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>
+            <label for  ="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>
             <?php if($campo['tipo'] == 'date'){ ?>  
               <input type="date" name='date' id='date' <?= $campo['obligatorio']?>>
             <?php }else if($campo['tipo'] == 'email'){ ?>  
@@ -31,7 +31,8 @@
                   for ($hora = $desde; $hora < $hasta; $hora++) {
                     for($min = 00; $min < 60; $min = $min + $intervalo) { ?>
                         <option value="<?= $hora?>:<?= $min?>"><?= $hora?>:<?= $min?></option>
-                <?php  } } ?>               
+                <?php  } } ?>        
+                <option value="<?= $hora?>:<?= $min?>"><?= $hora?>:00</option>       
                 </select>   
 
             <?php }else{ ?>

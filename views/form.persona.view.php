@@ -9,7 +9,7 @@
         <h1>Nombre del Paciente</h1>
     </header>
     <main>
-        <form action="/save_formulario" method = 'POST'>
+        <form action="/save_formulario" method = 'GET'>
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
             <p>
             <label for  ="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>

@@ -49,24 +49,24 @@ class form_controller
         // echo "<pre>";
         // var_dump($_POST);
         // exit(0);
-        $this->datos_reserva['nombre_paciente'] = $_POST['Nombre_del_Paciente'];
-        $this->datos_reserva['email'] = $_POST['Email'];
-        $this->datos_reserva['telefono'] = $_POST['Telefono'];
-        $this->datos_reserva['edad'] = intval($_POST['Edad']); 
-        $this->datos_reserva['talla_calzado'] = $_POST['Talla_de_calzado'];
-        $this->datos_reserva['altura'] = $_POST['Color_de_Pelo'];
-        $this->datos_reserva['fecha_nacimiento'] = $_POST['Fecha_de_nacimiento'];
-        $this->datos_reserva['color_pelo'] = $_POST['Color_de_pelo'];
-        $this->datos_reserva['fecha_turno'] = $_POST['Fecha_del_turno'];
-        $this->datos_reserva['hora_turno'] = $_POST['Horario_del_turno'];
+        $this->datos_reserva['nombre_paciente'] = $_GET['Nombre_del_Paciente'];
+        $this->datos_reserva['email'] = $_GET['Email'];
+        $this->datos_reserva['telefono'] = $_GET['Telefono'];
+        $this->datos_reserva['edad'] = intval($_GET['Edad']); 
+        $this->datos_reserva['talla_calzado'] = $_GET['Talla_de_calzado'];
+        $this->datos_reserva['altura'] = $_GET['Color_de_Pelo'];
+        $this->datos_reserva['fecha_nacimiento'] = $_GET['Fecha_de_nacimiento'];
+        $this->datos_reserva['color_pelo'] = $_GET['Color_de_pelo'];
+        $this->datos_reserva['fecha_turno'] = $_GET['Fecha_del_turno'];
+        $this->datos_reserva['hora_turno'] = $_GET['Horario_del_turno'];
 
         $this->planilla[] = $this->datos_reserva;
         $datos_mal_cargados = [];
 
         $fecha_actual = strtotime(date("d-m-Y",time()));
-        $fecha_turno = strtotime(date("d-m-Y",strtotime($_POST['Fecha_del_turno'])));
-        $fecha_nacimiento = date("d-m-Y H:i:00",strtotime($_POST['Fecha_de_nacimiento']));
-        $año_nacimiento = intval(date("o",strtotime($_POST['Fecha_de_nacimiento'])));
+        $fecha_turno = strtotime(date("d-m-Y",strtotime($_GET['Fecha_del_turno'])));
+        $fecha_nacimiento = date("d-m-Y H:i:00",strtotime($_GET['Fecha_de_nacimiento']));
+        $año_nacimiento = intval(date("o",strtotime($_GET['Fecha_de_nacimiento'])));
         $edad_ingresada = $this->datos_reserva['edad'];
         $año_actual = intval(date("o",time()));
         $dia_turno = date("l",$fecha_turno);

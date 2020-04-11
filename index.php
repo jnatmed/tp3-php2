@@ -14,7 +14,7 @@ $http_method = $_SERVER["REQUEST_METHOD"];
 // exit(0);
 
 
-if ($url_path == '/save_formulario' && $http_method == 'POST'){
+if ($url_path == '/save_formulario' && $http_method == 'GET'){
     $fController->guardarFormulario();
 }else if($url_path == '/' && $http_method == 'GET'){
     $fController->mostrarFormulario();

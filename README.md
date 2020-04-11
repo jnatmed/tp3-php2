@@ -21,7 +21,7 @@ que mejor se ajuste y permitan HTML y PHP. Además, tomar en cuenta de validar q
 ingresados se encuentren en los rangos especificados. ¿Por qué cree usted que se requiere validar
 los datos en ambos extremos de la comunicación?<br><br>
 
-<p>__Respuesta:__ La razon por la cual se requiere es que, del lado del cliente solo se pueden verificar 
+<p>Respuesta: La razon por la cual se requiere es que, del lado del cliente solo se pueden verificar 
 el formator de los datos, es decir, formato de fecha, de email, rango de datos acotados como altura, edad, etc.
 Pero lo que solo se puede verificar del lado del servidor es la consistencia de los mismos; un ejemplo de ello es
 la fecha de turno, se debe verificar que sea superior o igual a la actual, y asimismo que no sea un dia no laborable. 
@@ -29,6 +29,8 @@ Ademas se puede verificar relacion entre campos, como puede ser la edad y la fec
 
 2) Extienda el ejercicio anterior para que al enviar el formulario mediante el método POST se muestre
 al usuario un resumen del turno. <br><br>
+
+En el siguiente commit se encuentra realizada la resolucion de los puntos 1 y 2. 
 
 - https://github.com/jnatmed/tp2-php-paw/commit/30a74eff839939d449ddd4f2727f116267eb4609
 
@@ -43,3 +45,9 @@ POST.
 - https://github.com/jnatmed/tp2-php-paw/commit/cc8579347e386a09ef0065adb35bdd8cade79076
 
 
+4) Agregue al formulario un campo que permita adjuntar una imagen , y que la etiqueta del campo sea
+Diagnóstico. El campo debe validar que sea un tipo de imagen valido (.jpg o .png) y será optativo.
+La imagen debe almacenarse en un subdirectorio del proyecto y también debe mostrarse al
+usuario al mostrar el resumen del turno del ejercicio 2. ¿Qué sucede si 2 usuarios cargan imágenes
+con el mismo nombre de imagen? ¿Qué mecanismo implementar para evitar que un usuario
+sobrescriba una imagen con el mismo nombre?

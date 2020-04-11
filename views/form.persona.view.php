@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <title>Formulario de Datos del Paciente</title>
+    <head>
+        <title>Formulario de Datos del Paciente</title>
+    </head>
+    <?php include "views/panel_navegacion.php"; ?>
 <body>
     <header>
         <h1>Nombre del Paciente</h1>
     </header>
     <main>
-        <form action="/save_data" method = 'POST'>
+        <form action="/save_formulario" method = 'POST'>
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
             <p>
             <label for  ="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>
             <?php if($campo['tipo'] == 'date'){ ?>  
-              <input type="date" name='date' id='date' <?= $campo['obligatorio']?>>
+              <input type="date" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' <?= $campo['obligatorio']?>>
             <?php }else if($campo['tipo'] == 'email'){ ?>  
-              <input type="text" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' pattern = <?= $campo['restriccion']?> tittle = "ej: pepe@servidor.com" <?= $campo['obligatorio']?>>
-            <?php }else if($campo['tipo'] == 'telefono'){ ?>  
-              <input type="text" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' pattern = <?= $campo['restriccion']?> tittle = "ej: 11 3438 7233" <?= $campo['obligatorio']?>>
-            <?php }else if($campo['tipo'] == 'altura'){ ?>  
-              <input type="range" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' min="100" max="280" <?= $campo['obligatorio']?>>
+              <input type="text" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' pattern = <?= $campo['restriccion']?> placeholder = "ej: pepe@servidor.com" <?= $campo['obligatorio']?>>
+            <?php }else if($campo['tipo'] == 'tel'){ ?>  
+            
+              <label for="phone">Ingrese el Nro de Telefono:</label><br><br>
+              <input type="tel" id="<?= $campo['nombre_campo']?>" name="<?= $campo['nombre_campo']?>" placeholder="011-3438-7233" pattern="<?= $campo['restriccion']?>" <?= $campo['obligatorio']?>><br><br>
+              <small>Formato: 011-3438-7233</small><br><br>
+
+            <?php }else if($campo['tipo'] == 'altura'){ 
+              list($min,$max) = explode("-",$campo['restriccion'])
+              ?>  
+              <input type="range" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' placeholder="Entre {<?= $min?>} y {<?= $max?>}" min="100" max="280" <?= $campo['obligatorio']?>>
             <?php }else if($campo['tipo'] == 'calzado' || $campo['tipo'] == 'edad' ){ 
               list($min, $max) = explode("-",$campo['restriccion']);
               ?>  
               <input type="number" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' min="<?= $min?>" max="<?= $max?>" <?= $campo['obligatorio']?>>
-            <?php }else if($campo['tipo'] == 'color'){ ?>  
-              <input type="color" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' value="#ff0000" <?= $campo['obligatorio']?>>
+            <?php }else if($campo['tipo'] == 'pelo'){ ?>  
+              <select name="<?= $campo['nombre_campo']?>">
+               <?php $pelo = explode("-",$campo['restriccion']); 
+                       foreach ($pelo as $color):?>
+                          <option value="<?= $color?>"><?= $color?></option>
+                <?php  endforeach  ?>        
+              </select>   
             <?php }else if($campo['tipo'] == 'horario_turno'){ ?>  
               <select name="<?= $campo['nombre_campo']?>">
                <?php 

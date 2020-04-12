@@ -1,8 +1,10 @@
 <?php
 
 include 'controlador/imagenController.php';
+// include 'controlador/planilla.turnos.controller.php';
 
 use \App\controlador\imagenController;
+use \App\controlador\planillaTurnosController;
 
 class form_controller
 {
@@ -10,12 +12,26 @@ class form_controller
     public $tipo_restriccion = [];
     public $datos_reserva = [];
     public $planilla = [];
-    public $dirImg = "";
+    public $planillaController = "";
 
 
-    public function listar_datos()
-    {
-        include "views/form.persona.view.php";
+    public function carga_arreglo($datosTurno, $pathImg = "")
+    {        
+        $this->datos_reserva['nombre_paciente'] = $datosTurno['Nombre_del_Paciente'];
+        $this->datos_reserva['email'] = $datosTurno['Email'];
+        $this->datos_reserva['telefono'] = $datosTurno['Telefono'];
+        $this->datos_reserva['edad'] = intval($datosTurno['Edad']); 
+        $this->datos_reserva['talla_calzado'] = $datosTurno['Talla_de_calzado'];
+        $this->datos_reserva['altura'] = $datosTurno['Color_de_pelo'];
+        $this->datos_reserva['fecha_nacimiento'] = $datosTurno['Fecha_de_nacimiento'];
+        $this->datos_reserva['color_pelo'] = $datosTurno['Color_de_pelo'];
+        $this->datos_reserva['fecha_turno'] = $datosTurno['Fecha_del_turno'];
+        $this->datos_reserva['hora_turno'] = $datosTurno['Horario_del_turno'];
+        if ($pathImg == ''){
+            $this->datos_reserva['dir_img'] = $datosTurno['dir_img'];
+        }else{
+            $this->datos_reserva['dir_img'] = $pathImg;
+        }
     }
 
     public function mostrarFormulario()
@@ -36,7 +52,7 @@ class form_controller
         // var_dump($this->lista_datos[5]['nombre_campo']);
         // exit(0);
 
-        $this->listar_datos();
+        include "views/form.persona.view.php";
     }
 
     public function agregar_dato($nombre_campo, $obligatorio = '', $tipo, $restriccion='')
@@ -52,23 +68,14 @@ class form_controller
         // echo "<pre>";
         // var_dump($_POST);
         // exit(0);
-        $this->datos_reserva['nombre_paciente'] = $_POST['Nombre_del_Paciente'];
-        $this->datos_reserva['email'] = $_POST['Email'];
-        $this->datos_reserva['telefono'] = $_POST['Telefono'];
-        $this->datos_reserva['edad'] = intval($_POST['Edad']); 
-        $this->datos_reserva['talla_calzado'] = $_POST['Talla_de_calzado'];
-        $this->datos_reserva['altura'] = $_POST['Color_de_pelo'];
-        $this->datos_reserva['fecha_nacimiento'] = $_POST['Fecha_de_nacimiento'];
-        $this->datos_reserva['color_pelo'] = $_POST['Color_de_pelo'];
-        $this->datos_reserva['fecha_turno'] = $_POST['Fecha_del_turno'];
-        $this->datos_reserva['hora_turno'] = $_POST['Horario_del_turno'];
-
         $datos_mal_cargados = [];
 
+        $this->carga_arreglo($_POST);
+
         $fecha_actual = strtotime(date("d-m-Y",time()));
-        $fecha_turno = strtotime(date("d-m-Y",strtotime($_GET['Fecha_del_turno'])));
-        $fecha_nacimiento = date("d-m-Y H:i:00",strtotime($_GET['Fecha_de_nacimiento']));
-        $año_nacimiento = intval(date("o",strtotime($_GET['Fecha_de_nacimiento'])));
+        $fecha_turno = strtotime(date("d-m-Y",strtotime($_POST['Fecha_del_turno'])));
+        $fecha_nacimiento = date("d-m-Y H:i:00",strtotime($_POST['Fecha_de_nacimiento']));
+        $año_nacimiento = intval(date("o",strtotime($_POST['Fecha_de_nacimiento'])));
         $edad_ingresada = $this->datos_reserva['edad'];
         $año_actual = intval(date("o",time()));
         $dia_turno = date("l",$fecha_turno);
@@ -102,7 +109,7 @@ class form_controller
             $this->datos_mal_cargados[] = 'tipo de archivo no permitido';
         }
 
-        $this->datos_reserva['dir_img'] = $imgController->getTargetFile();;    
+        $this->datos_reserva['dir_img'] = $imgController->getTargetFile();
 
         $this->planilla[] = $this->datos_reserva;
 
@@ -110,10 +117,12 @@ class form_controller
     }
 
     public function reservarTurno()
-    {
-        echo "<pre>";
-        var_dump($_POST);
-        exit(0);
+    {        
+        $this->carga_arreglo($_POST);
+        $this->planillaController = new planillaTurnosController;
+
+        $this->planillaController->guardarTurnoConfirmado($this->datos_reserva);
+        $this->planillaController->verPlanillaTurnos();
     }
 }
 

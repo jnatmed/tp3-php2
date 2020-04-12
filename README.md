@@ -42,6 +42,9 @@ los datos del usuario viajan mediante la URL del usuario. Dependiendo del caso, 
 no es sensible, se puede optar por usar un metodo de envio mediante GET, caso constrario debe usarse
 POST. 
 
+Un detalle no menor para agregar, es que si en el formulario se agrega la insercion de una imagen
+no se puede usar el metodo GET para el envio de la misma, en este caso el uso de POST es obligatorio.   
+
 - https://github.com/jnatmed/tp2-php-paw/commit/cc8579347e386a09ef0065adb35bdd8cade79076
 
 
@@ -51,3 +54,4 @@ La imagen debe almacenarse en un subdirectorio del proyecto y también debe most
 usuario al mostrar el resumen del turno del ejercicio 2. ¿Qué sucede si 2 usuarios cargan imágenes
 con el mismo nombre de imagen? ¿Qué mecanismo implementar para evitar que un usuario
 sobrescriba una imagen con el mismo nombre?
+

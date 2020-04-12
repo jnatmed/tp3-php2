@@ -9,7 +9,7 @@
         <h1>Nombre del Paciente</h1>
     </header>
     <main>
-        <form action="/save_formulario" method = 'GET'>
+        <form action="/save_formulario" method = 'POST' enctype="multipart/form-data">
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
             <p>
             <label for  ="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>
@@ -54,6 +54,9 @@
             <?php } ?>                
             </p>
             <?php  endforeach?>  
+            
+            <input type="file" name="imagen_receta" id="imagen_receta"> <br><br>
+
             <input type="submit" name='enviar' value="Enviar">
             <input type="reset" name='limpiar' value="Limpiar">
         </form>

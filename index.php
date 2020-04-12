@@ -16,6 +16,8 @@ $http_method = $_SERVER["REQUEST_METHOD"];
 
 if ($url_path == '/save_formulario' && $http_method == 'POST'){
     $fController->guardarFormulario();
+}else if($url_path == '/turno_confirmado' && $http_method == 'POST'){
+    $fController->reservarTurno();
 }else if($url_path == '/' && $http_method == 'GET'){
     $fController->mostrarFormulario();
 }else {

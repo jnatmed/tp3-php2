@@ -1,5 +1,8 @@
 <?php
 
+include 'controlador/imagenController.php';
+
+use \App\controlador\imagenController;
 
 class form_controller
 {
@@ -7,7 +10,7 @@ class form_controller
     public $tipo_restriccion = [];
     public $datos_reserva = [];
     public $planilla = [];
-    
+    public $dirImg = "";
 
 
     public function listar_datos()
@@ -54,13 +57,12 @@ class form_controller
         $this->datos_reserva['telefono'] = $_POST['Telefono'];
         $this->datos_reserva['edad'] = intval($_POST['Edad']); 
         $this->datos_reserva['talla_calzado'] = $_POST['Talla_de_calzado'];
-        $this->datos_reserva['altura'] = $_POST['Color_de_Pelo'];
+        $this->datos_reserva['altura'] = $_POST['Color_de_pelo'];
         $this->datos_reserva['fecha_nacimiento'] = $_POST['Fecha_de_nacimiento'];
         $this->datos_reserva['color_pelo'] = $_POST['Color_de_pelo'];
         $this->datos_reserva['fecha_turno'] = $_POST['Fecha_del_turno'];
         $this->datos_reserva['hora_turno'] = $_POST['Horario_del_turno'];
 
-        $this->planilla[] = $this->datos_reserva;
         $datos_mal_cargados = [];
 
         $fecha_actual = strtotime(date("d-m-Y",time()));
@@ -90,9 +92,28 @@ class form_controller
         if( $fecha_actual > $fecha_turno){ // que sea superior a la fecha actual
             $this->datos_mal_cargados[] = 'la fecha del turno debe ser superior o igual al dia actual';    
         }
-        // exit(0);
+
+        $imgController = new imagenController($_FILES);
     
+        if ($imgController->tipoImagenValida()){
+            // var_dump($imgController);
+            move_uploaded_file($imgController->getDirTemp(),$imgController->getTargetFile());
+        }else{
+            $this->datos_mal_cargados[] = 'tipo de archivo no permitido';
+        }
+
+        $this->datos_reserva['dir_img'] = $imgController->getTargetFile();;    
+
+        $this->planilla[] = $this->datos_reserva;
+
         include "views/reserva.turno.view.php";
+    }
+
+    public function reservarTurno()
+    {
+        echo "<pre>";
+        var_dump($_POST);
+        exit(0);
     }
 }
 

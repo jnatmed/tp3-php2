@@ -32,7 +32,11 @@ class imagenController
     }
     public function getTargetFile()
     {
-        return $this->target_file;;
+        return $this->target_file;
+    }
+    public function guardarImagen(){
+        return move_uploaded_file($this->getDirTemp(),$this->getTargetFile());
+
     }
 
 }

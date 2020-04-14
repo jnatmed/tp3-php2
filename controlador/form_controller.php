@@ -104,25 +104,29 @@ class form_controller
     
         if ($imgController->tipoImagenValida()){
             // var_dump($imgController);
-            move_uploaded_file($imgController->getDirTemp(),$imgController->getTargetFile());
+            // move_uploaded_file($imgController->getDirTemp(),$imgController->getTargetFile());
+            $this->datos_reserva['dir_img'] = $imgController->getDirTemp();            
         }else{
             $this->datos_mal_cargados[] = 'tipo de archivo no permitido';
         }
-
-        $this->datos_reserva['dir_img'] = $imgController->getTargetFile();
-
-        $this->planilla[] = $this->datos_reserva;
 
         include "views/reserva.turno.view.php";
     }
 
     public function reservarTurno()
-    {        
-        $this->carga_arreglo($_POST);
+    {   
+        $imgController->guardarImagen();
+        $this->carga_arreglo($_POST,$imgController->getTargetFile());
         $this->planillaController = new planillaTurnosController;
-
         $this->planillaController->guardarTurnoConfirmado($this->datos_reserva);
         $this->planillaController->verPlanillaTurnos();
+    }
+
+    public function verTurnoReservado()
+    {
+        echo "<pre>";
+        var_dump($_POST);
+        exit(0);
     }
 }
 

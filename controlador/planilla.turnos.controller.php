@@ -8,6 +8,7 @@ class planillaTurnosController
     public $pathTurnos = "baseDatosTurnos/planillaTurnos.json";
     public $tamaño_planilla = 0;
     public $archivoTurnos = "";
+    public $turno = [];
 
     public function __construct()
     {
@@ -18,10 +19,8 @@ class planillaTurnosController
 
     }
 
-
     public function guardarTurnoConfirmado($turno)
     {
-        
         $this->planillaTurnos[count($this->planillaTurnos)+1] = $turno;
         $json_planillaTurnos = json_encode($this->planillaTurnos);
         file_put_contents($this->pathTurnos, $json_planillaTurnos);
@@ -32,6 +31,22 @@ class planillaTurnosController
 
         include "views/planilla.turnos.view.php";
     }
+
+    public function cargarTurno($id_turno)
+    {
+        $this->turno[] = $this->planillaTurnos[intval($id_turno)];
+        // echo "<pre>";
+        // var_dump($this->turno);
+        // var_dump($this->planillaTurnos);
+        // exit(0);
+    }
+
+    public function verTurnoReservado()
+    {
+        $this->cargarTurno($_POST['id_turno']);
+        include "views/turno.reservado.view.php";
+    }
+
 
 }
 

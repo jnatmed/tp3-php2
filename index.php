@@ -18,6 +18,8 @@ if ($url_path == '/save_formulario' && $http_method == 'POST'){
     $fController->reservarTurno();
 }else if($url_path == '/planilla_turnos' && $http_method == 'GET'){
     $planillaTurnos->verPlanillaTurnos();
+}else if($url_path == '/ver_turno_reservado' && $http_method == 'POST'){
+    $planillaTurnos->verTurnoReservado();
 }else if($url_path == '/' && $http_method == 'GET'){
     $fController->mostrarFormulario();
 }else {

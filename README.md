@@ -55,3 +55,12 @@ usuario al mostrar el resumen del turno del ejercicio 2. ¿Qué sucede si 2 usua
 con el mismo nombre de imagen? ¿Qué mecanismo implementar para evitar que un usuario
 sobrescriba una imagen con el mismo nombre?
 
+¿Qué sucede si 2 usuarios cargan imágenes con el mismo nombre de imagen?
+Pude notar que efectivamente la imagen se sobreescribe, si dos usuarios suben una imagen con el 
+mismo nombre. 
+¿Qué mecanismo implementar para evitar que un usuario sobrescriba una imagen con el mismo nombre?
+Una forma de hacerlo es concatenar "la fecha del turno" + "la hora del turno" y pasarlo por una 
+funcion HASH, usando el modulo "md5" de php; de esta forma evitando que dos pacientes reserven un turno
+en la misma fecha y hora, que eso ya forma parte de las primeras  restricciones en carga de datos, 
+se independiza el nombre con que cargue la imagen de la receta, ya que sera cambiada por una manejada 
+por el sistema. 

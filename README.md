@@ -64,3 +64,8 @@ funcion HASH, usando el modulo "md5" de php; de esta forma evitando que dos paci
 en la misma fecha y hora, que eso ya forma parte de las primeras  restricciones en carga de datos, 
 se independiza el nombre con que cargue la imagen de la receta, ya que sera cambiada por una manejada 
 por el sistema. <br></p>
+
+5) Utilice las herramientas para desarrollador del navegador y observe cómo fueron codificados por
+el navegador los datos enviados por el navegador en los dos ejercicios anteriores. ¿Qué diferencia
+nota?
+

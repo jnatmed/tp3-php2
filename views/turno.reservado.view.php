@@ -12,13 +12,25 @@
                 <td>Nombre del Paciente</td>
                 <td>Telefono</td>
                 <td>Email</td>
+
+                <td>Edad</td>
+                <td>Talla del Calzado</td>
+                <td>Fecha de Nacimiento</td>
+                <td>Color de Pelo</td>
+                <td>Receta Cargada</td>
             </tr>
                 <tr>
                     <td><?= $this->turno[0]['fecha_turno'];?></td>
                     <td><?= $this->turno[0]['hora_turno'];?></td> 
                     <td><?= $this->turno[0]['nombre_paciente']; ?></td> 
                     <td><?= $this->turno[0]['telefono'];?></td>
-                    <td><?= $this->turno[0]['email']; ?></td>                    
+                    <td><?= $this->turno[0]['email']; ?></td> 
+
+                    <td><?= $this->turno[0]['edad']; ?></td>                
+                    <td><?= $this->turno[0]['talla_calzado']; ?></td>                
+                    <td><?= $this->turno[0]['fecha_nacimiento']; ?></td>                
+                    <td><?= $this->turno[0]['color_pelo']; ?></td>                
+                    <td><img src='<?= $this->turno[0]['dir_img']; ?>' alt="imagen" width="500" height="333"></td>
                 </tr>
         </table>
     </body>

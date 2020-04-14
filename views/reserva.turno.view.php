@@ -19,7 +19,7 @@
                     <td>Horario del Turno</td>
                     <td>Receta Cargada</td>
                 </tr>
-                <?php $turno = $this->planilla[0];?>
+                <?php $turno = $this->datos_reserva;?>
                 <tr>
                     <td><?= $turno['nombre_paciente']; ?></td> 
                     <td><?= $turno['email']; ?></td>

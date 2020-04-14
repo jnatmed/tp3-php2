@@ -13,7 +13,7 @@ class form_controller
     public $datos_reserva = [];
     public $planilla = [];
     public $planillaController = "";
-
+    public $imgController = NULL;
 
     public function carga_arreglo($datosTurno, $pathImg = "")
     {        
@@ -27,11 +27,7 @@ class form_controller
         $this->datos_reserva['color_pelo'] = $datosTurno['Color_de_pelo'];
         $this->datos_reserva['fecha_turno'] = $datosTurno['Fecha_del_turno'];
         $this->datos_reserva['hora_turno'] = $datosTurno['Horario_del_turno'];
-        if ($pathImg == ''){
-            $this->datos_reserva['dir_img'] = $datosTurno['dir_img'];
-        }else{
-            $this->datos_reserva['dir_img'] = $pathImg;
-        }
+        $this->datos_reserva['dir_img'] = $pathImg;        
     }
 
     public function mostrarFormulario()
@@ -100,34 +96,35 @@ class form_controller
             $this->datos_mal_cargados[] = 'la fecha del turno debe ser superior o igual al dia actual';    
         }
 
-        $imgController = new imagenController($_FILES);
+        $this->imgController = new imagenController($_FILES,$this->datos_reserva['fecha_turno'],$this->datos_reserva['hora_turno']);
     
-        if ($imgController->tipoImagenValida()){
+        if ($this->imgController->tipoImagenValida()){
             // var_dump($imgController);
-            // move_uploaded_file($imgController->getDirTemp(),$imgController->getTargetFile());
-            $this->datos_reserva['dir_img'] = $imgController->getDirTemp();            
+            move_uploaded_file($this->imgController->getDirTemp(),$this->imgController->getTargetFile());
+            $this->datos_reserva['dir_img'] = $this->imgController->getTargetFile();            
         }else{
             $this->datos_mal_cargados[] = 'tipo de archivo no permitido';
         }
 
+        // echo ("<pre>");
+        // var_dump($imgController);
+        // var_dump($_POST);
+        // var_dump($_FILES);
+        // exit(0);
         include "views/reserva.turno.view.php";
     }
 
     public function reservarTurno()
     {   
-        $imgController->guardarImagen();
-        $this->carga_arreglo($_POST,$imgController->getTargetFile());
+        // $this->imgController->guardarImagen();
+        // move_uploaded_file($this->imgController->getDirTemp(),$this->imgController->getTargetFile());
+
+        $this->carga_arreglo($_POST,$_POST['dir_img']);
         $this->planillaController = new planillaTurnosController;
         $this->planillaController->guardarTurnoConfirmado($this->datos_reserva);
         $this->planillaController->verPlanillaTurnos();
     }
 
-    public function verTurnoReservado()
-    {
-        echo "<pre>";
-        var_dump($_POST);
-        exit(0);
-    }
 }
 
 ?>

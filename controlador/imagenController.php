@@ -8,12 +8,14 @@ class imagenController
     public $target_file = "";
     public $tiposPermitidos = ['jpg','png','jpeg'];
     public $dirTemp = "";
+    public $nombreImagenMd5 = "";
 
-    public function __construct($array_FILES)
+    public function __construct($array_FILES,$fechaTurno, $horaTurno)
     {
         $this->dirTemp = $array_FILES['imagen_receta']['tmp_name'];
-        $this->target_file = $this->target_dir.basename($array_FILES['imagen_receta']['name']);
-        $this->tipoImagen = strtolower(pathinfo($this->target_file,PATHINFO_EXTENSION));
+        $this->nombreImagenMd5 = md5($fechaTurno.$horaTurno);
+        $this->tipoImagen = strtolower(pathinfo(basename($array_FILES['imagen_receta']['name']),PATHINFO_EXTENSION));
+        $this->target_file = $this->target_dir.$this->nombreImagenMd5.'.'.$this->tipoImagen;
     }
     
     public function tipoImagenValida()

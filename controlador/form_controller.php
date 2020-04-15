@@ -48,11 +48,6 @@ class form_controller
         $this->agregar_dato('Fecha del turno', 'required','date');
         $this->agregar_dato('Horario del turno', '', 'horario_turno','8-17-15');
         
-        // echo "<pre>";
-        // var_dump($this->lista_datos[5]['tipo']);
-        // var_dump($this->lista_datos[5]['nombre_campo']);
-        // exit(0);
-
         include "views/form.persona.view.php";
     }
 
@@ -66,9 +61,7 @@ class form_controller
     }
   
     public function guardarFormulario(){
-        // echo "<pre>";
-        // var_dump($_POST);
-        // exit(0);
+
         $datos_mal_cargados = [];
 
         $this->carga_arreglo($_POST);
@@ -81,16 +74,6 @@ class form_controller
         $año_actual = intval(date("o",time()));
         $dia_turno = date("l",$fecha_turno);
 
-        // echo "<pre>";
-        // var_dump($fecha_actual);
-        // var_dump($fecha_turno);
-        // var_dump($fecha_nacimiento);
-        // var_dump($dia_turno);
-        // var_dump($edad_ingresada);
-        // var_dump($año_nacimiento);
-        // var_dump($año_actual);
-        // var_dump($_POST['Fecha_del_turno']);
-
         if (($edad_ingresada + $año_nacimiento) < $año_actual){ // comprobar edad y fecha nacimiento
             $this->datos_mal_cargados[] = '#ERROR EDAD FECHA NACIMIENTO: la edad debe ser consistente con la fecha de nacimiento';
         }
@@ -101,11 +84,11 @@ class form_controller
             $this->datos_mal_cargados[] = '#ERROR FECHA TURNO: la fecha del turno debe ser superior o igual al dia actual';    
         }
 
-        if ($_FILES['size'] <> 0){
+
+        if ($_FILES['imagen_receta']['size'] <> 0){
             $this->imgController = new imagenController($_FILES,$this->datos_reserva['fecha_turno'],$this->datos_reserva['hora_turno']);
         
             if ($this->imgController->tipoImagenValida()){
-                // var_dump($imgController);
                 move_uploaded_file($this->imgController->getDirTemp(),$this->imgController->getTargetFile());
                 $this->datos_reserva['dir_img'] = $this->imgController->getTargetFile();            
             }else{
@@ -113,30 +96,19 @@ class form_controller
             }
 
         }else{
-            $this->datos_mal_cargados[] = "Imagen no cargada";
+            echo("Imagen no cargada");
         } 
 
         if ($this->planillaController->buscarFechaTurno($this->datos_reserva['fecha_turno'],$this->datos_reserva['hora_turno'])){
             $this->datos_mal_cargados[] =  "#ERROR FECHA Y HORA TURNO: La fecha y turno cargados ya fueron asignados a otro paciente.";    
         }
         
-        // echo ("<pre>");
-        // var_dump($this->imgController);
-        // var_dump($_POST);
-        // var_dump($_FILES);
-        // var_dump($this->datos_mal_cargados);
-        // exit(0);
 
         include "views/reserva.turno.view.php";
     }
 
     public function reservarTurno()
     {   
-        // $this->imgController->guardarImagen();
-        // move_uploaded_file($this->imgController->getDirTemp(),$this->imgController->getTargetFile());
-        // echo ("<pre>");
-        // var_dump($_POST);
-        // exit(0);
         if (array_key_exists('enviar',$_POST)){
             $this->carga_arreglo($_POST,$_POST['dir_img']);
             $this->planillaController->guardarTurnoConfirmado($this->datos_reserva);

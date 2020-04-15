@@ -56,8 +56,7 @@
             <?php endforeach; ?>
             </ul>
         <?php }else{ ?>
-                <input type="submit" name='enviar' value="Confirmar Turno" disabled>
-                <input type="submit" name='cancelar' value="Cancelar Turno">
+                <input type="submit" name='enviar' value="Confirmar Turno">
             </form>    
 
            <?php echo "<h1>Datos correctamente cargados</h1>";} ?>

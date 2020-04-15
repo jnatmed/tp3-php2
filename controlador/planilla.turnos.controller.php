@@ -14,9 +14,6 @@ class planillaTurnosController
     {
         $this->archivoTurnos = file_get_contents($this->pathTurnos);
         $this->planillaTurnos = json_decode($this->archivoTurnos, true);
-        // $this->$tamaño_planilla = count($this->planillaTurnos);
-        // var_dump(count($this->planillaTurnos));    
-
     }
 
     public function guardarTurnoConfirmado($turno)
@@ -35,10 +32,6 @@ class planillaTurnosController
     public function cargarTurno($id_turno)
     {
         $this->turno[] = $this->planillaTurnos[intval($id_turno)];
-        // echo "<pre>";
-        // var_dump($this->turno);
-        // var_dump($this->planillaTurnos);
-        // exit(0);
     }
 
     public function verTurnoReservado()
@@ -51,8 +44,6 @@ class planillaTurnosController
     {
         $existeTurno = false;
         foreach ($this->planillaTurnos as $id_turno => $turno):
-            // echo ("<pre>");
-            // var_dump($turno);
 
             if ($turno['fecha_turno'] == $fecha_turno && $turno['hora_turno'] == $hora_turno)
             {

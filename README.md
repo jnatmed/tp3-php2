@@ -103,7 +103,7 @@ que necesita mas de 15 min por cita. </p>
 <p>Aqui se puede ver la modificacion, con la implementacion del JSON. Aunque el codigo ya completo se encuentra en <br>
 el commit del siguiente punto.</p>
 
-https://github.com/jnatmed/tp2-php-paw/commit/f45dbfce76ee2ae709a3483c2d1ec42989764d1c
+- https://github.com/jnatmed/tp2-php-paw/commit/f45dbfce76ee2ae709a3483c2d1ec42989764d1c
 
 7) Construya la vista de ficha de turno . Dicha vista debe permitir acceder al turno y mostrar todos sus <br>
 datos, recuperados del mecanismo de persistencia elaborado en el punto anterior. ¿Cómo se  <br>

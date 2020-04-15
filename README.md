@@ -27,6 +27,10 @@ Pero lo que solo se puede verificar del lado del servidor es la consistencia de 
 la fecha de turno, se debe verificar que sea superior o igual a la actual, y asimismo que no sea un dia no laborable. 
 Ademas se puede verificar relacion entre campos, como puede ser la edad y la fecha de nacimiento, deben ser consistentes.</p>
 
+<p>Nota: La hora del Turno no esta tildada como obligatoria, sin embargo para la implementacion del codigo<br>
+que arme, la considere como obligatoria. las razones son que del lado del servidor, debo evitar que <br>
+se reserve un turno en la misma fecha y hora, y la carga de la hora debe estar siempre, a mi consideracion.</p>
+
 2) Extienda el ejercicio anterior para que al enviar el formulario mediante el método POST se muestre
 al usuario un resumen del turno. <br><br>
 
@@ -44,6 +48,8 @@ POST.
 
 Un detalle no menor para agregar, es que si en el formulario se agrega la insercion de una imagen
 no se puede usar el metodo GET para el envio de la misma, en este caso el uso de POST es obligatorio.   
+
+Utilizando las herramientas de Navegador (Pestaña Red), se puede observar que la informacion viaja en el encabezado, mediante GET. 
 
 - https://github.com/jnatmed/tp2-php-paw/commit/cc8579347e386a09ef0065adb35bdd8cade79076
 
@@ -69,3 +75,9 @@ por el sistema. <br></p>
 el navegador los datos enviados por el navegador en los dos ejercicios anteriores. ¿Qué diferencia
 nota?
 
+<p>Se puede notar en la pestaña de red que cuando se envia el formulario mediante POST, los datos viajan <br>
+en el cuerpo de la peticion, se puede ver en el request payload. <br></p>
+
+<img src='img/punto5-tp2-php.png' alt="imagen" width="500" height="333">
+
+<p> mientras que en una peticion GET se puede observar que los datos viajan en la URL de la peticion. </p>

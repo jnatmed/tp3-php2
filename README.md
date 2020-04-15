@@ -81,3 +81,27 @@ en el cuerpo de la peticion, se puede ver en el request payload. <br></p>
 <img src='img/punto5-tp2-php.png' alt="imagen" width="auto" height="333">
 
 <p> mientras que en una peticion GET se puede observar que los datos viajan en la URL de la peticion. </p>
+
+6) Agregar persistencia al sistema de turnos. Todos los datos del formulario deben almacenarse <br>
+mediante algún mecanismo para poder ser recuperados posteriormente. Crear una nueva vista que <br>
+le permita a un empleado administrativo visualizar todos los turnos en una tabla. La tabla debe <br>
+incluir los siguientes campos: <br>
+    a) Fecha del turno <br>
+    b) Hora del turno <br>
+    c) Nombre del paciente <br>
+    d) Teléfono <br>
+    e) Email <br>
+    f) Link a la ficha del turno (la ficha se implementa en el siguiente punto) Esta página y la del <br>
+     formulario del punto 2 deben contar con una barra de navegación que permita ir a una u otra pantalla.<br>
+Además, al procesar el formulario en el lado servidor, el sistema asigne un número de turno (que no debe repetirse). <br>
+Para generar el sistema de persistencia, se aconseja estudiar algún mecanismo de serialización de datos. <br>
+¿Cómo relaciona la imagen del turno con los datos del turno? Comente alternativas que evaluó y opción elegida. <br>
+
+<p>RESPUESTA: </p>
+
+7) Construya la vista de ficha de turno . Dicha vista debe permitir acceder al turno y mostrar todos sus <br>
+datos, recuperados del mecanismo de persistencia elaborado en el punto anterior. ¿Cómo se  <br>
+identifica y discrimina un turno de otro? Debe funcionar el link a la ficha que se encuentra en la <br>
+tabla de turnos. Recuerde agregar un enlace para volver a la tabla de turnos. <br>
+
+<p>RESPUESTA: </p>

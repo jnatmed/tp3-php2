@@ -78,6 +78,6 @@ nota?
 <p>Se puede notar en la pestaña de red que cuando se envia el formulario mediante POST, los datos viajan <br>
 en el cuerpo de la peticion, se puede ver en el request payload. <br></p>
 
-<img src='img/punto5-tp2-php.png' alt="imagen" width="500" height="333">
+<img src='img/punto5-tp2-php.png' alt="imagen" width="auto" height="333">
 
 <p> mientras que en una peticion GET se puede observar que los datos viajan en la URL de la peticion. </p>

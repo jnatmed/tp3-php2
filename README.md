@@ -97,11 +97,20 @@ Además, al procesar el formulario en el lado servidor, el sistema asigne un nú
 Para generar el sistema de persistencia, se aconseja estudiar algún mecanismo de serialización de datos. <br>
 ¿Cómo relaciona la imagen del turno con los datos del turno? Comente alternativas que evaluó y opción elegida. <br>
 
-<p>RESPUESTA: </p>
+<p>RESPUESTA: la imagen del turno la relaciono mediante la fecha del turno y la hora del turno, que son las claves<br> 
+para la asignacion del mismo a un paciente. Ya que los demas datos pueden repetirse, si se trata de un mismo paciente <br>
+que necesita mas de 15 min por cita. </p>
+<p>Aqui se puede ver la modificacion, con la implementacion del JSON. Aunque el codigo ya completo se encuentra en <br>
+el commit del siguiente punto.</p>
+
+https://github.com/jnatmed/tp2-php-paw/commit/f45dbfce76ee2ae709a3483c2d1ec42989764d1c
 
 7) Construya la vista de ficha de turno . Dicha vista debe permitir acceder al turno y mostrar todos sus <br>
 datos, recuperados del mecanismo de persistencia elaborado en el punto anterior. ¿Cómo se  <br>
 identifica y discrimina un turno de otro? Debe funcionar el link a la ficha que se encuentra en la <br>
 tabla de turnos. Recuerde agregar un enlace para volver a la tabla de turnos. <br> 
 
-<p>RESPUESTA: </p>
+<p>RESPUESTA: Cada turno lo discrimine, mediante una numeracion de 0 a n. Lo correcto hubiera sido <br>
+discriminarlo por fecha y hora del turno, los demas datos pueden variar</p>
+
+- https://github.com/jnatmed/tp2-php-paw/commit/90d83ad2cd388e7c26763409b881ad4336e7248f

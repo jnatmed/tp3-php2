@@ -99,9 +99,9 @@ Para generar el sistema de persistencia, se aconseja estudiar algún mecanismo d
 
 <p>RESPUESTA: </p>
 
-7) <h3>Construya la vista de ficha de turno . Dicha vista debe permitir acceder al turno y mostrar todos sus <br>
+7) Construya la vista de ficha de turno . Dicha vista debe permitir acceder al turno y mostrar todos sus <br>
 datos, recuperados del mecanismo de persistencia elaborado en el punto anterior. ¿Cómo se  <br>
 identifica y discrimina un turno de otro? Debe funcionar el link a la ficha que se encuentra en la <br>
-tabla de turnos. Recuerde agregar un enlace para volver a la tabla de turnos. <br> </h3>
+tabla de turnos. Recuerde agregar un enlace para volver a la tabla de turnos. <br> 
 
 <p>RESPUESTA: </p>

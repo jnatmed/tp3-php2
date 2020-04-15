@@ -47,6 +47,20 @@ class planillaTurnosController
         include "views/turno.reservado.view.php";
     }
 
+    public function buscarFechaTurno($fecha_turno, $hora_turno)
+    {
+        $existeTurno = false;
+        foreach ($this->planillaTurnos as $id_turno => $turno):
+            // echo ("<pre>");
+            // var_dump($turno);
+
+            if ($turno['fecha_turno'] == $fecha_turno && $turno['hora_turno'] == $hora_turno)
+            {
+                $existeTurno = true;
+            }
+        endforeach;
+        return $existeTurno;
+    }
 
 }
 

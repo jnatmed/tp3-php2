@@ -43,15 +43,23 @@
                 <input type="text" value="<?= $turno['fecha_turno']; ?>" name="Fecha_del_turno" hidden="true">
                 <input type="text" value="<?= $turno['hora_turno']; ?>" name="Horario_del_turno" hidden="true">
                 <input type="text" value="<?= $turno['dir_img']; ?>" name="dir_img" hidden="true">
-            <input type="submit" name='enviar' value="Confirmar Turno">
-        </form>    
+
         <?php 
           if (!empty($this->datos_mal_cargados)){ ?>
+            <input type="submit" name='enviar' value="Confirmar Turno" disabled>
+            <input type="submit" name='cancelar' value="Cancelar Turno">
+        </form>    
+
             <ul> Errores Encontrados:
             <?php foreach ($this->datos_mal_cargados as $error):?>
                 <li>Error: <?= $error ?></li>
             <?php endforeach; ?>
             </ul>
-        <?php }else{ echo "<h1>Datos correctamente cargados</h1>";} ?>
+        <?php }else{ ?>
+                <input type="submit" name='enviar' value="Confirmar Turno" disabled>
+                <input type="submit" name='cancelar' value="Cancelar Turno">
+            </form>    
+
+           <?php echo "<h1>Datos correctamente cargados</h1>";} ?>
     </body>
 </html>

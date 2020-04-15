@@ -12,8 +12,13 @@ class form_controller
     public $tipo_restriccion = [];
     public $datos_reserva = [];
     public $planilla = [];
-    public $planillaController = "";
+    public $planillaController = NULL;
     public $imgController = NULL;
+
+    public function __construct()
+    {
+        $this->planillaController = new planillaTurnosController;
+    }
 
     public function carga_arreglo($datosTurno, $pathImg = "")
     {        
@@ -87,30 +92,41 @@ class form_controller
         // var_dump($_POST['Fecha_del_turno']);
 
         if (($edad_ingresada + $año_nacimiento) < $año_actual){ // comprobar edad y fecha nacimiento
-            $this->datos_mal_cargados[] = 'la edad debe ser consistente con la fecha de nacimiento';
+            $this->datos_mal_cargados[] = '#ERROR EDAD FECHA NACIMIENTO: la edad debe ser consistente con la fecha de nacimiento';
         }
         if(date("l",$fecha_turno) == 'Sunday'){ // que no sea dia domingo
-            $this->datos_mal_cargados[] = 'la fecha del turno no puede ser domingo';
+            $this->datos_mal_cargados[] = '#ERROR DIA TURNO: la fecha del turno no puede ser domingo';
         }
         if( $fecha_actual > $fecha_turno){ // que sea superior a la fecha actual
-            $this->datos_mal_cargados[] = 'la fecha del turno debe ser superior o igual al dia actual';    
+            $this->datos_mal_cargados[] = '#ERROR FECHA TURNO: la fecha del turno debe ser superior o igual al dia actual';    
         }
 
-        $this->imgController = new imagenController($_FILES,$this->datos_reserva['fecha_turno'],$this->datos_reserva['hora_turno']);
-    
-        if ($this->imgController->tipoImagenValida()){
-            // var_dump($imgController);
-            move_uploaded_file($this->imgController->getDirTemp(),$this->imgController->getTargetFile());
-            $this->datos_reserva['dir_img'] = $this->imgController->getTargetFile();            
+        if ($_FILES['size'] <> 0){
+            $this->imgController = new imagenController($_FILES,$this->datos_reserva['fecha_turno'],$this->datos_reserva['hora_turno']);
+        
+            if ($this->imgController->tipoImagenValida()){
+                // var_dump($imgController);
+                move_uploaded_file($this->imgController->getDirTemp(),$this->imgController->getTargetFile());
+                $this->datos_reserva['dir_img'] = $this->imgController->getTargetFile();            
+            }else{
+                $this->datos_mal_cargados[] = '#ERROR IMAGEN: tipo de archivo no permitido';
+            }
+
         }else{
-            $this->datos_mal_cargados[] = 'tipo de archivo no permitido';
-        }
+            $this->datos_mal_cargados[] = "Imagen no cargada";
+        } 
 
+        if ($this->planillaController->buscarFechaTurno($this->datos_reserva['fecha_turno'],$this->datos_reserva['hora_turno'])){
+            $this->datos_mal_cargados[] =  "#ERROR FECHA Y HORA TURNO: La fecha y turno cargados ya fueron asignados a otro paciente.";    
+        }
+        
         // echo ("<pre>");
-        // var_dump($imgController);
+        // var_dump($this->imgController);
         // var_dump($_POST);
         // var_dump($_FILES);
+        // var_dump($this->datos_mal_cargados);
         // exit(0);
+
         include "views/reserva.turno.view.php";
     }
 
@@ -118,11 +134,16 @@ class form_controller
     {   
         // $this->imgController->guardarImagen();
         // move_uploaded_file($this->imgController->getDirTemp(),$this->imgController->getTargetFile());
-
-        $this->carga_arreglo($_POST,$_POST['dir_img']);
-        $this->planillaController = new planillaTurnosController;
-        $this->planillaController->guardarTurnoConfirmado($this->datos_reserva);
-        $this->planillaController->verPlanillaTurnos();
+        // echo ("<pre>");
+        // var_dump($_POST);
+        // exit(0);
+        if (array_key_exists('enviar',$_POST)){
+            $this->carga_arreglo($_POST,$_POST['dir_img']);
+            $this->planillaController->guardarTurnoConfirmado($this->datos_reserva);
+            $this->planillaController->verPlanillaTurnos();
+        }else{
+            $this->mostrarFormulario();
+        }
     }
 
 }

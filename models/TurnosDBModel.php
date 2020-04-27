@@ -22,7 +22,7 @@ class TurnosDBModel
 
         $this->turnos = array();
         $this->db = new PDO($dsn, $params['user'], $params['pwd']);
-    }
+    }   
 
     private function setNames(){
         return $this->db->query("SET NAMES 'utf8'");

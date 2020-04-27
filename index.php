@@ -6,7 +6,7 @@ include 'controlador/dbController.php';
 
 // use \App\controlador\form_controller;
 use \App\controlador\planillaTurnosController;
-use \App\controlador\dbController;
+// use \App\controlador\dbController;
 
 $fController = new form_controller;
 $planillaTurnos = new planillaTurnosController;

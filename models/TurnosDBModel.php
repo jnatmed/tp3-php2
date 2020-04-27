@@ -2,15 +2,26 @@
 
 namespace App\models;
 
+// $dbPDO =new PDO('mysql:host=localhost;dbname=dbturnos', "root", "y00s4d14");
 
-class dbTurnos
+
+class TurnosDBModel
 {
     public $turnos;
-    private $db;
-
+    private $db, $dsn;
+    public $params = [
+        'host' => 'localhost',
+        'user' => 'root',
+        'pwd' => 'y00s4d14',
+        'db' => 'dbturnos'
+    ];
+    
     public function __construct(){
-        $this->conexion = array();
-        $this->db = PDO('mysql:host=localhost;dbname=dbturnos', "root", "y00s4d14");
+
+        $this->dsn = sprintf("mysql:host=%s;dbname=%s", $this->params['host'], $this->params['db']);
+
+        $this->turnos = array();
+        $this->db = new PDO($dsn, $params['user'], $params['pwd']);
     }
 
     private function setNames(){

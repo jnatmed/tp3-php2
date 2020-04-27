@@ -4,7 +4,6 @@ namespace App\models;
 
 // $dbPDO =new PDO('mysql:host=localhost;dbname=dbturnos', "root", "y00s4d14");
 
-
 class TurnosDBModel
 {
     public $turnos;
@@ -15,14 +14,14 @@ class TurnosDBModel
         'pwd' => 'y00s4d14',
         'db' => 'dbturnos'
     ];
-    
+
     public function __construct(){
 
         $this->dsn = sprintf("mysql:host=%s;dbname=%s", $this->params['host'], $this->params['db']);
 
         $this->turnos = array();
-        $this->db = new PDO($dsn, $params['user'], $params['pwd']);
-    }   
+        $this->db = new \PDO($this->dsn, $params['user'], $params['pwd']);
+    }
 
     private function setNames(){
         return $this->db->query("SET NAMES 'utf8'");
@@ -37,7 +36,7 @@ class TurnosDBModel
 
         return $this->turnos;
         $this->db = NULL;
-    }       
+    }
 
     public function setTurno($fecha_turno, $hora_turno){
         self::setNames();

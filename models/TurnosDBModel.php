@@ -2,8 +2,7 @@
 
 namespace App\models;
 
-// $dbPDO =new PDO('mysql:host=localhost;dbname=dbturnos', "root", "y00s4d14");
-
+use PDO;
 
 class TurnosDBModel
 {
@@ -20,8 +19,19 @@ class TurnosDBModel
 
         $this->dsn = sprintf("mysql:host=%s;dbname=%s", $this->params['host'], $this->params['db']);
 
-        $this->turnos = array();
-        $this->db = new PDO($dsn, $params['user'], $params['pwd']);
+        try {
+            //code...
+            $this->turnos = array();
+            $this->db = new PDO($this->dsn, $this->params['user'],$this->params['pwd']);    
+        } catch (\Throwable $th) {
+            //throw $th;
+            echo ("<pre>");
+            var_dump($th);
+            exit(0);
+            
+        }
+
+
     }   
 
     private function setNames(){
@@ -29,11 +39,20 @@ class TurnosDBModel
     }
 
     public function getTurnos(){
-        self::setNames();
-        $sql = "SELECT id, fecha_turno, hora_turno, nombre_paciente FROM dbturnos";
-        foreach ($this->db->query($sql) as $res){
+        // self::setNames();
+
+        // $sql = "SELECT id, fecha_turno, hora_turno, nombre_paciente FROM dbturnos";
+        $sql = "SELECT * FROM dbturnos";
+
+        foreach ($this->db->prepare($sql) as $res){
             $this->turnos[] = $res;
+            // echo($res);
         }
+
+        // echo ("<pre>");
+        // var_dump($query->fetchAll());
+        // exit(0);
+
 
         return $this->turnos;
         $this->db = NULL;

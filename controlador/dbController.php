@@ -1,30 +1,29 @@
 <?php
+
+namespace App\controlador;
+
 include "models/TurnosDBModel.php";
-
-// namespace \App\controlador;
-
 
 use \App\models\TurnosDBModel;
 
-// class dbController
-// {
-$datos;
-$turno;
-$turno = new TurnosDBModel;
-$datos = $turno->getTurnos();    
-include "views/turnosView.php";
+class dbController
+{
+    public $datos;
+    public $turno;
 
-//     public function __construct(){
-//         $this->turno = new TurnosDBModel;
-//     }
+    public function __construct(){
+        $this->turno = new TurnosDBModel;
+    }
 
-//     public function getTurnos(){
+    public function getTurnos(){
 
-//         $this->datos = $turno->getTurnos();
+        $this->datos = $this->turno->getTurnos();
+        
+        var_dump($this->datos);
     
-//         include "views/turnosView.php";
-//     }
-// }
+        include "views/turnosView.php";
+    }
+}
 
 
 

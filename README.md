@@ -16,3 +16,4 @@ solicitar una nueva imagen.
 de tipo INFO y almacenar fecha y hora, operación (ABM), y turno afectado (id). En los casos de
 modificación y baja, almacene el registro completo. ¿Considera esto util? ¿En que casos puede
 llegar a utilizarse?
+

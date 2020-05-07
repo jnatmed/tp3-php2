@@ -18,21 +18,23 @@ class TurnosDBModel
     public function __construct(){
 
         $this->dsn = sprintf("mysql:host=%s;dbname=%s", $this->params['host'], $this->params['db']);
-
         try {
             //code...
             $this->turnos = array();
             $this->db = new PDO($this->dsn, $this->params['user'],$this->params['pwd']);    
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // echo "Conexion realizada Satisfactoriamente";
         } catch (\Throwable $th) {
             //throw $th;
             echo ("<pre>");
             var_dump($th);
-            exit(0);
-            
+            exit(0);   
         }
-
-
     }   
+
+    public function crearDBTurnos(){
+
+    }
 
     private function setNames(){
         return $this->db->query("SET NAMES 'utf8'");
@@ -41,18 +43,11 @@ class TurnosDBModel
     public function getTurnos(){
         // self::setNames();
 
-        // $sql = "SELECT id, fecha_turno, hora_turno, nombre_paciente FROM dbturnos";
-        $sql = "SELECT * FROM dbturnos";
+        $sql = "SELECT id, fecha_turno, hora_turno, nombre_paciente FROM turnos";
 
-        foreach ($this->db->prepare($sql) as $res){
+        foreach ($this->db->query($sql) as $res){
             $this->turnos[] = $res;
-            // echo($res);
         }
-
-        // echo ("<pre>");
-        // var_dump($query->fetchAll());
-        // exit(0);
-
 
         return $this->turnos;
         $this->db = NULL;

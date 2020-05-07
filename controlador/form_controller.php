@@ -1,7 +1,9 @@
 <?php
 
+namespace App\controlador;
+
 include 'controlador/imagenController.php';
-// include 'controlador/planilla.turnos.controller.php';
+include 'controlador/planilla.turnos.controller.php';
 
 use \App\controlador\imagenController;
 use \App\controlador\planillaTurnosController;

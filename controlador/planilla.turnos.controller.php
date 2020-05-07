@@ -2,6 +2,11 @@
 
 namespace App\controlador;
 
+include "models/TurnosDBModel.php";
+
+use \App\models\TurnosDBModel;
+
+
 class planillaTurnosController
 {
     public $planillaTurnos = [];
@@ -9,11 +14,16 @@ class planillaTurnosController
     public $tamaño_planilla = 0;
     public $archivoTurnos = "";
     public $turno = [];
+    public $dbturnos;
 
     public function __construct()
     {
-        $this->archivoTurnos = file_get_contents($this->pathTurnos);
-        $this->planillaTurnos = json_decode($this->archivoTurnos, true);
+        // ACA SE OBTIENE LA BASE DE DATOS   
+        $this->dbturnos = new TurnosDBModel;
+        // $this->archivoTurnos = file_get_contents($this->pathTurnos);
+        // $this->planillaTurnos = json_decode($this->archivoTurnos, true);
+        
+        $this->planillaTurnos = $this->dbturnos->getTurnos();
     }
 
     public function guardarTurnoConfirmado($turno)
@@ -25,6 +35,8 @@ class planillaTurnosController
 
     public function verPlanillaTurnos()
     {
+        echo("pre");
+        var_dump($this->planillaTurnos);
 
         include "views/planilla.turnos.view.php";
     }

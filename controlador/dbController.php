@@ -19,12 +19,14 @@ class dbController
 
         $this->datos = $this->turno->getTurnos();
         
-        var_dump($this->datos);
+        // var_dump($this->datos);
     
-        include "views/turnosView.php";
+        return ;
+    }
+
+    public function insertTurno(){
+
     }
 }
-
-
 
 ?>

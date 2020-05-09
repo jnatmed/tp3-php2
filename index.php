@@ -1,5 +1,8 @@
 <?php
 
+// phpinfo();
+// echo("hola mundo");
+
 include 'controlador/form_controller.php';
 // include 'controlador/planilla.turnos.controller.php';
 
@@ -15,15 +18,15 @@ $http_method = $_SERVER["REQUEST_METHOD"];
 // echo ("<pre>");
 // var_dump($_SERVER);
 // exit(0);
-error_reporting(E_ALL);
-ini_set('display_errors','On');
 
 if($url_path == '/' && $http_method == 'GET'){
-    echo ("hola estoy aqui");
-    // $formController->mostrarFormulario();    
-    $planillaTurnos->verPlanillaTurnos();
+    $formController->mostrarFormulario();    
 }else if ($url_path == '/planilla_turnos' && $http_method == 'GET'){
     $planillaTurnos->verPlanillaTurnos();
+}else if ($url_path == '/ver_turno_reservado' && $http_method == 'POST'){
+    $planillaTurnos->verTurnoReservado();
+}else if ($url_path == '/baja_turno_reservado' && $http_method == 'POST'){
+    $planillaTurnos->bajaTurnoReservado();
 }else {
     http_response_code(404);
     include "views/error.404.view.php"; 

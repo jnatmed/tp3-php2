@@ -13,7 +13,8 @@
                 <td>Nombre del Paciente</td>
                 <td>Telefono</td>
                 <td>Email</td>
-                <td>Nro de Turno</td>
+                <td>Consulta de Turno</td>
+                <!-- <td>Eliminacion Turno</td> -->
             </tr>
             <?php foreach ($this->planillaTurnos as $nroTurno => $turno):?>
                 <tr>
@@ -22,7 +23,7 @@
                     <td><?= $turno['nombre_paciente']; ?></td> 
                     <td><?= $turno['telefono'];?></td>
                     <td><?= $turno['email']; ?></td>                    
-                    <td><button type="submit" name="id_turno" value="<?= $nroTurno; ?>" >Ver Turno</button></td>
+                    <td><button type="submit" name="id_turno" value="<?= $turno['id']; ?>" >Ver Turno</button></td>
                 </tr>
             <?php endforeach ?>
         </table>

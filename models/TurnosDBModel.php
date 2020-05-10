@@ -79,8 +79,13 @@ class TurnosDBModel
                                         edad,
                                         talla_calzado,
                                         altura,
-                                        color_pelo) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-        $stmt->execute($valores);
+                                        color_pelo) VALUES (null,?,?,?,?,?,?,?,?,?,?)";
+        try{
+            $sql = $this->db->prepare($consulta);
+            $sql->execute($valores);    
+        }catch(Exception $e){
+            echo($e);        
+        }
     }
 
     public function bajaTurnoSeleccionado($id_turno){

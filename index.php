@@ -23,6 +23,10 @@ if($url_path == '/' && $http_method == 'GET'){
     $formController->mostrarFormulario();    
 }else if ($url_path == '/planilla_turnos' && $http_method == 'GET'){
     $planillaTurnos->verPlanillaTurnos();
+}else if ($url_path == '/save_formulario' && $http_method == 'POST'){
+    $formController->guardarFormulario();
+}else if ($url_path == '/turno_confirmado' && $http_method == 'POST'){
+    $formController->reservarTurno();
 }else if ($url_path == '/ver_turno_reservado' && $http_method == 'POST'){
     $planillaTurnos->verTurnoReservado();
 }else if ($url_path == '/baja_turno_reservado' && $http_method == 'POST'){

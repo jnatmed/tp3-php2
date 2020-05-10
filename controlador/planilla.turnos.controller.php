@@ -21,30 +21,14 @@ class planillaTurnosController
     {
         // ACA SE OBTIENE LA BASE DE DATOS   
         $this->dbturnos = new TurnosDBModel;
-        // $this->archivoTurnos = file_get_contents($this->pathTurnos);
-        // $this->planillaTurnos = json_decode($this->archivoTurnos, true);
-        // $this->nombresColumnas = [
-        //     `id`, 
-        //     `fecha_turno`, 
-        //     `hora_turno`, 
-        //     `nombre_paciente`, 
-        //     `email`, 
-        //     `telefono`, 
-        //     `fecha_nacimiento`, 
-        //     `edad`, 
-        //     `talla_calzado`, 
-        //     `altura`, 
-        //     `color_pelo`
-        // ];
+
         $this->planillaTurnos = $this->dbturnos->getTurnos();
     }
 
     public function guardarTurnoConfirmado($turno)
     {
-        // $this->planillaTurnos[count($this->planillaTurnos)+1] = $turno;
-        // $json_planillaTurnos = json_encode($this->planillaTurnos);
-        // file_put_contents($this->pathTurnos, $json_planillaTurnos);
-        
+        $this->dbturnos->insertarTurno($turno);
+        $this->verPlanillaTurnos();
     }
 
     public function verPlanillaTurnos()

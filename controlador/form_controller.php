@@ -111,6 +111,10 @@ class form_controller
 
     public function reservarTurno()
     {   
+        // echo("<pre>");
+        // var_dump($_POST);
+        // exit();
+
         if (array_key_exists('enviar',$_POST)){
             $this->carga_arreglo($_POST,$_POST['dir_img']);
             $this->planillaController->guardarTurnoConfirmado($this->datos_reserva);

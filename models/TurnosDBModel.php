@@ -1,10 +1,12 @@
 <?php
 namespace App\models;
+include 'models/config.php';
 
 use PDO;
 
 class TurnosDBModel
 {
+   
     public $turnos;
     private $db, $dsn, $conexion;
     public $params = [
@@ -14,8 +16,11 @@ class TurnosDBModel
         'db' => 'dbturnos'
     ];
     
-    public function crearDB(){
+    public function motrarMsj($msj){
+        // echo($msj);
+    }
 
+    public function crearDB(){
         //1 - me conecto al servidor
         //2 - creo la base de datos
         $sqlDB = "CREATE DATABASE dbturnos";
@@ -24,43 +29,31 @@ class TurnosDBModel
         try{
             $this->db = new PDO("mysql:host={$this->params['host']}", $this->params['user'],$this->params['pwd']);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);            
-            echo("1 - Conexion establecida..<br>");
+            $this->motrarMsj("1 - Conexion establecida..<br>");
         }catch(\Throwable $th){
-            echo("1E - Error al conectar al Servidor!<br>");
+            $this->motrarMsj("1E - Error al conectar al Servidor!<br>");
             // echo($th);    
         }
         //2 - creo dbturnos
         try{
             $this->db->exec($sqlDB);
-            echo("2 - Base de Datos dbturnos Creada..<br>");
+            $this->motrarMsj("2 - Base de Datos dbturnos Creada..<br>");
             $this->db = null;
         }catch(\Throwable $th){
-            echo("2E - Error al crear la DB dbturnos!<br>");
+            $this->motrarMsj("2E - Error al crear la DB dbturnos!<br>");
             // echo($th);    
         }
     }    
 
     public function crearTabla(){
         // 3 - Creo tabla turnos 
-        $sqlTabla = "CREATE TABLE `turnos` (
-            `id` int(11) NOT NULL,
-            `fecha_turno` date NOT NULL,
-            `hora_turno` time DEFAULT NULL,
-            `nombre_paciente` varchar(300) COLLATE utf8_spanish2_ci NOT NULL,
-            `email` varchar(300) COLLATE utf8_spanish2_ci NOT NULL,
-            `telefono` varchar(300) COLLATE utf8_spanish2_ci NOT NULL,
-            `fecha_nacimiento` date NOT NULL,
-            `edad` int(11) DEFAULT NULL,
-            `talla_calzado` int(11) DEFAULT NULL,
-            `altura` int(11) DEFAULT NULL,
-            `color_pelo` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL
-          ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;";
+        include 'models/config.php';
  
         try{
             $this->db->exec($sqlTabla);
-            echo("3 - Tabla turnos Creada..<br>");
+            $this->motrarMsj("3 - Tabla turnos Creada..<br>");
         }catch(\Throwable $th){
-            echo("3E - Error al crear Tabla turnos!<br>");
+            $this->motrarMsj("3E - Error al crear Tabla turnos!<br>");
             // echo($th);    
         }
         
@@ -135,6 +128,7 @@ class TurnosDBModel
                                                                 '{$valores['edad']}', '{$valores['talla_calzado']}', 
                                                                 '{$valores['altura']}', '{$valores['color_pelo']}' )";
         try{
+            $this->motrarMsj($consulta);
             $sql = $this->db->prepare($consulta);
             $sql->execute($valores);    
         }catch(Exception $e){

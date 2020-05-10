@@ -1,13 +1,14 @@
 <?php
-
 namespace App\models;
+
+include 'models/samples.php';
 
 use PDO;
 
 class TurnosDBModel
 {
     public $turnos;
-    private $db, $dsn;
+    private $db, $dsn, $conexion;
     public $params = [
         'host' => 'localhost',
         'user' => 'root',
@@ -15,13 +16,66 @@ class TurnosDBModel
         'db' => 'dbturnos'
     ];
     
+    public function crearDB(){
+
+        //1 - me conecto al servidor
+        //2 - creo la base de datos
+        $sqlDB = "CREATE DATABASE dbturnos";
+       
+        //1 - conecto al servidor
+        try{
+            $this->db = new PDO("mysql:host={$this->params['host']}", $this->params['user'],$this->params['pwd']);
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);            
+            echo("1 - Conexion establecida..<br>");
+        }catch(\Throwable $th){
+            echo("1E - Error al conectar al Servidor!<br>");
+            // echo($th);    
+        }
+        //2 - creo dbturnos
+        try{
+            $this->db->exec($sqlDB);
+            echo("2 - Base de Datos dbturnos Creada..<br>");
+            $this->db = null;
+        }catch(\Throwable $th){
+            echo("2E - Error al crear la DB dbturnos!<br>");
+            // echo($th);    
+        }
+    }    
+
+    public function crearTabla(){
+        // 3 - Creo tabla turnos 
+        $sqlTabla = "CREATE TABLE `turnos` (
+            `id` int(11) NOT NULL,
+            `fecha_turno` date NOT NULL,
+            `hora_turno` time DEFAULT NULL,
+            `nombre_paciente` varchar(300) COLLATE utf8_spanish2_ci NOT NULL,
+            `email` varchar(300) COLLATE utf8_spanish2_ci NOT NULL,
+            `telefono` varchar(300) COLLATE utf8_spanish2_ci NOT NULL,
+            `fecha_nacimiento` date NOT NULL,
+            `edad` int(11) DEFAULT NULL,
+            `talla_calzado` int(11) DEFAULT NULL,
+            `altura` int(11) DEFAULT NULL,
+            `color_pelo` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL
+          ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;";
+ 
+        try{
+            $this->db->exec($sqlTabla);
+            echo("3 - Tabla turnos Creada..<br>");
+        }catch(\Throwable $th){
+            echo("3E - Error al crear Tabla turnos!<br>");
+            // echo($th);    
+        }
+        
+    }
     public function __construct(){
 
+        $this->crearDB();    
         $this->dsn = sprintf("mysql:host=%s;dbname=%s", $this->params['host'], $this->params['db']);
         try {
-            $this->turnos = array();
             $this->db = new PDO($this->dsn, $this->params['user'],$this->params['pwd']);    
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->crearTabla();
+            $this->insertarTurno($sample_1);
         } catch (\Throwable $th) {
             echo ("<pre>");
             var_dump($th);
@@ -29,9 +83,6 @@ class TurnosDBModel
         }
     }   
 
-    public function crearDBTurnos(){
-
-    }
 
     private function setNames(){
         return $this->db->query("SET NAMES 'utf8'");
@@ -79,7 +130,18 @@ class TurnosDBModel
                                         edad,
                                         talla_calzado,
                                         altura,
-                                        color_pelo) VALUES (null,?,?,?,?,?,?,?,?,?,?)";
+                                        color_pelo) VALUES (null,
+                                                            {$valores['fecha_turno']},
+                                                            {$valores['hora_turno']},
+                                                            {$valores['nombre_paciente']},
+                                                            {$valores['email']},
+                                                            {$valores['telefono']},
+                                                            {$valores['fecha_nacimiento']},
+                                                            {$valores['edad']},
+                                                            {$valores['talla_calzado']},
+                                                            {$valores['altura']},
+                                                            {$valores['color_pelo']},
+                                                            )";
         try{
             $sql = $this->db->prepare($consulta);
             $sql->execute($valores);    

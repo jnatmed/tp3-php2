@@ -119,30 +119,21 @@ class TurnosDBModel
     }
 
     public function insertarTurno($valores){
-        $consulta = "INSERT INTO 'turnos'('id',
-                                        'fecha_turno',
-                                        'hora_turno',
-                                        'nombre_paciente',
-                                        'email',
-                                        'telefono',
-                                        'fecha_nacimiento',
-                                        'edad',
-                                        'talla_calzado',
-                                        'altura',
-                                        'color_pelo') VALUES (NULL,
-                                                            {$valores['fecha_turno']},
-                                                            {$valores['hora_turno']},
-                                                            {$valores['nombre_paciente']},
-                                                            {$valores['email']},
-                                                            {$valores['telefono']},
-                                                            {$valores['fecha_nacimiento']},
-                                                            {$valores['edad']},
-                                                            {$valores['talla_calzado']},
-                                                            {$valores['altura']},
-                                                            {$valores['color_pelo']}
-                                                            )";
-        echo($consulta);
-        $consulta = "INSERT INTO `turnos` (`id`, `fecha_turno`, `hora_turno`, `nombre_paciente`, `email`, `telefono`, `fecha_nacimiento`, `edad`, `talla_calzado`, `altura`, `color_pelo`) VALUES (NULL, '2020-05-11', '08:48:04', 'pedro', 'pedro@gmail.com', '11-3438-7233', '1989-03-01', '31', '40', '169', 'negro')";
+        $consulta = "INSERT INTO `turnos` (`id`, 
+                                           `fecha_turno`, 
+                                           `hora_turno`, 
+                                           `nombre_paciente`, 
+                                           `email`, 
+                                           `telefono`, 
+                                           `fecha_nacimiento`, 
+                                           `edad`, `talla_calzado`, 
+                                           `altura`, 
+                                           `color_pelo`) VALUES (NULL,'{$valores['fecha_turno']}', 
+                                                                '{$valores['hora_turno']}', '{$valores['nombre_paciente']}', 
+                                                                '{$valores['email']}', '{$valores['telefono']}', 
+                                                                '{$valores['fecha_nacimiento']}', 
+                                                                '{$valores['edad']}', '{$valores['talla_calzado']}', 
+                                                                '{$valores['altura']}', '{$valores['color_pelo']}' )";
         try{
             $sql = $this->db->prepare($consulta);
             $sql->execute($valores);    

@@ -5,7 +5,7 @@
     <?php include "views/panel_navegacion.php"; ?>
     <body>
         <h1>Turno del Paciente <?= $this->turno[0]['nombre_paciente']; ?></h1>
-        <form action="baja_turno_reservado" method='POST'>
+        <form action="edicion_turno" method='POST'>
             <table border = "2">
                 <tr>
                     <td>Fecha del Turno</td>
@@ -34,7 +34,8 @@
                         <td><img src='<?= $this->turno[0]['dir_img']; ?>' alt="imagen" width="500" height="333"></td>
                     </tr>
             </table>
-            <td><button type="submit" name='id_turno' value="<?= $this->turno[0]['id']; ?>" >Eliminar Turno</button></td>
+            <td><button type="submit" name='baja_turno' value="<?= $this->turno[0]['id']; ?>" >Eliminar Turno</button></td>
+            <td><button type="submit" name='modificacion_turno' value="<?= $this->turno[0]['id']; ?>" >Modificar Turno</button></td>
         </form>
     </body>
 </html>

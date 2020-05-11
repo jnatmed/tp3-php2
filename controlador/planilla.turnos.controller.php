@@ -22,29 +22,43 @@ class planillaTurnosController
         // ACA SE OBTIENE LA BASE DE DATOS   
         $this->dbturnos = new TurnosDBModel;
 
-        $this->planillaTurnos = $this->dbturnos->getTurnos();
+        // $this->planillaTurnos = $this->dbturnos->getTurnos();
+    }
+
+    public function guardarTurnoModificado(){
+        // echo("<pre>");
+        // echo("guardarTurnoModificado<br>");
+        // var_dump($_POST);
+        // exit();        
+
+        $this->dbturnos->actualizarTurno($_POST);
+        $this->verPlanillaTurnos();
     }
 
     public function guardarTurnoConfirmado($turno)
     {
+        // echo("<pre>");
+        // echo("guardarTurnoConfirmado<br>");
+        // var_dump($turno);
+        // exit();        
         $this->dbturnos->insertarTurno($turno);
-        $this->verPlanillaTurnos();
     }
 
     public function verPlanillaTurnos()
     {
         // echo("pre");
         // var_dump($this->planillaTurnos);
+        $this->planillaTurnos = $this->dbturnos->getTurnos();
 
         include "views/planilla.turnos.view.php";
     }
 
-    public function cargarTurno($id_turno)
-    {
-        var_dump($id_turno);
-        var_dump(intval($id_turno));
-        $this->turno[] = $this->planillaTurnos[$id_turno];
-    }
+    // public function cargarTurno($id_turno)
+    // {
+    //     var_dump($id_turno);
+    //     var_dump(intval($id_turno));
+    //     $this->turno[] = $this->planillaTurnos[$id_turno];
+    // }
 
     public function verTurnoReservado()
     {
@@ -54,10 +68,11 @@ class planillaTurnosController
     public function bajaTurnoReservado()
     {
         // echo("<pre>");    
-        // var_dump($_POST['id_turno']);
+        // echo("bajaTurnoReservado<br>");    
+        // var_dump($_POST);
         // exit();
-        $this->turno = $this->dbturnos->bajaTurnoSeleccionado($_POST['id_turno']);
-        include "views/planilla.turnos.view.php";
+        $this->turno = $this->dbturnos->bajaTurnoSeleccionado($_POST['baja_turno']);
+        $this->verPlanillaTurnos();
     }
 
     public function buscarFechaTurno($fecha_turno, $hora_turno)

@@ -29,8 +29,17 @@ if($url_path == '/' && $http_method == 'GET'){
     $formController->reservarTurno();
 }else if ($url_path == '/ver_turno_reservado' && $http_method == 'POST'){
     $planillaTurnos->verTurnoReservado();
-}else if ($url_path == '/baja_turno_reservado' && $http_method == 'POST'){
-    $planillaTurnos->bajaTurnoReservado();
+}else if ($url_path == '/guardar_modificacion_turno' && $http_method == 'POST'){
+    $planillaTurnos->guardarTurnoModificado();
+}else if ($url_path == '/edicion_turno' && $http_method == 'POST'){
+    if(isset($_POST['baja_turno'])){
+        $planillaTurnos->bajaTurnoReservado();
+    }else if($_POST['modificacion_turno']){
+        $formController->modificacionTurno();
+    }else{
+        http_response_code(404);
+        include "views/error.404.view.php";     
+    }
 }else {
     http_response_code(404);
     include "views/error.404.view.php"; 

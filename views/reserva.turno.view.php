@@ -13,6 +13,7 @@
                     <td>Telefono</td>
                     <td>Edad</td>
                     <td>Talla del Calzado</td>
+                    <td>Altura</td>
                     <td>Fecha de Nacimiento</td>
                     <td>Color de Pelo</td>
                     <td>Fecha del Turno</td>
@@ -26,6 +27,7 @@
                     <td><?= $turno['telefono'];?></td>
                     <td><?= $turno['edad'];?></td>
                     <td><?= $turno['talla_calzado'];?></td>
+                    <td><?= $turno['altura'];?></td>
                     <td><?= $turno['fecha_nacimiento'];?></td>
                     <td><?= $turno['color_pelo'];?></td>
                     <td><?= $turno['fecha_turno'];?></td>
@@ -38,6 +40,7 @@
                 <input type="text" value="<?= $turno['telefono']; ?>" name="Telefono" hidden="true">
                 <input type="text" value="<?= $turno['edad']; ?>" name="Edad" hidden="true">
                 <input type="text" value="<?= $turno['talla_calzado']; ?>" name="Talla_de_calzado" hidden="true">
+                <input type="text" value="<?= $turno['altura']; ?>" name="altura" hidden="true">
                 <input type="text" value="<?= $turno['fecha_nacimiento']; ?>" name="Fecha_de_nacimiento" hidden="true">
                 <input type="text" value="<?= $turno['color_pelo']; ?>" name="Color_de_pelo" hidden="true">
                 <input type="text" value="<?= $turno['fecha_turno']; ?>" name="Fecha_del_turno" hidden="true">

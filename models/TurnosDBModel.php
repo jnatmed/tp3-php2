@@ -96,9 +96,9 @@ class TurnosDBModel
 
     public function getTurnoSeleccionado($id_turno){
 
-        echo("<pre>");
-
-        var_dump($id_turno);
+        // echo("<pre>");
+        // echo("getTurnoSeleccionado<br>");
+        // var_dump($id_turno);
         $sql = "SELECT * FROM turnos WHERE id ='{$id_turno}'";
         try{
             foreach ($this->db->query($sql) as $res){
@@ -112,6 +112,11 @@ class TurnosDBModel
     }
 
     public function insertarTurno($valores){
+        // echo("<pre>");
+        // echo("insertarTurno<br>");
+        // var_dump($valores);
+        // exit(); 
+
         $consulta = "INSERT INTO `turnos` (`id`, 
                                            `fecha_turno`, 
                                            `hora_turno`, 
@@ -119,18 +124,52 @@ class TurnosDBModel
                                            `email`, 
                                            `telefono`, 
                                            `fecha_nacimiento`, 
-                                           `edad`, `talla_calzado`, 
+                                           `edad`,
+                                           `talla_calzado`, 
                                            `altura`, 
-                                           `color_pelo`) VALUES (NULL,'{$valores['fecha_turno']}', 
-                                                                '{$valores['hora_turno']}', '{$valores['nombre_paciente']}', 
-                                                                '{$valores['email']}', '{$valores['telefono']}', 
+                                           `color_pelo`) VALUES (NULL,
+                                                                '{$valores['fecha_turno']}', 
+                                                                '{$valores['hora_turno']}',
+                                                                '{$valores['nombre_paciente']}', 
+                                                                '{$valores['email']}', 
+                                                                '{$valores['telefono']}', 
                                                                 '{$valores['fecha_nacimiento']}', 
-                                                                '{$valores['edad']}', '{$valores['talla_calzado']}', 
-                                                                '{$valores['altura']}', '{$valores['color_pelo']}' )";
+                                                                '{$valores['edad']}', 
+                                                                '{$valores['talla_calzado']}', 
+                                                                '{$valores['altura']}', 
+                                                                '{$valores['color_pelo']}' )";
         try{
             $this->motrarMsj($consulta);
+            echo($consulta);
             $sql = $this->db->prepare($consulta);
-            $sql->execute($valores);    
+            // $sql->execute($valores);    
+            $sql->execute();    
+        }catch(Exception $e){
+            echo($e);        
+        }
+    }
+    public function actualizarTurno($valores){
+        // echo("<pre>");
+        // echo("insertarTurno<br>");
+        // var_dump($valores);
+        // exit(); 
+        $consulta = "UPDATE `turnos` SET 
+                            `fecha_turno`='{$valores['Fecha_del_turno']}',
+                            `hora_turno`='{$valores['Horario_del_turno']}',
+                            `nombre_paciente`='{$valores['Nombre_del_Paciente']}',
+                            `email`='{$valores['Email']}',
+                            `telefono`='{$valores['Telefono']}',
+                            `fecha_nacimiento`='{$valores['Fecha_de_nacimiento']}',
+                            `edad`='{$valores['Edad']}',
+                            `talla_calzado`='{$valores['Talla_de_calzado']}',
+                            `altura`='{$valores['altura']}',
+                            `color_pelo`='{$valores['Color_de_pelo']}' WHERE id = '{$valores['id']}'";
+        try{
+            $this->motrarMsj($consulta);
+            echo($consulta);
+            $sql = $this->db->prepare($consulta);
+            // $sql->execute($valores);    
+            $sql->execute();    
         }catch(Exception $e){
             echo($e);        
         }

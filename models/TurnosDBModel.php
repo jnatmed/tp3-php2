@@ -67,7 +67,7 @@ class TurnosDBModel
             $this->db = new PDO($this->dsn, $this->params['user'],$this->params['pwd']);    
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->crearTabla();
-            $this->insertarTurno($sample_1);
+            // $this->insertarTurno($sample_1);
         } catch (\Throwable $th) {
             echo ("<pre>");
             var_dump($th);
@@ -96,19 +96,19 @@ class TurnosDBModel
 
     public function getTurnoSeleccionado($id_turno){
 
-        // echo("<pre>");
+        echo("<pre>");
 
-        // var_dump($this->db);
+        var_dump($id_turno);
         $sql = "SELECT * FROM turnos WHERE id ='{$id_turno}'";
         try{
             foreach ($this->db->query($sql) as $res){
                 $resu[] = $res;
             }    
+            return $resu;
+            $this->db = NULL;    
         }catch(Exception $e){
             echo($e);
         }
-        return $resu;
-        $this->db = NULL;
     }
 
     public function insertarTurno($valores){
@@ -137,18 +137,18 @@ class TurnosDBModel
     }
 
     public function bajaTurnoSeleccionado($id_turno){
-        $consulta = "DELETE FROM turnos WHERE 'id' =:id";
+        $consulta = "DELETE FROM turnos WHERE id = ?;";
+        echo("id turno: ".$id_turno."<br>");
+        // echo("<pre>");
+        // var_dump($id_turno);
+        // exit();
         try{
             $sql = $this->db->prepare($consulta);
-            $sql->bindParam(':id',$id,PDO::PARAM_INT);
-            $id = trim($id_turno);
-            $sql->execute();
-            if($sql->rowCount() > 0){
-                $count = $sql->rowCount();
-                echo("{$count} registro ha sido eliminado");
+            // $sql->bindColumn(':id',$id_turno);
+            if($sql->execute([$id_turno]) === TRUE){
+                echo("registro ha sido eliminado, id=>{$id_turno}");
             }else{
                 echo("No se pudo eliminar el registro<br>");
-                print_r($sql->errorInfo());
             }    
         }catch(Exception $e){
             echo($e);

@@ -53,6 +53,9 @@ class planillaTurnosController
     }
     public function bajaTurnoReservado()
     {
+        // echo("<pre>");    
+        // var_dump($_POST['id_turno']);
+        // exit();
         $this->turno = $this->dbturnos->bajaTurnoSeleccionado($_POST['id_turno']);
         include "views/planilla.turnos.view.php";
     }

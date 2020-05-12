@@ -1,6 +1,6 @@
 <?php
 
-// $img = imagecreatefromjpeg('img/giovi.jpeg');
+$img = 'img/giovi.jpeg';
 $fp = fopen($img,'r+b');
 $jpeg = fread($fp, filesize('img/giovi.jpeg'));
 fclose($fp);

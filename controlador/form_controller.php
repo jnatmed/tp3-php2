@@ -133,6 +133,7 @@ class form_controller
             imagejpeg($img);
             $jpeg = ob_get_contents();
             ob_end_clean();
+            $jpeg = str_replace("##","##",mysql_real_escape_string($jpeg));
             // var_dump($jpeg);
             // $this->imgController = new imagenController($_FILES,$this->datos_reserva['fecha_turno'],$this->datos_reserva['hora_turno']);
         

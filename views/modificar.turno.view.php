@@ -12,7 +12,7 @@
       <?php //echo("<pre>")?>
       <?php //var_dump($this->lista_datos)?>
       <?php //exit();?>
-        <form action="/guardar_modificacion_turno" method = 'POST' enctype="multipart/form-data">
+        <form action="/save_formulario" method = 'POST' enctype="multipart/form-data">
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
             <p>
             <label for  ="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>

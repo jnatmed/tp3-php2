@@ -48,7 +48,8 @@ class TurnosDBModel
     public function crearTabla(){
         // 3 - Creo tabla turnos 
         include 'models/config.php';
- 
+        // include 'models/samples.php';
+
         try{
             $this->db->exec($sqlTabla);
             $this->motrarMsj("3 - Tabla turnos Creada..<br>");
@@ -68,6 +69,8 @@ class TurnosDBModel
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->crearTabla();
             // $this->insertarTurno($sample_1);
+            // $this->insertarTurno($sample_2);
+            // $this->insertarTurno($sample_3);    
         } catch (\Throwable $th) {
             echo ("<pre>");
             var_dump($th);
@@ -116,34 +119,35 @@ class TurnosDBModel
         // echo("insertarTurno<br>");
         // var_dump($valores);
         // exit(); 
-
-        $consulta = "INSERT INTO `turnos` (`id`, 
-                                           `fecha_turno`, 
-                                           `hora_turno`, 
-                                           `nombre_paciente`, 
-                                           `email`, 
-                                           `telefono`, 
-                                           `fecha_nacimiento`, 
-                                           `edad`,
-                                           `talla_calzado`, 
-                                           `altura`, 
-                                           `color_pelo`) VALUES (NULL,
-                                                                '{$valores['fecha_turno']}', 
-                                                                '{$valores['hora_turno']}',
-                                                                '{$valores['nombre_paciente']}', 
-                                                                '{$valores['email']}', 
-                                                                '{$valores['telefono']}', 
-                                                                '{$valores['fecha_nacimiento']}', 
-                                                                '{$valores['edad']}', 
-                                                                '{$valores['talla_calzado']}', 
-                                                                '{$valores['altura']}', 
-                                                                '{$valores['color_pelo']}' )";
+        $consulta = "INSERT INTO `turnos`(`id`, 
+                                        `fecha_turno`, 
+                                        `hora_turno`, 
+                                        `nombre_paciente`, 
+                                        `email`, 
+                                        `telefono`, 
+                                        `fecha_nacimiento`, 
+                                        `edad`, 
+                                        `talla_calzado`, 
+                                        `altura`, 
+                                        `color_pelo`, 
+                                        `imagen`) VALUES (NULL,
+                                                        '{$valores['fecha_turno']}',
+                                                        '{$valores['hora_turno']}',
+                                                        '{$valores['nombre_paciente']}',
+                                                        '{$valores['email']}',
+                                                        '{$valores['telefono']}',
+                                                        '{$valores['fecha_nacimiento']}',
+                                                        '{$valores['edad']}',
+                                                        '{$valores['talla_calzado']}',
+                                                        '{$valores['altura']}',
+                                                        '{$valores['color_pelo']}',
+                                                          NULL)";
         try{
             $this->motrarMsj($consulta);
-            echo($consulta);
+            // echo($consulta);
             $sql = $this->db->prepare($consulta);
-            // $sql->execute($valores);    
             $sql->execute();    
+            // echo("Insercion realizada.!");
         }catch(Exception $e){
             echo($e);        
         }
@@ -163,7 +167,8 @@ class TurnosDBModel
                             `edad`='{$valores['Edad']}',
                             `talla_calzado`='{$valores['Talla_de_calzado']}',
                             `altura`='{$valores['altura']}',
-                            `color_pelo`='{$valores['Color_de_pelo']}' WHERE id = '{$valores['id']}'";
+                            `color_pelo`='{$valores['Color_de_pelo']}', 
+                            `imagen`='{$valores['imagen_receta']}' WHERE id = '{$valores['id']}'";
         try{
             $this->motrarMsj($consulta);
             echo($consulta);

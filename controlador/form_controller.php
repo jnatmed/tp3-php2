@@ -24,6 +24,7 @@ class form_controller
     public function __construct()
     {
         $this->planillaController = new planillaTurnosController;
+        $this->dbturnos = new TurnosDBModel;
     }
 
     public function carga_arreglo($datosTurno, $pathImg = "")
@@ -62,7 +63,7 @@ class form_controller
 
     public function modificacionTurno(){
         $valores = [];
-        $this->dbturnos = new TurnosDBModel;
+        
         $valores = $this->dbturnos->getTurnoSeleccionado($_POST['modificacion_turno']);
         // echo("<pre>");
         // echo("modificacionTurno<br>");
@@ -124,14 +125,24 @@ class form_controller
 
 
         if ($_FILES['imagen_receta']['size'] <> 0){
-            $this->imgController = new imagenController($_FILES,$this->datos_reserva['fecha_turno'],$this->datos_reserva['hora_turno']);
+            $extensionImagen = $_FILES['imagen_receta']['type'];
+            $tamanioImagen = $_FILES['imagen_receta']['size'];
+            $nombreImagen = $_FILES['imagen_receta']['tmp_name'];
+            $img = imagecreatefromjpeg($nombreImagen);
+            ob_start();
+            imagejpeg($img);
+            $jpeg = ob_get_contents();
+            ob_end_clean();
+            // var_dump($jpeg);
+            // $this->imgController = new imagenController($_FILES,$this->datos_reserva['fecha_turno'],$this->datos_reserva['hora_turno']);
         
-            if ($this->imgController->tipoImagenValida()){
-                move_uploaded_file($this->imgController->getDirTemp(),$this->imgController->getTargetFile());
-                $this->datos_reserva['dir_img'] = $this->imgController->getTargetFile();            
-            }else{
-                $this->datos_mal_cargados[] = '#ERROR IMAGEN: tipo de archivo no permitido';
-            }
+            // if ($this->imgController->tipoImagenValida()){
+                // move_uploaded_file($this->imgController->getDirTemp(),$this->imgController->getTargetFile());
+
+                $this->datos_reserva['dir_img'] = $jpeg;
+            // }else{
+                // $this->datos_mal_cargados[] = '#ERROR IMAGEN: tipo de archivo no permitido';
+            // }
 
         }else{
             echo("Imagen no cargada");

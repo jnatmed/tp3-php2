@@ -1,10 +1,10 @@
 <?php
 
-$img = 'img/giovi.jpeg';
-$fp = fopen($img,'r+b');
-$jpeg = fread($fp, filesize('img/giovi.jpeg'));
-fclose($fp);
-$jpeg = addslashes($jpeg);
+// $img = 'img/giovi.jpeg';
+// $fp = fopen($img,'r+b');
+// $jpeg = fread($fp, filesize('img/giovi.jpeg'));
+// fclose($fp);
+// $jpeg = addslashes($jpeg);
 
 $sample_1 = [
     "fecha_turno" => '2020-05-16',

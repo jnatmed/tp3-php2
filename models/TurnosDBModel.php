@@ -3,6 +3,8 @@ namespace App\models;
 include 'models/config.php';
 
 use PDO;
+use \App\controlador\imagenController;
+
 
 class TurnosDBModel
 {
@@ -107,6 +109,12 @@ class TurnosDBModel
             foreach ($this->db->query($sql) as $res){
                 $resu[] = $res;
             }    
+
+        // echo("<pre>");
+        // echo("getTurnoSeleccionado<br>");
+        // var_dump($resu);
+        // exit();
+
             return $resu;
             $this->db = NULL;    
         }catch(Exception $e){
@@ -152,11 +160,13 @@ class TurnosDBModel
             echo($e);        
         }
     }
-    public function actualizarTurno($valores){
+    public function actualizarTurno($valores,$img_receta){
         // echo("<pre>");
         // echo("insertarTurno<br>");
         // var_dump($valores);
         // exit(); 
+        $this->imgController = new imagenController($img_receta);
+        $this->imgController->codificar();
         $consulta = "UPDATE `turnos` SET 
                             `fecha_turno`='{$valores['Fecha_del_turno']}',
                             `hora_turno`='{$valores['Horario_del_turno']}',
@@ -168,7 +178,7 @@ class TurnosDBModel
                             `talla_calzado`='{$valores['Talla_de_calzado']}',
                             `altura`='{$valores['altura']}',
                             `color_pelo`='{$valores['Color_de_pelo']}', 
-                            `imagen`='{$valores['imagen_receta']}' WHERE id = '{$valores['id']}'";
+                            `imagen`='{$this->imgController->getImagenCodificada()}' WHERE id = '{$valores['id']}'";
         try{
             $this->motrarMsj($consulta);
             echo($consulta);

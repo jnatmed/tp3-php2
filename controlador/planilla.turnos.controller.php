@@ -5,7 +5,7 @@ namespace App\controlador;
 include "models/TurnosDBModel.php";
 
 use \App\models\TurnosDBModel;
-
+use \App\controlador\imagenController;
 
 class planillaTurnosController
 {
@@ -31,7 +31,7 @@ class planillaTurnosController
         // var_dump($_POST);
         // exit();        
 
-        $this->dbturnos->actualizarTurno($_POST);
+        $this->dbturnos->actualizarTurno($_POST,$_FILES);
         $this->verPlanillaTurnos();
     }
 
@@ -63,6 +63,13 @@ class planillaTurnosController
     public function verTurnoReservado()
     {
         $this->turno = $this->dbturnos->getTurnoSeleccionado($_POST['id_turno']);
+        $this->imgController = new imagenController();
+        $this->turno[0]['imagen'] = $this->imgController->devolverPathImagen($this->turno[0]['imagen']);
+        // echo("<pre>");    
+        // echo("verTurnoReservado<br>");    
+        // var_dump($this->turno);
+        // exit();
+
         include "views/turno.reservado.view.php";
     }
     public function bajaTurnoReservado()

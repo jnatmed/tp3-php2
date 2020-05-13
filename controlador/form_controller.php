@@ -125,26 +125,9 @@ class form_controller
 
 
         if ($_FILES['imagen_receta']['size'] <> 0){
-            $extensionImagen = $_FILES['imagen_receta']['type'];
-            $tamanioImagen = $_FILES['imagen_receta']['size'];
-            $nombreImagen = $_FILES['imagen_receta']['tmp_name'];
-            $img = imagecreatefromjpeg($nombreImagen);
-            ob_start();
-            imagejpeg($img);
-            $jpeg = ob_get_contents();
-            ob_end_clean();
-            $jpeg = str_replace("##","##",mysql_real_escape_string($jpeg));
-            // var_dump($jpeg);
-            // $this->imgController = new imagenController($_FILES,$this->datos_reserva['fecha_turno'],$this->datos_reserva['hora_turno']);
-        
-            // if ($this->imgController->tipoImagenValida()){
-                // move_uploaded_file($this->imgController->getDirTemp(),$this->imgController->getTargetFile());
-
-                $this->datos_reserva['dir_img'] = $jpeg;
-            // }else{
-                // $this->datos_mal_cargados[] = '#ERROR IMAGEN: tipo de archivo no permitido';
-            // }
-
+            $this->imgController = new imagenController($_FILES);
+            $this->imgController->codificar();
+            $this->datos_reserva['dir_img'] = $this->imgController->getImagenCodificada();
         }else{
             echo("Imagen no cargada");
         } 

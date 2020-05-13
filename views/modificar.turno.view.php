@@ -12,7 +12,7 @@
       <?php //echo("<pre>")?>
       <?php //var_dump($this->lista_datos)?>
       <?php //exit();?>
-        <form action="/save_formulario" method = 'POST' enctype="multipart/form-data">
+        <form action="/guardar_modificacion_turno" method = 'POST' enctype="multipart/form-data">
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
             <p>
             <label for  ="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>
@@ -23,8 +23,8 @@
              <?php }else if($campo['tipo'] == 'tel'){ ?>    <!-- TELEFONO -->
             
               <label for="phone">Ingrese el Nro de Telefono:</label><br><br>
-              <input type="tel" id="<?= $campo['nombre_campo']?>" name="<?= $campo['nombre_campo']?>" value = '<?= $campo['valor']?>' placeholder="011-3438-7233" pattern="<?= $campo['restriccion']?>" <?= $campo['obligatorio']?>><br><br>
-              <small>Formato: 011-3438-7233</small><br><br>
+              <input type="tel" id="<?= $campo['nombre_campo']?>" name="<?= $campo['nombre_campo']?>" value = '<?= $campo['valor']?>' placeholder="11-3438-7233" pattern="<?= $campo['restriccion']?>" <?= $campo['obligatorio']?>><br><br>
+              <small>Formato: 11-3438-7233</small><br><br>
 
             <?php }else if($campo['tipo'] == 'altura'){   // ALTURA
               list($min,$max) = explode("-",$campo['restriccion'])
@@ -59,10 +59,10 @@
             <?php } ?>                
             </p>
             <?php  endforeach?>  
-            
             <input type="file" name="imagen_receta" id="imagen_receta"> <br><br>
+
             <input type="text" name ='id' value = <?= $this->id_turno_update?> hidden = True>
-            <input type="submit" name='modificar' value= "modificar">
+            <input type="submit" name='modificar_turno' value= "modificar">
         </form>
     </main>
 </body>

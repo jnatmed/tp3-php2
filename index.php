@@ -30,6 +30,7 @@ if($url_path == '/' && $http_method == 'GET'){
 }else if ($url_path == '/ver_turno_reservado' && $http_method == 'POST'){
     $planillaTurnos->verTurnoReservado();
 }else if ($url_path == '/guardar_modificacion_turno' && $http_method == 'POST'){
+    // var_dump($_FILES);
     $planillaTurnos->guardarTurnoModificado();
 }else if ($url_path == '/edicion_turno' && $http_method == 'POST'){
     if(isset($_POST['baja_turno'])){

@@ -16,12 +16,12 @@
             <?php if($campo['tipo'] == 'date'){ ?>  <!-- FECHA NACIMIENTO o FECHA TURNO-->
               <input type="date" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' <?= $campo['obligatorio']?>>
             <?php }else if($campo['tipo'] == 'email'){ ?>  <!-- EMAIL -->
-              <input type="text" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' pattern = <?= $campo['restriccion']?> placeholder = "ej: pepe@servidor.com" <?= $campo['obligatorio']?>>
+              <input type="text" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' pattern = <?= $campo['restriccion']?> placeholder = "ej: pepej@servidor.com" <?= $campo['obligatorio']?>>
              <?php }else if($campo['tipo'] == 'tel'){ ?>    <!-- TELEFONO -->
             
               <label for="phone">Ingrese el Nro de Telefono:</label><br><br>
-              <input type="tel" id="<?= $campo['nombre_campo']?>" name="<?= $campo['nombre_campo']?>" placeholder="011-3438-7233" pattern="<?= $campo['restriccion']?>" <?= $campo['obligatorio']?>><br><br>
-              <small>Formato: 011-3438-7233</small><br><br>
+              <input type="tel" id="<?= $campo['nombre_campo']?>" name="<?= $campo['nombre_campo']?>" placeholder="11-3438-7233" pattern="<?= $campo['restriccion']?>" <?= $campo['obligatorio']?>><br><br>
+              <small>Formato: 11-3438-7233</small><br><br>
 
             <?php }else if($campo['tipo'] == 'altura'){   // ALTURA
               list($min,$max) = explode("-",$campo['restriccion'])

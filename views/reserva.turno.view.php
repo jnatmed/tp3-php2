@@ -32,7 +32,7 @@
                     <td><?= $turno['color_pelo'];?></td>
                     <td><?= $turno['fecha_turno'];?></td>
                     <td><?= $turno['hora_turno'];?></td> 
-                    <td><img src='<?= $turno['dir_img']; ?>' alt="imagen" width="500" height="333"></td>
+                    <td><img src='img/tmp.jpeg' alt="imagen" width="500" height="333"></td>
                 </tr>                                                        
             </table><br><br>
                 <input type="text" value="<?= $turno['nombre_paciente']; ?>" name="Nombre_del_Paciente" hidden="true">

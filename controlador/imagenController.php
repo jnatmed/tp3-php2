@@ -35,7 +35,6 @@ class imagenController
         $decoded = base64_decode($imgBase64);
         $file = 'img/tmp.jpeg';
         file_put_contents($file,$decoded);
-        return $file;
     }
 
     public function getImagenCodificada(){

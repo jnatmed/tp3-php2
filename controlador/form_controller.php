@@ -128,6 +128,7 @@ class form_controller
             $this->imgController = new imagenController($_FILES);
             $this->imgController->codificar();
             $this->datos_reserva['dir_img'] = $this->imgController->getImagenCodificada();
+            $this->imgController->devolverPathImagen($this->datos_reserva['dir_img']);
         }else{
             echo("Imagen no cargada");
         } 

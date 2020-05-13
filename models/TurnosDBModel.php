@@ -127,6 +127,8 @@ class TurnosDBModel
         // echo("insertarTurno<br>");
         // var_dump($valores);
         // exit(); 
+        // $this->imgController = new imagenController();
+        // $this->imgController->codificar($valores['dir_img']);
         $consulta = "INSERT INTO `turnos`(`id`, 
                                         `fecha_turno`, 
                                         `hora_turno`, 
@@ -149,7 +151,7 @@ class TurnosDBModel
                                                         '{$valores['talla_calzado']}',
                                                         '{$valores['altura']}',
                                                         '{$valores['color_pelo']}',
-                                                          NULL)";
+                                                        '{$valores['dir_img']}')";
         try{
             $this->motrarMsj($consulta);
             // echo($consulta);

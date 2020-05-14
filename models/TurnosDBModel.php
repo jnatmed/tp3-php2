@@ -140,7 +140,8 @@ class TurnosDBModel
                                         `talla_calzado`, 
                                         `altura`, 
                                         `color_pelo`, 
-                                        `imagen`) VALUES (NULL,
+                                        `imagen`,
+                                        `tipo_imagen`) VALUES (NULL,
                                                         '{$valores['fecha_turno']}',
                                                         '{$valores['hora_turno']}',
                                                         '{$valores['nombre_paciente']}',
@@ -151,7 +152,8 @@ class TurnosDBModel
                                                         '{$valores['talla_calzado']}',
                                                         '{$valores['altura']}',
                                                         '{$valores['color_pelo']}',
-                                                        '{$valores['dir_img']}')";
+                                                        '{$valores['dir_img']}',
+                                                        '{$valores['tipo_imagen']}')";
         try{
             $this->motrarMsj($consulta);
             // echo($consulta);

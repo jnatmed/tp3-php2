@@ -27,7 +27,7 @@ class form_controller
         $this->dbturnos = new TurnosDBModel;
     }
 
-    public function carga_arreglo($datosTurno, $pathImg = "")
+    public function carga_arreglo($datosTurno, $pathImg = "", $tipo_imagen = "")
     {        
         // echo("<pre>");
         // var_dump($datosTurno);
@@ -42,7 +42,8 @@ class form_controller
         $this->datos_reserva['color_pelo'] = $datosTurno['Color_de_pelo'];
         $this->datos_reserva['fecha_turno'] = $datosTurno['Fecha_del_turno'];
         $this->datos_reserva['hora_turno'] = $datosTurno['Horario_del_turno'];
-        $this->datos_reserva['dir_img'] = $pathImg;        
+        $this->datos_reserva['dir_img'] = $pathImg;    
+        $this->datos_reserva['tipo_imagen'] = $tipo_imagen;    
     }
 
     public function mostrarFormulario()
@@ -126,9 +127,15 @@ class form_controller
 
         if ($_FILES['imagen_receta']['size'] <> 0){
             $this->imgController = new imagenController($_FILES);
-            $this->imgController->codificar();
-            $this->datos_reserva['dir_img'] = $this->imgController->getImagenCodificada();
-            $this->imgController->devolverPathImagen($this->datos_reserva['dir_img']);
+            if($this->imgController->getTamanioEnMB() <= 1){
+                var_dump($this->imgController);
+                $this->imgController->codificar();
+                $this->datos_reserva['dir_img'] = $this->imgController->getImagenCodificada();
+                $this->datos_reserva['tipo_imagen'] = $this->imgController->getTipoImagen();
+                $this->imgController->devolverPathImagen($this->datos_reserva['dir_img']);                
+            }else{
+                echo("Imagen no cargada, Tamanio de carga Excedido => ".$this->imgController->getTamanioEnMB());
+            }
         }else{
             echo("Imagen no cargada");
         } 
@@ -149,7 +156,7 @@ class form_controller
         // exit();
 
         if (array_key_exists('enviar',$_POST)){
-            $this->carga_arreglo($_POST,$_POST['dir_img']);
+            $this->carga_arreglo($_POST,$_POST['dir_img'], $_POST['tipo_imagen']);
             $this->planillaController->guardarTurnoConfirmado($this->datos_reserva);
             $this->planillaController->verPlanillaTurnos();
         }else{

@@ -13,6 +13,7 @@ $sqlTabla = "CREATE TABLE `turnos` (
   `altura` int(11) DEFAULT NULL,
   `color_pelo` varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `imagen` mediumblob DEFAULT NULL
+  'tipo_imagen' varchar(30) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 ALTER TABLE `turnos` ADD PRIMARY KEY (`id`);
 ALTER TABLE `turnos` MODIFY `id` int NOT NULL AUTO_INCREMENT;

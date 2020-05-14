@@ -31,16 +31,39 @@ class imagenController
         return base64_decode($this->getImagenCodificada());
     }
 
+    public function setTipoImagen($tipoImg){
+        $this->extensionImagen = $tipoImg;
+    }
+    public function getTipoImagen(){
+        return $this->extensionImagen;
+    }
+
     public function devolverPathImagen($imgBase64){
         $decoded = base64_decode($imgBase64);
-        $file = 'img/tmp.jpeg';
-        file_put_contents($file,$decoded);
+        $this->pathFile = 'img/tmp.jpeg';
+        file_put_contents($this->pathFile,$decoded);
+        $this->setTamanioImagen(filesize($this->pathFile));
+    }
+
+    public function getPathFile(){
+        return $this->pathFile;
+    }
+
+    public function getTamanioEnMB(){
+        return ($this->getTamanioImagen() / 1048576);
     }
 
     public function getImagenCodificada(){
         return $this->imagenCodificada;
     }
 
+
+    public function setTamanioImagen($tamanio){
+        $this->tamanioImagen = $tamanio;
+    }
+    public function getTamanioImagen(){
+        return $this->tamanioImagen;
+    }
     public function tipoImagenValida()
     {
         $encontrado = false;

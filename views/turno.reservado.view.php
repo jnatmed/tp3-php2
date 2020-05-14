@@ -4,7 +4,10 @@
     </head>
     <?php include "views/panel_navegacion.php"; ?>
     <body>
-        <h1>Turno del Paciente <?= $this->turno[0]['nombre_paciente']; ?></h1>
+        <h1>Turno del Paciente <?php 
+            $this->turno[0]['nombre_paciente']; 
+            // echo($this->imgController->getTamanioEnMB()); 
+        ?></h1>
         <form action="edicion_turno" method='POST'>
             <table border = "2">
                 <tr>

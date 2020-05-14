@@ -32,7 +32,8 @@
                     <td><?= $turno['color_pelo'];?></td>
                     <td><?= $turno['fecha_turno'];?></td>
                     <td><?= $turno['hora_turno'];?></td> 
-                    <td><img src='img/tmp.jpeg' alt="imagen" width="500" height="333"></td>
+                    <td><img src='img/tmp.jpeg' alt="imagen" width="500" height="333"><br>
+                    </td>
                 </tr>                                                        
             </table><br><br>
                 <input type="text" value="<?= $turno['nombre_paciente']; ?>" name="Nombre_del_Paciente" hidden="true">
@@ -46,7 +47,7 @@
                 <input type="text" value="<?= $turno['fecha_turno']; ?>" name="Fecha_del_turno" hidden="true">
                 <input type="text" value="<?= $turno['hora_turno']; ?>" name="Horario_del_turno" hidden="true">
                 <input type="text" value="<?= $turno['dir_img']; ?>" name="dir_img" hidden="true">
-
+                <input type="text" value="<?= $turno['tipo_imagen']; ?>" name="tipo_imagen" hidden="true">
         <?php 
           if (!empty($this->datos_mal_cargados)){ ?>
             <input type="submit" name='enviar' value="Confirmar Turno" disabled>

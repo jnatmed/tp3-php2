@@ -20,6 +20,7 @@ class form_controller
     public $imgController = NULL;
     public $dbturnos;
     public $id_turno_update;
+    const MAXIMO_VALOR_PERMITIDO_IMAGEN = 10;
 
     public function __construct()
     {
@@ -127,7 +128,7 @@ class form_controller
 
         if ($_FILES['imagen_receta']['size'] <> 0){
             $this->imgController = new imagenController($_FILES);
-            if($this->imgController->getTamanioEnMB() <= 1){
+            if($this->imgController->getTamanioEnMB() <= MAXIMO_VALOR_PERMITIDO_IMAGEN){
                 var_dump($this->imgController);
                 $this->imgController->codificar();
                 $this->datos_reserva['dir_img'] = $this->imgController->getImagenCodificada();

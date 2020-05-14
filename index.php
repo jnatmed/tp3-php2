@@ -1,6 +1,7 @@
 <?php
 
 // phpinfo();
+// exit();
 // echo("hola mundo");
 
 include 'controlador/form_controller.php';
@@ -30,7 +31,10 @@ if($url_path == '/' && $http_method == 'GET'){
 }else if ($url_path == '/ver_turno_reservado' && $http_method == 'POST'){
     $planillaTurnos->verTurnoReservado();
 }else if ($url_path == '/guardar_modificacion_turno' && $http_method == 'POST'){
-    // var_dump($_FILES);
+    echo("<pre>");
+    echo("guardar_modificacion_turno<br>");
+    var_dump($_FILES);
+    exit(); 
     $planillaTurnos->guardarTurnoModificado();
 }else if ($url_path == '/edicion_turno' && $http_method == 'POST'){
     if(isset($_POST['baja_turno'])){

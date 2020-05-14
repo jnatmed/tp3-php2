@@ -165,10 +165,10 @@ class TurnosDBModel
         }
     }
     public function actualizarTurno($valores,$img_receta){
-        // echo("<pre>");
-        // echo("insertarTurno<br>");
-        // var_dump($valores);
-        // exit(); 
+        echo("<pre>");
+        echo("insertarTurno<br>");
+        var_dump($img_receta);
+        exit(); 
         $this->imgController = new imagenController($img_receta);
         $this->imgController->codificar();
         $consulta = "UPDATE `turnos` SET 

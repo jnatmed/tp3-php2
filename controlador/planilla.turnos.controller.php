@@ -26,10 +26,10 @@ class planillaTurnosController
     }
 
     public function guardarTurnoModificado(){
-        // echo("<pre>");
-        // echo("guardarTurnoModificado<br>");
-        // var_dump($_POST);
-        // exit();        
+        echo("<pre>");
+        echo("guardarTurnoModificado<br>");
+        var_dump($_FILES);
+        exit();        
 
         $this->dbturnos->actualizarTurno($_POST,$_FILES);
         $this->verPlanillaTurnos();

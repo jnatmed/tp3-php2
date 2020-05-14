@@ -20,7 +20,6 @@ class form_controller
     public $imgController = NULL;
     public $dbturnos;
     public $id_turno_update;
-    const MAXIMO_VALOR_PERMITIDO_IMAGEN = 10;
 
     public function __construct()
     {
@@ -126,17 +125,21 @@ class form_controller
         }
 
 
-        if ($_FILES['imagen_receta']['size'] <> 0){
-            $this->imgController = new imagenController($_FILES);
-            if($this->imgController->getTamanioEnMB() <= MAXIMO_VALOR_PERMITIDO_IMAGEN){
-                var_dump($this->imgController);
-                $this->imgController->codificar();
-                $this->datos_reserva['dir_img'] = $this->imgController->getImagenCodificada();
-                $this->datos_reserva['tipo_imagen'] = $this->imgController->getTipoImagen();
-                $this->imgController->devolverPathImagen($this->datos_reserva['dir_img']);                
+        $this->imgController = new imagenController($_FILES);
+
+        if ($this->imgController->getTamanioImagen() <> 0){
+            if($this->imgController->controlTamanioMaximoImagen()){
+                if($this->imgController->controlTipoImagenValida()){
+                    $this->imgController->codificar();
+                    $this->datos_reserva['dir_img'] = $this->imgController->getImagenCodificada();
+                    $this->datos_reserva['tipo_imagen'] = $this->imgController->getTipoImagen();
+                    $this->imgController->devolverPathImagen($this->datos_reserva['dir_img']);                
+                }else{
+                    $this->datos_mal_cargados[] = "#ERROR IMAGEN: Tipo de imagen no valido.";
+                }    
             }else{
-                echo("Imagen no cargada, Tamanio de carga Excedido => ".$this->imgController->getTamanioEnMB());
-            }
+                $this->datos_mal_cargados[] = "#ERROR IMAGEN: Imagen no cargada, Tamanio de carga Excedido => ".$this->imgController->getTamanioEnMB();
+             }
         }else{
             echo("Imagen no cargada");
         } 

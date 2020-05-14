@@ -182,11 +182,11 @@ class TurnosDBModel
                             `talla_calzado`='{$valores['Talla_de_calzado']}',
                             `altura`='{$valores['altura']}',
                             `color_pelo`='{$valores['Color_de_pelo']}', 
-                            `imagen`='{$this->imgController->getImagenCodificada()},
+                            `imagen`='{$this->imgController->getImagenCodificada()}',
                             `tipo_imagen`='{$this->imgController->getTipoImagen()}' WHERE id = '{$valores['id']}'";
         try{
             // $this->motrarMsj($consulta);
-            echo($consulta);
+            // echo($consulta);
             $sql = $this->db->prepare($consulta);
             // $sql->execute($valores);    
             $sql->execute();    

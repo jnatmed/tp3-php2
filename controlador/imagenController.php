@@ -9,7 +9,8 @@ class imagenController
     public $nombreImagen;
     public $imagenCodificada;
     public $tiposPermitidos = ['jpg','png','jpeg'];
-
+    public $maximo_tamanio_imagen_valido;
+    const MAXIMO_TAMANIO_IMAGEN = 10;
 
     public function __construct($array_FILES = NULL)
     {
@@ -17,9 +18,30 @@ class imagenController
             $this->extensionImagen = $_FILES['imagen_receta']['type'];
             $this->tamanioImagen = $_FILES['imagen_receta']['size'];
             $this->nombreImagen = $_FILES['imagen_receta']['tmp_name'];
+        }else{
+            $this->extensionImagen = "";
+            $this->tamanioImagen = 0;
+            $this->nombreImagen = "";
         }
+        $this->setMaximo_tamanio_imagen_valido(floatval(self::MAXIMO_TAMANIO_IMAGEN));
     }
 
+    public function controlTamanioMaximoImagen(){
+        
+        if (($this->getTamanioEnMB()) <= $this->getMaximo_tamanio_imagen_valido()) {
+            return true;
+        }else{
+            return false;
+        } 
+    }
+
+    public function getMaximo_tamanio_imagen_valido(){
+        return $this->maximo_tamanio_imagen_valido;
+    }
+
+    public function setMaximo_tamanio_imagen_valido($val){
+        $this->maximo_tamanio_imagen_valido = $val;
+    }
     public function codificar(){
         $fp = fopen($this->nombreImagen,"rb");
         $this->imagenCodificada = fread($fp, filesize($this->nombreImagen));
@@ -64,7 +86,7 @@ class imagenController
     public function getTamanioImagen(){
         return $this->tamanioImagen;
     }
-    public function tipoImagenValida()
+    public function controlTipoImagenValida()
     {
         $encontrado = false;
         foreach ($this->tiposPermitidos as $extension){

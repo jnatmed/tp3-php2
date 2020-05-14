@@ -26,10 +26,10 @@ class planillaTurnosController
     }
 
     public function guardarTurnoModificado(){
-        echo("<pre>");
-        echo("guardarTurnoModificado<br>");
-        var_dump($_FILES);
-        exit();        
+        // echo("<pre>");
+        // echo("guardarTurnoModificado<br>");
+        // var_dump($_FILES);
+        // exit();        
 
         $this->dbturnos->actualizarTurno($_POST,$_FILES);
         $this->verPlanillaTurnos();
@@ -52,13 +52,6 @@ class planillaTurnosController
 
         include "views/planilla.turnos.view.php";
     }
-
-    // public function cargarTurno($id_turno)
-    // {
-    //     var_dump($id_turno);
-    //     var_dump(intval($id_turno));
-    //     $this->turno[] = $this->planillaTurnos[$id_turno];
-    // }
 
     public function verTurnoReservado()
     {

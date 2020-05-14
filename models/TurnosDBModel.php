@@ -165,10 +165,10 @@ class TurnosDBModel
         }
     }
     public function actualizarTurno($valores,$img_receta){
-        echo("<pre>");
-        echo("insertarTurno<br>");
-        var_dump($img_receta);
-        exit(); 
+        // echo("<pre>");
+        // echo("insertarTurno<br>");
+        // var_dump($img_receta);
+        // exit(); 
         $this->imgController = new imagenController($img_receta);
         $this->imgController->codificar();
         $consulta = "UPDATE `turnos` SET 
@@ -182,9 +182,10 @@ class TurnosDBModel
                             `talla_calzado`='{$valores['Talla_de_calzado']}',
                             `altura`='{$valores['altura']}',
                             `color_pelo`='{$valores['Color_de_pelo']}', 
-                            `imagen`='{$this->imgController->getImagenCodificada()}' WHERE id = '{$valores['id']}'";
+                            `imagen`='{$this->imgController->getImagenCodificada()},
+                            `tipo_imagen`='{$this->imgController->getTipoImagen()}' WHERE id = '{$valores['id']}'";
         try{
-            $this->motrarMsj($consulta);
+            // $this->motrarMsj($consulta);
             echo($consulta);
             $sql = $this->db->prepare($consulta);
             // $sql->execute($valores);    

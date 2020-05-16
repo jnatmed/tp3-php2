@@ -1,0 +1,46 @@
+#navegador ul{
+    list-style-type: none;
+    text-align: center;
+ }
+ #navegador li{
+    display: inline;
+    text-align: center;
+    margin: 0 10px 0 0;
+ }
+ #navegador li a {
+    padding: 2px 7px 2px 7px;
+    color: #666;
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
+    text-decoration: none;
+ }
+ #navegador li a:hover{
+    background-color: #333333;
+    color: #ffffff;
+ }
+ input {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+#turnos{
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+#turnos td, #turnos th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+#turnos tr:nth-child(even){background-color: #f2f2f2;}
+
+#turnos tr:hover {background-color: #ddd;}
+
+#turnos th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}

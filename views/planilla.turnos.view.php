@@ -1,20 +1,23 @@
 <html>
     <head>
         <title>Planilla de Turnos</title>
+        <link rel="stylesheet" href="css/miestilo.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/cabecera.css">
     </head>
-    <?php include "views/panel_navegacion.php"; ?>
+    <?php include "views/estructura/panel_navegacion.php"; ?>
     <body>
         <form action="/ver_turno_reservado" method='POST'>
         <h1>Planilla de Turnos de Pacientes</h1>
-        <table border = "2">
+        <table id="turnos">
             <tr>
-                <td>Fecha del Turno</td>
-                <td>Horario del Turno</td>
-                <td>Nombre del Paciente</td>
-                <td>Telefono</td>
-                <td>Email</td>
-                <td>Consulta de Turno</td>
-                <!-- <td>Eliminacion Turno</td> -->
+                <th>Fecha del Turno</th>
+                <th>Horario del Turno</th>
+                <th>Nombre del Paciente</th>
+                <th>Telefono</th>
+                <th>Email</th>
+                <th>Consulta de Turno</th>
+                <!-- <th>Eliminacion Turno</th> -->
             </tr>
             <?php foreach ($this->planillaTurnos as $nroTurno => $turno):?>
                 <tr>
@@ -29,4 +32,5 @@
         </table>
         </form>
     </body>
+    <?php include "views/estructura/footer.view.php"; ?>
 </html>

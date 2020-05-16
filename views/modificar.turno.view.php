@@ -2,8 +2,11 @@
 <html>
     <head>
         <title>Formulario de Datos del Paciente</title>
-    </head>
-    <?php include "views/panel_navegacion.php"; ?>
+        <link rel="stylesheet" href="css/miestilo.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/cabecera.css">
+      </head>
+    <?php include "views/estructura/panel_navegacion.php"; ?>
 <body>
     <header>
         <h1>Nombre del Paciente</h1>
@@ -66,4 +69,5 @@
         </form>
     </main>
 </body>
+<?php include "views/estructura/footer.view.php"; ?>
 </html>

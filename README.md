@@ -4,7 +4,6 @@ Persistencia y MVC</h1><br><br>
 CONFIGURACION
 
 Para la prueba del Proyecto: 
-- Habilitar la libreria GD, para el uso de funciones de grafico.
 - importar el archivo SQL '001_create_database_dbturnos', en el mismo se encuentra la creacion
 de la base de datos y la tabla turnos, junto a la insercion de 5 tuplas para realizar las pruebas. 
 - en el archivo de php.ini, hay que cambiar las variables 

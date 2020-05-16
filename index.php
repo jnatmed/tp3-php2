@@ -43,11 +43,11 @@ if($url_path == '/' && $http_method == 'GET'){
         $formController->modificacionTurno();
     }else{
         http_response_code(404);
-        include "views/error.404.view.php";     
+        include "views/estructura/error.404.view.php";     
     }
 }else {
     http_response_code(404);
-    include "views/error.404.view.php"; 
+    include "views/estructura/error.404.view.php"; 
 }
 
 ?>

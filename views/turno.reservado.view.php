@@ -1,27 +1,30 @@
 <html>
     <head>
         <title>Turno Paciente</title>
+        <link rel="stylesheet" href="css/miestilo.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/cabecera.css">
     </head>
-    <?php include "views/panel_navegacion.php"; ?>
+    <?php include "views/estructura/panel_navegacion.php"; ?>
     <body>
         <h1>Turno del Paciente <?php 
             $this->turno[0]['nombre_paciente']; 
             // echo($this->imgController->getTamanioEnMB()); 
         ?></h1>
         <form action="edicion_turno" method='POST'>
-            <table border = "2">
+            <table id="turnos">
                 <tr>
-                    <td>Fecha del Turno</td>
-                    <td>Horario del Turno</td>
-                    <td>Nombre del Paciente</td>
-                    <td>Telefono</td>
-                    <td>Email</td>
-                    <td>Edad</td>
-                    <td>Talla del Calzado</td>
-                    <td>Altura</td>
-                    <td>Fecha de Nacimiento</td>
-                    <td>Color de Pelo</td>
-                    <td>Receta Cargada</td>
+                    <th>Fecha del Turno</th>
+                    <th>Horario del Turno</th>
+                    <th>Nombre del Paciente</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th>Edad</th>
+                    <th>Talla del Calzado</th>
+                    <th>Altura</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Color de Pelo</th>
+                    <th>Receta Cargada</th>
                 </tr>
                     <tr>
                         <td><?= $this->turno[0]['fecha_turno'];?></td>
@@ -41,4 +44,5 @@
             <td><button type="submit" name='modificacion_turno' value="<?= $this->turno[0]['id']; ?>" >Modificar Turno</button></td>
         </form>
     </body>
+    <?php include "views/estructura/footer.view.php"; ?>
 </html>

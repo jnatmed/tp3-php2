@@ -1,24 +1,27 @@
 <html>
     <head>
         <title>Reserva de Turno</title>
+        <link rel="stylesheet" href="css/miestilo.css">
+        <link rel="stylesheet" href="css/footer.css">
+        <link rel="stylesheet" href="css/cabecera.css">
     </head>
-    <?php include "views/panel_navegacion.php"; ?>
+    <?php include "views/estructura/panel_navegacion.php"; ?>
     <body>
         <h1>Reserva de Turno</h1>
         <form action="/turno_confirmado" method = 'POST' enctype="multipart/form-data">
-            <table border = "2">
+            <table id="turnos">
                 <tr>
-                    <td>Nombre del Paciente</td>
-                    <td>Email</td>
-                    <td>Telefono</td>
-                    <td>Edad</td>
-                    <td>Talla del Calzado</td>
-                    <td>Altura</td>
-                    <td>Fecha de Nacimiento</td>
-                    <td>Color de Pelo</td>
-                    <td>Fecha del Turno</td>
-                    <td>Horario del Turno</td>
-                    <td>Receta Cargada</td>
+                    <th>Nombre del Paciente</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th>Edad</th>
+                    <th>Talla del Calzado</th>
+                    <th>Altura</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Color de Pelo</th>
+                    <th>Fecha del Turno</th>
+                    <th>Horario del Turno</th>
+                    <th>Receta Cargada</th>
                 </tr>
                 <?php $turno = $this->datos_reserva;?>
                 <tr>
@@ -65,4 +68,5 @@
 
            <?php echo "<h1>Datos correctamente cargados</h1>";} ?>
     </body>
+    <?php include "views/estructura/footer.view.php"; ?>
 </html>

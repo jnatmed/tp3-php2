@@ -90,7 +90,7 @@ class imagenController
     {
         $encontrado = false;
         foreach ($this->tiposPermitidos as $extension){
-            if ($this->tipoImagen == $extension){
+            if (strpos($this->getTipoImagen(),$extension)!==false){
                 $encontrado = true;
             }
         }

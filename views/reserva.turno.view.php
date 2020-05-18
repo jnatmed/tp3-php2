@@ -35,7 +35,7 @@
                     <td><?= $turno['color_pelo'];?></td>
                     <td><?= $turno['fecha_turno'];?></td>
                     <td><?= $turno['hora_turno'];?></td> 
-                    <td><img src='img/tmp.jpeg' alt="imagen" width="500" height="333"><br>
+                    <td><img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="imagen" width="500" height="333"><br>
                     </td>
                 </tr>                                                        
             </table><br><br>

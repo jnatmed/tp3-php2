@@ -5,7 +5,7 @@
     margin: 8px 0;
     box-sizing: border-box;
   } 
-/*
+
 #turnos{
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -23,6 +23,6 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #4CAF50;
+    background-color: rgb(0, 150, 69);
     color: white;
-} */
+}

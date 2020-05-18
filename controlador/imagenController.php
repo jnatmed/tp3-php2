@@ -9,15 +9,16 @@ class imagenController
     public $nombreImagen;
     public $imagenCodificada;
     public $tiposPermitidos = ['jpg','png','jpeg'];
+    public $extension;
     public $maximo_tamanio_imagen_valido;
     const MAXIMO_TAMANIO_IMAGEN = 10;
 
     public function __construct($array_FILES = NULL)
     {
         if (isset($array_FILES)){
-            $this->extensionImagen = $_FILES['imagen_receta']['type'];
-            $this->tamanioImagen = $_FILES['imagen_receta']['size'];
-            $this->nombreImagen = $_FILES['imagen_receta']['tmp_name'];
+            $this->extensionImagen = $array_FILES['imagen_receta']['type'];
+            $this->tamanioImagen = $array_FILES['imagen_receta']['size'];
+            $this->nombreImagen = $array_FILES['imagen_receta']['tmp_name'];
         }else{
             $this->extensionImagen = "";
             $this->tamanioImagen = 0;
@@ -35,7 +36,7 @@ class imagenController
         } 
     }
 
-    public function getMaximo_tamanio_imagen_valido(){
+public function getMaximo_tamanio_imagen_valido(){
         return $this->maximo_tamanio_imagen_valido;
     }
 
@@ -62,9 +63,29 @@ class imagenController
 
     public function devolverPathImagen($imgBase64){
         $decoded = base64_decode($imgBase64);
-        $this->pathFile = 'img/tmp.jpeg';
-        file_put_contents($this->pathFile,$decoded);
-        $this->setTamanioImagen(filesize($this->pathFile));
+        $this->setPathFile('img/tmp.'.$this->getExtension());
+        file_put_contents($this->getPathFile(),$decoded);
+        $this->setTamanioImagen(filesize($this->getPathFile()));
+    }
+
+    public function cargarImagen(){
+        if ($this->imagenCargada()){    
+            return $this->getPathFile();
+        }else{
+            return "models/samples/contenido-no-disponible.jpg";
+        }
+
+    }
+
+    public function setExtension($ext){
+        $this->extension = $ext;
+    }
+    public function getExtension(){
+        return $this->extension;
+    }
+    
+    public function setPathFile($pfile){
+        $this->pathFile = $pfile;
     }
 
     public function getPathFile(){
@@ -79,6 +100,9 @@ class imagenController
         return $this->imagenCodificada;
     }
 
+    public function imagenCargada(){
+        return ($this->getTamanioImagen() <> 0);
+    }
 
     public function setTamanioImagen($tamanio){
         $this->tamanioImagen = $tamanio;
@@ -91,6 +115,7 @@ class imagenController
         $encontrado = false;
         foreach ($this->tiposPermitidos as $extension){
             if (strpos($this->getTipoImagen(),$extension)!==false){
+                $this->setExtension($extension);
                 $encontrado = true;
             }
         }

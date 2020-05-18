@@ -170,7 +170,9 @@ class TurnosDBModel
         // var_dump($img_receta);
         // exit(); 
         $this->imgController = new imagenController($img_receta);
-        $this->imgController->codificar();
+        if($this->imgController->imagenCargada()){
+            $this->imgController->codificar();
+        }
         $consulta = "UPDATE `turnos` SET 
                             `fecha_turno`='{$valores['Fecha_del_turno']}',
                             `hora_turno`='{$valores['Horario_del_turno']}',

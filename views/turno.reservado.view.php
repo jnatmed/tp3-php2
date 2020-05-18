@@ -37,7 +37,7 @@
                         <td><?= $this->turno[0]['altura']; ?></td>                
                         <td><?= $this->turno[0]['fecha_nacimiento']; ?></td>                
                         <td><?= $this->turno[0]['color_pelo']; ?></td>                
-                        <td><img src='img/tmp.jpeg' alt="imagen" width="500" height="333"></td>
+                        <td><img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="imagen" width="500" height="333"></td>
                     </tr>
             </table>
             <td><button type="submit" name='baja_turno' value="<?= $this->turno[0]['id']; ?>" >Eliminar Turno</button></td>

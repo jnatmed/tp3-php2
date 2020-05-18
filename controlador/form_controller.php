@@ -12,14 +12,15 @@ use \App\controlador\planillaTurnosController;
 
 class form_controller
 {
-    public $lista_datos = [];
-    public $tipo_restriccion = [];
-    public $datos_reserva = [];
-    public $planilla = [];
-    public $planillaController = NULL;
-    public $imgController = NULL;
-    public $dbturnos;
-    public $id_turno_update;
+    public $lista_datos = []; // lista de carga de estructura de ingreso del turno
+    public $tipo_restriccion = []; // estructura de cada campo de ingreso con (su tipo, si es obligatorio, restriccion, patron y valor)
+    public $datos_reserva = []; // hash que contiene los datos a cargarse en la vista de ingreso del turno
+    public $planilla = []; 
+    public $planillaController = NULL; // clase planilla controller
+    public $imgController = NULL; // clase que controla el ingreso correcto de la imagen
+    public $dbturnos; // base de datos de turnos, donde hago las consultas de turnos y modificaciones
+    public $id_turno_update; // identificador del turno, que se pasa a la vista de "modificacion.turno.view"
+    public $datos_mal_cargados; // arreglo donde cargo los errores encontrados en la carga del turno
 
     public function __construct()
     {
@@ -99,10 +100,16 @@ class form_controller
         $this->tipo_restriccion['valor'] = $valor;
         $this->lista_datos[] = $this->tipo_restriccion;
     }
-  
-    public function guardarFormulario(){
 
-        $datos_mal_cargados = [];
+
+        // entrada: 
+        // - $_POST, $_FILES
+        // salida:
+        // - $this->datos_mal_cargados, con los errores encontrados
+        // - obj imgController con los datos de la imagen cargada 
+
+    public function controlFormulario($post, $files){
+        $this->datos_mal_cargados = [];
 
         $this->carga_arreglo($_POST);
 
@@ -127,7 +134,7 @@ class form_controller
 
         $this->imgController = new imagenController($_FILES);
 
-        if ($this->imgController->getTamanioImagen() <> 0){
+        if ($this->imgController->imagenCargada()){
             if($this->imgController->controlTamanioMaximoImagen()){
                 if($this->imgController->controlTipoImagenValida()){
                     $this->imgController->codificar();
@@ -147,9 +154,37 @@ class form_controller
         if ($this->planillaController->buscarFechaTurno($this->datos_reserva['fecha_turno'],$this->datos_reserva['hora_turno'])){
             $this->datos_mal_cargados[] =  "#ERROR FECHA Y HORA TURNO: La fecha y turno cargados ya fueron asignados a otro paciente.";    
         }
-        
+
+    }
+
+    public function guardarTurnoModificado(){
+        // echo("<pre>");
+        // echo("guardarTurnoModificado<br>");
+        // var_dump($_FILES);
+        // exit();        
+        $this->controlFormulario($_POST,$_FILES); //     
+        $this->dbturnos->actualizarTurno($_POST,$_FILES);
+        $this->planillaController->verPlanillaTurnos();
+    }
+
+    public function guardarFormulario(){
+        // entrada: 
+        // - $_POST, $_FILES
+        // salida:
+        // - $this->datos_mal_cargados, con los errores encontrados
+        // - obj imgController con los datos de la imagen cargada 
+        $this->controlFormulario($_POST,$_FILES); //     
 
         include "views/reserva.turno.view.php";
+    }
+
+    public function guardarTurnoConfirmado($turno)
+    {
+        // echo("<pre>");
+        // echo("guardarTurnoConfirmado<br>");
+        // var_dump($turno);
+        // exit();        
+        $this->dbturnos->insertarTurno($turno);
     }
 
     public function reservarTurno()
@@ -161,7 +196,7 @@ class form_controller
 
         if (array_key_exists('enviar',$_POST)){
             $this->carga_arreglo($_POST,$_POST['dir_img'], $_POST['tipo_imagen']);
-            $this->planillaController->guardarTurnoConfirmado($this->datos_reserva);
+            $this->guardarTurnoConfirmado($this->datos_reserva);
             $this->planillaController->verPlanillaTurnos();
         }else{
             $this->mostrarFormulario();

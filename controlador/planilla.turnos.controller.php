@@ -25,25 +25,6 @@ class planillaTurnosController
         // $this->planillaTurnos = $this->dbturnos->getTurnos();
     }
 
-    public function guardarTurnoModificado(){
-        // echo("<pre>");
-        // echo("guardarTurnoModificado<br>");
-        // var_dump($_FILES);
-        // exit();        
-
-        $this->dbturnos->actualizarTurno($_POST,$_FILES);
-        $this->verPlanillaTurnos();
-    }
-
-    public function guardarTurnoConfirmado($turno)
-    {
-        // echo("<pre>");
-        // echo("guardarTurnoConfirmado<br>");
-        // var_dump($turno);
-        // exit();        
-        $this->dbturnos->insertarTurno($turno);
-    }
-
     public function verPlanillaTurnos()
     {
         // echo("pre");
@@ -57,7 +38,11 @@ class planillaTurnosController
     {
         $this->turno = $this->dbturnos->getTurnoSeleccionado($_POST['id_turno']);
         $this->imgController = new imagenController();
-        $this->turno[0]['imagen'] = $this->imgController->devolverPathImagen($this->turno[0]['imagen']);
+        if($this->turno[0]['imagen'] <> ''){
+            $this->imgController->setTipoImagen($this->turno[0]['tipo_imagen']);
+            $this->imgController->controlTipoImagenValida();
+            $this->turno[0]['imagen'] = $this->imgController->devolverPathImagen($this->turno[0]['imagen']);
+        }
         // echo("<pre>");    
         // echo("verTurnoReservado<br>");    
         // var_dump($this->turno);

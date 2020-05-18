@@ -1,6 +1,4 @@
-
-
-  input, label {
+input, label {
     width: 50%;
     margin: 8px 0;
     box-sizing: border-box;
@@ -26,3 +24,17 @@
     background-color: rgb(0, 150, 69);
     color: white;
 }
+
+/* .formulario_cargado{
+  grid-area: form_cargado;
+}
+
+.receta_cargada{
+  grid-area: img_receta;
+}
+
+.contenido{
+  display: grid;
+  grid-template-columns: 'form_cargado img_receta';
+  background-color: rgb(0, 110, 199);
+} */

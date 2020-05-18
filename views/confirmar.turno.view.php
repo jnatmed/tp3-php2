@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Reserva de Turno</title>
-        <link rel="stylesheet" href="css/miestilo.css">
+        <link rel="stylesheet" href="css/contenido.css">
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/cabecera.css">
     </head>
@@ -54,7 +54,7 @@
         <?php 
           if (!empty($this->datos_mal_cargados)){ ?>
             <input type="submit" name='enviar' value="Confirmar Turno" disabled>
-            <input type="submit" name='cancelar' value="Cancelar Turno">
+            <input type="submit" name='corregir' value="Corregir Turno">
         </form>    
 
             <ul> Errores Encontrados:

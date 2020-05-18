@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Not Found</title>
-        <link rel="stylesheet" href="css/miestilo.css">
+        <link rel="stylesheet" href="css/contenido.css">
     </head>
     <?php include "views/estructura/panel_navegacion.php"; ?>
     <body>

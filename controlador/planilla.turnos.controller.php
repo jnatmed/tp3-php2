@@ -31,7 +31,7 @@ class planillaTurnosController
         // var_dump($this->planillaTurnos);
         $this->planillaTurnos = $this->dbturnos->getTurnos();
 
-        include "views/planilla.turnos.view.php";
+        include "views/listado.turnos.view.php";
     }
 
     public function verTurnoReservado()
@@ -41,14 +41,14 @@ class planillaTurnosController
         if($this->turno[0]['imagen'] <> ''){
             $this->imgController->setTipoImagen($this->turno[0]['tipo_imagen']);
             $this->imgController->controlTipoImagenValida();
-            $this->turno[0]['imagen'] = $this->imgController->devolverPathImagen($this->turno[0]['imagen']);
+            $this->imgController->devolverPathImagen($this->turno[0]['imagen']);
         }
         // echo("<pre>");    
         // echo("verTurnoReservado<br>");    
         // var_dump($this->turno);
         // exit();
 
-        include "views/turno.reservado.view.php";
+        include "views/consulta.turno.view.php";
     }
     public function bajaTurnoReservado()
     {

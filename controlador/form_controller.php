@@ -60,7 +60,24 @@ class form_controller
         $this->agregar_dato('Fecha del turno', 'required','date');
         $this->agregar_dato('Horario del turno', '', 'horario_turno','8-17-15');
         
-        include "views/form.persona.view.php";
+        include "views/nuevo.turno.view.php";
+    }
+
+    public function corregirIngreso(){
+
+        $this->agregar_dato('Nombre del Paciente','required','nombre','[a-zA-Z]+',$_POST['Nombre_del_Paciente']);
+        $this->agregar_dato('Email', 'required','email','[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$',$_POST['Email']);
+        $this->agregar_dato('Telefono', 'required','tel','[0-1]{2}-[0-9]{4}-[0-9]{4}',$_POST['Telefono']);
+        $this->agregar_dato('Edad', '', 'edad','18-60',$_POST['Edad']);
+        $this->agregar_dato('Talla de calzado', '', 'calzado','20-45',$_POST['Talla_de_calzado']);
+        $this->agregar_dato('altura', '','altura','1-3', $_POST['altura']);
+        $this->agregar_dato('Fecha de nacimiento', 'required','date','',$_POST['Fecha_de_nacimiento']);
+        $this->agregar_dato('Color de pelo','required','pelo','rubio-negro-castaño-marron',$_POST['Color_de_pelo']);
+        $this->agregar_dato('Fecha del turno', 'required','date','',$_POST['Fecha_del_turno']);
+        $this->agregar_dato('Horario del turno', '', 'horario_turno','8-17-15',$_POST['Horario_del_turno']);
+
+        include "views/modificar.turno.view.php";
+
     }
 
     public function modificacionTurno(){
@@ -87,6 +104,13 @@ class form_controller
         // var_dump($this->lista_datos);
         // exit();
         $this->id_turno_update = $_POST['modificacion_turno'];
+
+        $this->imgController = new imagenController();
+        if($valores[0]['imagen'] <> ''){
+            $this->imgController->setTipoImagen($valores[0]['tipo_imagen']);
+            $this->imgController->controlTipoImagenValida();
+            $this->imgController->devolverPathImagen($valores[0]['imagen']);
+        }
 
         include "views/modificar.turno.view.php";
     }
@@ -175,7 +199,7 @@ class form_controller
         // - obj imgController con los datos de la imagen cargada 
         $this->controlFormulario($_POST,$_FILES); //     
 
-        include "views/reserva.turno.view.php";
+        include "views/confirmar.turno.view.php";
     }
 
     public function guardarTurnoConfirmado($turno)
@@ -199,7 +223,7 @@ class form_controller
             $this->guardarTurnoConfirmado($this->datos_reserva);
             $this->planillaController->verPlanillaTurnos();
         }else{
-            $this->mostrarFormulario();
+            $this->corregirIngreso();
         }
     }
 

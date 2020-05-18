@@ -2,12 +2,12 @@
 <html>
     <head>
         <title>Formulario de Datos del Paciente</title>
-        <link rel="stylesheet" href="css/miestilo.css">
+        <link rel="stylesheet" href="css/contenido.css">
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/cabecera.css">
       </head>
     <?php include "views/estructura/panel_navegacion.php"; ?>
-<body>
+<body class = "contenido"> 
     <header>
         <h1>Nombre del Paciente</h1>
     </header>
@@ -15,7 +15,7 @@
       <?php //echo("<pre>")?>
       <?php //var_dump($this->lista_datos)?>
       <?php //exit();?>
-        <form action="/guardar_modificacion_turno" method = 'POST' enctype="multipart/form-data">
+        <form action="/guardar_modificacion_turno" method = 'POST' enctype="multipart/form-data" class = "formulario_cargado">
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
             <p>
             <label for  ="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>
@@ -63,10 +63,17 @@
             </p>
             <?php  endforeach?>  
             <input type="file" name="imagen_receta" id="imagen_receta"> <br><br>
+              <?php if($this->id_turno_update <> 0){?>
 
-            <input type="text" name ='id' value = <?= $this->id_turno_update?> hidden = True>
-            <input type="submit" name='modificar_turno' value= "modificar">
-        </form>
+                    <input type="text" name ='id' value = <?= $this->id_turno_update?> hidden = True>
+                    <input type="submit" name='modificar_turno' value= "modificar">
+                  </form>
+              <img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="receta_cargada" class = "receta_cargada">
+
+              <?php }else{?>
+                  <input type="submit" name='corregir_turno' value= "corregir">
+                </form>
+              <?php }?>  
     </main>
 </body>
 <?php include "views/estructura/footer.view.php"; ?>

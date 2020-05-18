@@ -28,7 +28,8 @@ solicitar una nueva imagen.
 
 RESPUESTA: <br>
 Para guardar las imagenes de las recetas use la funcion "base64encode()"<br>
-INSERCION: el archivo en binario lo inserto en un campo 'imagen' y el tipo en un campo 'tipo_imagen'<br>
+INSERCION: el archivo en binario lo inserto en un campo 'imagen' de la base de datos<br>
+'dbturnos' del tipo "MEDIUMBLOB", el cual previamente fue codificado en binario.
 CONSULTA: para la consulta:<br>
 - traigo el archivo de la base de datos,
 - lo decodifico 
@@ -37,6 +38,8 @@ CONSULTA: para la consulta:<br>
 de receta guardada. 
 
 <pre>
+"Parte del codigo para decodificar la imagen"
+
     public function devolverPathImagen($imgBase64){
         $decoded = base64_decode($imgBase64);
         $this->setPathFile('img/tmp.'.$this->getExtension());

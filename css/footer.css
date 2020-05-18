@@ -8,6 +8,10 @@
     text-align: center;
  }
 
+ #footer{
+    background-color: rgb(0, 150, 69);
+ }
+ 
  @font-face {
     font-family: "Swis721 Cn BT";
     src: url("http://allfont.es/allfont.css?fonts=swiss-721-win95bt");

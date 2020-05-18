@@ -159,6 +159,7 @@ class TurnosDBModel
             // echo($consulta);
             $sql = $this->db->prepare($consulta);
             $sql->execute();    
+            // $this->logger->guardarAccion('a',$sql);   
             // echo("Insercion realizada.!");
         }catch(Exception $e){
             echo($e);        
@@ -188,10 +189,12 @@ class TurnosDBModel
                             `tipo_imagen`='{$this->imgController->getTipoImagen()}' WHERE id = '{$valores['id']}'";
         try{
             // $this->motrarMsj($consulta);
-            // echo($consulta);
+            // $p = explode("'imagen'",$consulta);
+            // echo($p[0]);
             $sql = $this->db->prepare($consulta);
             // $sql->execute($valores);    
-            $sql->execute();    
+            $sql->execute(); 
+            // $this->logger->guardarAccion('m',$sql);   
         }catch(Exception $e){
             echo($e);        
         }
@@ -208,6 +211,7 @@ class TurnosDBModel
             // $sql->bindColumn(':id',$id_turno);
             if($sql->execute([$id_turno]) === TRUE){
                 echo("registro ha sido eliminado, id=>{$id_turno}");
+                // $this->logger->guardarAccion('b',$consulta);   
             }else{
                 echo("No se pudo eliminar el registro<br>");
             }    

@@ -11,7 +11,7 @@ class imagenController
     public $tiposPermitidos = ['jpg','png','jpeg'];
     public $extension;
     public $maximo_tamanio_imagen_valido;
-    const MAXIMO_TAMANIO_IMAGEN = 2;
+    const MAXIMO_TAMANIO_IMAGEN = 10;
 
     public function __construct($array_FILES = NULL)
     {

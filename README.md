@@ -26,6 +26,8 @@ software debe permitir cargar imágenes de hasta 10 MB. Si la imagen pesa más, 
 informar al usuario este inconveniente, y pre-cargando el formulario con los datos ingresados,
 solicitar una nueva imagen.
 
+RESPUESTA: 
+
 3) Implemente Modificación y Baja de los registros del sistema de turnos.
 
 -RESPUESTA: Realizado, con algunas cuestiones pendientes en lo que refiere a la seguridad, es decir:

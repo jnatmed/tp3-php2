@@ -26,10 +26,10 @@ software debe permitir cargar imágenes de hasta 10 MB. Si la imagen pesa más, 
 informar al usuario este inconveniente, y pre-cargando el formulario con los datos ingresados,
 solicitar una nueva imagen.
 
-RESPUESTA: 
-Para guardar las imagenes de las recetas use la funcion "base64encode()"
-INSERCION: el archivo en binario lo inserto en un campo 'imagen' y el tipo en un campo 'tipo_imagen'
-CONSULTA: para la consulta:
+RESPUESTA: <br>
+Para guardar las imagenes de las recetas use la funcion "base64encode()"<br>
+INSERCION: el archivo en binario lo inserto en un campo 'imagen' y el tipo en un campo 'tipo_imagen'<br>
+CONSULTA: para la consulta:<br>
 - traigo el archivo de la base de datos,
 - lo decodifico 
 - los guardo en un archivo temporal ubicado en "img/tmp.[jpeg/jpg/jpg]" 

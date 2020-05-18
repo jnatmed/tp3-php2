@@ -27,6 +27,29 @@ informar al usuario este inconveniente, y pre-cargando el formulario con los dat
 solicitar una nueva imagen.
 
 RESPUESTA: 
+Para guardar las imagenes de las recetas use la funcion "base64encode()"
+INSERCION: el archivo en binario lo inserto en un campo 'imagen' y el tipo en un campo 'tipo_imagen'
+CONSULTA: para la consulta:
+- traigo el archivo de la base de datos,
+- lo decodifico 
+- los guardo en un archivo temporal ubicado en "img/tmp.[jpeg/jpg/jpg]" 
+- y en la vista leo directamente de ese archivo temporal, solo si existe una imagen
+de receta guardada. 
+
+<pre>
+    public function devolverPathImagen($imgBase64){
+        $decoded = base64_decode($imgBase64);
+        $this->setPathFile('img/tmp.'.$this->getExtension());
+        file_put_contents($this->getPathFile(),$decoded);
+        $this->setTamanioImagen(filesize($this->getPathFile()));
+    }
+</pre>
+
+Para informar al usuario el inconveniente, al cargar los datos ingresados por el usuario, los errores
+encontrados se van guardando en un arreglo. Si el arreglo esta vacio se ingresan los datos del turno.
+Si arreglo tiene algun error, se informa al usuario y mediante un boton "corregir" se puede volver atras
+al formulario de carga con los datos pre-cargados.
+
 
 3) Implemente Modificación y Baja de los registros del sistema de turnos.
 

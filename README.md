@@ -17,9 +17,9 @@ CONSIGNAS:
 una base de datos MySQL usando PDO. La generación del número de turno debe hacerse vía
 motor de base de datos. ¿Qué cambios hubo que realizar para la generación del id?
 
--RESPUESTA: En la version anterior, tomaba como id a los campos: id (autoincremental), fecha turno, hora turno. 
-en esta version, el id cambio al campo id(autoincremental), ya que todos los demas fueron considerados
-repetibles.Todo lo demas quedo igual, en lo que a generacion de id se refiere. 
+-RESPUESTA: En la version anterior, para la generacion del id usaba a los campos: id (autoincremental),<br>
+fecha turno, hora turno. en esta version, el id cambio al campo id(autoincremental), ya que todos <br>
+los demas fueron considerados repetibles.Todo lo demas quedo igual, en lo que a generacion de id se refiere.<br> 
 
 2) Modifique el sistema para permitir que las imágenes sean persistidas sobre la base de datos. El
 software debe permitir cargar imágenes de hasta 10 MB. Si la imagen pesa más, se le debe
@@ -29,7 +29,7 @@ solicitar una nueva imagen.
 RESPUESTA: <br>
 Para guardar las imagenes de las recetas use la funcion "base64encode()"<br>
 INSERCION: el archivo en binario lo inserto en un campo 'imagen' de la base de datos<br>
-'dbturnos' del tipo "MEDIUMBLOB", el cual previamente fue codificado en binario.
+'dbturnos' del tipo "MEDIUMBLOB". <br>
 CONSULTA: para la consulta:<br>
 - traigo el archivo de la base de datos,
 - lo decodifico 

@@ -22,64 +22,18 @@ class TurnosDBModel
         // echo($msj);
     }
 
-    public function crearDB(){
-        //1 - me conecto al servidor
-        //2 - creo la base de datos
-        $sqlDB = "CREATE DATABASE dbturnos";
-       
-        //1 - conecto al servidor
-        try{
-            $this->db = new PDO("mysql:host={$this->params['host']}", $this->params['user'],$this->params['pwd']);
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);            
-            $this->motrarMsj("1 - Conexion establecida..<br>");
-        }catch(\Throwable $th){
-            $this->motrarMsj("1E - Error al conectar al Servidor!<br>");
-            // echo($th);    
-        }
-        //2 - creo dbturnos
-        try{
-            $this->db->exec($sqlDB);
-            $this->motrarMsj("2 - Base de Datos dbturnos Creada..<br>");
-            $this->db = null;
-        }catch(\Throwable $th){
-            $this->motrarMsj("2E - Error al crear la DB dbturnos!<br>");
-            // echo($th);    
-        }
-    }    
-
-    public function crearTabla(){
-        // 3 - Creo tabla turnos 
-        include 'models/config.php';
-        // include 'models/samples.php';
-
-        try{
-            $this->db->exec($sqlTabla);
-            $this->motrarMsj("3 - Tabla turnos Creada..<br>");
-        }catch(\Throwable $th){
-            $this->motrarMsj("3E - Error al crear Tabla turnos!<br>");
-            // echo($th);    
-        }
-        
-    }
     public function __construct(){
-        include 'models/samples.php';
 
-        $this->crearDB();    
         $this->dsn = sprintf("mysql:host=%s;dbname=%s", $this->params['host'], $this->params['db']);
         try {
             $this->db = new PDO($this->dsn, $this->params['user'],$this->params['pwd']);    
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->crearTabla();
-            // $this->insertarTurno($sample_1);
-            // $this->insertarTurno($sample_2);
-            // $this->insertarTurno($sample_3);    
         } catch (\Throwable $th) {
             echo ("<pre>");
             var_dump($th);
             exit(0);   
         }
     }   
-
 
     private function setNames(){
         return $this->db->query("SET NAMES 'utf8'");

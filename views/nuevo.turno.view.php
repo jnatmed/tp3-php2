@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Formulario de Datos del Paciente</title>
-        <link rel="stylesheet" href="css/miestilo.css">
+        <link rel="stylesheet" href="css/contenido.css">
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/cabecera.css">
       </head>

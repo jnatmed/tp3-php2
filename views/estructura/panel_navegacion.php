@@ -1,5 +1,5 @@
 <nav>
-    <ul class="horizontal">
+    <ul class="panel">
         <li>
             <a href="/planilla_turnos"><h1>Planilla de Turnos</h1></a>            
         </li>

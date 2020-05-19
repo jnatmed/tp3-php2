@@ -1,7 +1,5 @@
 <?php
 namespace App\models;
-include 'models/config.php';
-
 use PDO;
 use \App\controlador\imagenController;
 

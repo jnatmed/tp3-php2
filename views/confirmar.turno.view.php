@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html>
     <head>
         <title>Reserva de Turno</title>
@@ -5,8 +7,9 @@
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/cabecera.css">
     </head>
-    <?php include "views/estructura/panel_navegacion.php"; ?>
     <body>
+        <main>
+        <?php include "views/estructura/cabecera.view.php"; ?>
         <h1>Reserva de Turno</h1>
         <form action="/turno_confirmado" method = 'POST' enctype="multipart/form-data">
             <table id="turnos">
@@ -35,7 +38,7 @@
                     <td><?= $turno['color_pelo'];?></td>
                     <td><?= $turno['fecha_turno'];?></td>
                     <td><?= $turno['hora_turno'];?></td> 
-                    <td><img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="imagen" width="500" height="333"><br>
+                    <td><img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="imagen" class="receta_cargada"><br>
                     </td>
                 </tr>                                                        
             </table><br><br>
@@ -67,6 +70,8 @@
             </form>    
 
            <?php echo "<h1>Datos correctamente cargados</h1>";} ?>
+      </main>     
+      <?php include "views/estructura/footer.view.php"; ?>
+
     </body>
-    <?php include "views/estructura/footer.view.php"; ?>
 </html>

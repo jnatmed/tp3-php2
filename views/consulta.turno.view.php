@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html>
     <head>
         <title>Turno Paciente</title>
@@ -5,8 +7,9 @@
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/cabecera.css">
     </head>
-    <?php include "views/estructura/panel_navegacion.php"; ?>
     <body>
+        <main>
+        <?php include "views/estructura/cabecera.view.php"; ?>
         <h1>Turno del Paciente <?php 
             $this->turno[0]['nombre_paciente']; 
             // echo($this->imgController->getTamanioEnMB()); 
@@ -37,12 +40,14 @@
                         <td><?= $this->turno[0]['altura']; ?></td>                
                         <td><?= $this->turno[0]['fecha_nacimiento']; ?></td>                
                         <td><?= $this->turno[0]['color_pelo']; ?></td>                
-                        <td><img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="imagen" width="500" height="333"></td>
+                        <td><img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="imagen" class="receta_cargada"></td>
                     </tr>
             </table>
-            <td><button type="submit" name='baja_turno' value="<?= $this->turno[0]['id']; ?>" >Eliminar Turno</button></td>
-            <td><button type="submit" name='modificacion_turno' value="<?= $this->turno[0]['id']; ?>" >Modificar Turno</button></td>
+            <button type="submit" name='baja_turno' value="<?= $this->turno[0]['id']; ?>" >Eliminar Turno</button>
+            <button type="submit" name='modificacion_turno' value="<?= $this->turno[0]['id']; ?>" >Modificar Turno</button>
         </form>
+        </main>
+        <?php include "views/estructura/footer.view.php"; ?>
+
     </body>
-    <?php include "views/estructura/footer.view.php"; ?>
 </html>

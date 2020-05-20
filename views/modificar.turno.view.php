@@ -6,10 +6,9 @@
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/cabecera.css">
       </head>
-    <?php include "views/estructura/panel_navegacion.php"; ?>
 <body class = "contenido"> 
    <main>
-
+   <?php include "views/estructura/cabecera.view.php"; ?>
      <header id="nombre_paciente">
          <h1>Turno del Paciente: <?= $this->lista_datos[0]['valor']?></h1>
      </header>
@@ -66,18 +65,21 @@
               <?php if($this->id_turno_update <> 0){?>
 
                     <input type="text" name ='id' value = <?= $this->id_turno_update?> hidden = True>
-                    <input type="submit" name='modificar_turno' value= "modificar">
+                    <input type="submit" name='corregir_turno' value= "corregir">
                   </form>
+                  </section>
+
                   <section class = "receta_cargada">
-                    <img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="receta_cargada" >
+                    <img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="receta_cargada" class="receta_cargada">
                   </section>         
               <?php }else{?>
                   <input type="submit" name='corregir_turno' value= "corregir">
                 </form>
+                </section>
+
               <?php }?> 
-          </section>
 
     </main>
+    <?php include "views/estructura/footer.view.php"; ?>
 </body>
-<?php include "views/estructura/footer.view.php"; ?>
 </html>

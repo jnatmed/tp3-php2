@@ -6,12 +6,12 @@
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/cabecera.css">
       </head>
-    <?php include "views/estructura/panel_navegacion.php"; ?>
 <body>
+  <main>  
+    <?php include "views/estructura/cabecera.view.php"; ?>
     <header>
-        <h1>Nombre del Paciente</h1>
+      <h1>Nombre del Paciente</h1>
     </header>
-    <main>
         <form action="/save_formulario" method = 'POST' enctype="multipart/form-data">
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
             <p>
@@ -64,6 +64,7 @@
             <input type="reset" name='limpiar' value="Limpiar">
         </form>
     </main>
+    <?php include "views/estructura/footer.view.php"; ?>
+
 </body>
-<?php include "views/estructura/footer.view.php"; ?>
 </html>

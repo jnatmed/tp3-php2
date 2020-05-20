@@ -103,6 +103,7 @@ class form_controller
         // echo("modificacionTurno<br>");
         // var_dump($this->lista_datos);
         // exit();
+
         $this->id_turno_update = $_POST['modificacion_turno'];
 
         $this->imgController = new imagenController();

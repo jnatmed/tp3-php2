@@ -8,14 +8,14 @@
       </head>
     <?php include "views/estructura/panel_navegacion.php"; ?>
 <body class = "contenido"> 
-    <header>
-        <h1>Nombre del Paciente</h1>
-    </header>
-    <main>
-      <?php //echo("<pre>")?>
-      <?php //var_dump($this->lista_datos)?>
-      <?php //exit();?>
-        <form action="/guardar_modificacion_turno" method = 'POST' enctype="multipart/form-data" class = "formulario_cargado">
+   <main>
+
+     <header id="nombre_paciente">
+         <h1>Turno del Paciente: <?= $this->lista_datos[0]['valor']?></h1>
+     </header>
+    <section class="formulario_cargado">
+
+        <form action="/guardar_modificacion_turno" method = 'POST' enctype="multipart/form-data">
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
             <p>
             <label for  ="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>
@@ -62,18 +62,21 @@
             <?php } ?>                
             </p>
             <?php  endforeach?>  
-            <input type="file" name="imagen_receta" id="imagen_receta"> <br><br>
+            <input type="file" name="imagen_receta" id="imagen_receta"> <br><br> 
               <?php if($this->id_turno_update <> 0){?>
 
                     <input type="text" name ='id' value = <?= $this->id_turno_update?> hidden = True>
                     <input type="submit" name='modificar_turno' value= "modificar">
                   </form>
-              <img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="receta_cargada" class = "receta_cargada">
-
+                  <section class = "receta_cargada">
+                    <img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="receta_cargada" >
+                  </section>         
               <?php }else{?>
                   <input type="submit" name='corregir_turno' value= "corregir">
                 </form>
-              <?php }?>  
+              <?php }?> 
+          </section>
+
     </main>
 </body>
 <?php include "views/estructura/footer.view.php"; ?>

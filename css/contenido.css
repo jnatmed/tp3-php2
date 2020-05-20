@@ -1,13 +1,24 @@
+@import url(fonts/swiss-721.css);
+
+html,h2, main, head, body{
+  font-family: 'Swiss 721 Condensed Italic BT', 'Arial-Narrow', sans-serif;
+  font-size: 12px;
+}
+
 input, label {
-    width: 50%;
-    margin: 8px 0;
+    /* width: 50%; */
+    /* margin: 8px 0; */
     box-sizing: border-box;
   } 
 
 #turnos{
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family: 'Swiss 721 Bold Condensed BT', 'Arial-Narrow', sans-serif;
     border-collapse: collapse;
     width: 100%;
+}
+
+header > h1{
+  text-transform: uppercase;
 }
 #turnos td, #turnos th {
     border: 1px solid #ddd;
@@ -25,16 +36,38 @@ input, label {
     color: white;
 }
 
-/* .formulario_cargado{
+.formulario_cargado{
   grid-area: form_cargado;
+  background-color: khaki;
 }
 
 .receta_cargada{
   grid-area: img_receta;
+  background-color: lawngreen;
+}
+
+#footer{
+  grid-area: footer;
+  background-color: lightcoral;
+}
+#nombre_paciente{
+  grid-area: nom_paciente;
+  background-color: lightseagreen;
+}
+
+.panel{
+  grid-area: panel;
+  background-color: magenta;
 }
 
 .contenido{
   display: grid;
-  grid-template-columns: 'form_cargado img_receta';
+  /* grid-template-columns: 3fr 1fr; */
+  /* grid-template-rows: 100vh min-content 1fr max-content; */
+  grid-template-areas: 
+  'panel'
+  'nom_paciente'
+  'form_cargado img_receta'
+  'footer';
   background-color: rgb(0, 110, 199);
-} */
+}

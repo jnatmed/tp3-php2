@@ -64,5 +64,12 @@ En caso de encontrar una mejora al respecto, estare haciendo el commit correspon
 4) Cada acción del ABM debe ser registrada usando el Logger del framework. Cada log debe ser
 de tipo INFO y almacenar fecha y hora, operación (ABM), y turno afectado (id). En los casos de
 modificación y baja, almacene el registro completo. ¿Considera esto util? ¿En que casos puede
-llegar a utilizarse?
+llegar a utilizarse?<br>
 
+Realizada la instalacion de Composer, y Monolog. Via este framework, se realizo el registro de las Altas Bajas y Modificaciones en la Base de Datos dbturnos. <br>
+Sirvio para identificar un error que estaba cometiendo al momento de actualizar un registro. Al parecer estaba haciendo un alta, cuando en realizar debia realizarse una modificacion en una operacion de UPDATE. <br><br>
+
+Veo que tuve que incorporar la carpeta "vendor" a mi proyecto, sin ella no podia cargarse la App de composer y mucho menos el framework monolog. <br>
+Sin embargo, al momento de hace el "git add ." y el commit correspondiente, no se cargo dicha carpeta. De hecho al parecer git la ignoro sin tenerla encuenta, me resulto curioso ese comportamiento.<br><br>
+
+Los logs se registran en 'logs/LogABMTurnosDataBase-[fecha].log' 

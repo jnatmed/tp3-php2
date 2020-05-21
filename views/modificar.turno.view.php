@@ -14,7 +14,8 @@
      <header id="nombre_paciente">
          <h1>Turno del Paciente: <?= $this->lista_datos[0]['valor']?></h1>
      </header>
-    <section class="formulario_cargado">
+      <section class="formulario_e_imagen">
+       <article class="formulario_cargado">
 
         <form action="/guardar_modificacion_turno" method = 'POST' enctype="multipart/form-data">
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
@@ -69,16 +70,18 @@
                     <input type="text" name ='id' value = <?= $this->id_turno_update?> hidden = True>
                     <input type="submit" name='corregir_turno' value= "corregir">
                   </form>
-                  </section>
-
-                  <section class = "receta_cargada">
+                  </article>
+                  <article class = "receta_cargada">
                     <img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="receta_cargada" class="receta_cargada">
-                  </section>         
+                    <h4>Receta Cargada en el Sistema</h4>
+                  </article>     
+                  </section>  
+    
               <?php }else{?>
                   <input type="submit" name='corregir_turno' value= "corregir">
                 </form>
+                </article>
                 </section>
-
               <?php }?> 
 
     </main>

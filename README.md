@@ -71,6 +71,5 @@ Sirvio para identificar un error que estaba cometiendo al momento de actualizar 
 La considero util en cuanto a cuestiones de analisis de informacion, e identificar errores de comportamiento erroneo, como el ejemplo explicado en el parrafo anterior, en el mismo, la aplicacion web mostraba buen funcionamiento, sin embargo tras bambalinas estaba sucediendo algo distinto al esperado. <br>
 
 Veo que tuve que incorporar la carpeta "vendor" a mi proyecto, sin ella no podia cargarse la App de composer y mucho menos el framework monolog. <br>
-Sin embargo, al momento de hace el "git add ." y el commit correspondiente, no se cargo dicha carpeta. De hecho al parecer git la ignoro sin tenerla encuenta, me resulto curioso ese comportamiento.<br><br>
 
 Los logs se registran en 'logs/LogABMTurnosDataBase-[fecha].log' 

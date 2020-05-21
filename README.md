@@ -67,7 +67,8 @@ modificación y baja, almacene el registro completo. ¿Considera esto util? ¿En
 llegar a utilizarse?<br>
 
 Realizada la instalacion de Composer, y Monolog. Via este framework, se realizo el registro de las Altas Bajas y Modificaciones en la Base de Datos dbturnos. <br>
-Sirvio para identificar un error que estaba cometiendo al momento de actualizar un registro. Al parecer estaba haciendo un alta, cuando en realizar debia realizarse una modificacion en una operacion de UPDATE. <br><br>
+Sirvio para identificar un error que estaba cometiendo al momento de actualizar un registro. Al parecer estaba haciendo un alta, cuando en realidad debia registrarse una operacion de UPDATE. <br>
+La considero util en cuanto a cuestiones de analisis de informacion, e identificar errores de comportamiento erroneo, como el ejemplo explicado en el parrafo anterior, en el mismo, la aplicacion web mostraba buen funcionamiento, sin embargo tras bambalinas estaba sucediendo algo distinto al esperado. <br>
 
 Veo que tuve que incorporar la carpeta "vendor" a mi proyecto, sin ella no podia cargarse la App de composer y mucho menos el framework monolog. <br>
 Sin embargo, al momento de hace el "git add ." y el commit correspondiente, no se cargo dicha carpeta. De hecho al parecer git la ignoro sin tenerla encuenta, me resulto curioso ese comportamiento.<br><br>

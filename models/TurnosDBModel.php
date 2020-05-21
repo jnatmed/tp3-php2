@@ -1,8 +1,14 @@
 <?php
 namespace App\models;
+
+require 'vendor/autoload.php';
+
 use PDO;
 use \App\controlador\imagenController;
 
+use \Monolog\Logger;
+use \Monolog\Handler\RotatingFileHandler;
+use \Monolog\Handler\BrowserConsoleHandler;
 
 class TurnosDBModel
 {
@@ -21,6 +27,13 @@ class TurnosDBModel
     }
 
     public function __construct(){
+    /**
+     * Cargo el objeto Logger
+     *  */    
+
+        $this->logger = new Logger('LogABMTurnosDataBase');
+        $this->logger->pushHandler(new RotatingFileHandler('logs/LogABMTurnosDataBase.log'), 7);
+        $this->logger->pushHandler(new BrowserConsoleHandler());
 
         $this->dsn = sprintf("mysql:host=%s;dbname=%s", $this->params['host'], $this->params['db']);
         try {
@@ -111,8 +124,8 @@ class TurnosDBModel
             // echo($consulta);
             $sql = $this->db->prepare($consulta);
             $sql->execute();    
-            // $this->logger->guardarAccion('a',$sql);   
-            // echo("Insercion realizada.!");
+            // $this->logger->info();   
+            $this->logger->info("ALTA TURNO: ", $valores);
         }catch(Exception $e){
             echo($e);        
         }
@@ -146,7 +159,7 @@ class TurnosDBModel
             $sql = $this->db->prepare($consulta);
             // $sql->execute($valores);    
             $sql->execute(); 
-            // $this->logger->guardarAccion('m',$sql);   
+            $this->logger->info("MODIFICACION TURNO:",$valores);   
         }catch(Exception $e){
             echo($e);        
         }
@@ -163,6 +176,13 @@ class TurnosDBModel
             // $sql->bindColumn(':id',$id_turno);
             if($sql->execute([$id_turno]) === TRUE){
                 echo("registro ha sido eliminado, id=>{$id_turno}");
+
+                $logBaja = [
+                    "id" => "$id_turno",
+                ];
+
+                $this->logger->info("BAJA TURNO:", $logBaja);   
+
                 // $this->logger->guardarAccion('b',$consulta);   
             }else{
                 echo("No se pudo eliminar el registro<br>");

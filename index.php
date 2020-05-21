@@ -36,10 +36,8 @@ if($url_path == '/' && $http_method == 'GET'){
     // var_dump($_FILES);
     // exit(); 
     if($_POST['corregir_turno']){
-        $formController->guardarFormulario();
-    }else{
         $formController->guardarTurnoModificado();
-    }    
+    }   
 }else if ($url_path == '/edicion_turno' && $http_method == 'POST'){
     if(isset($_POST['baja_turno'])){
         $planillaTurnos->bajaTurnoReservado();

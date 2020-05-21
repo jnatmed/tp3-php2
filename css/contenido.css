@@ -40,7 +40,7 @@ header > h1{
 .formulario_cargado{
   grid-area: form_cargado;
   background-color: khaki;
-  flex-flow: column;
+  /* flex-flow: column; */
   width: auto;
   margin-left: 10px;
   margin-block-end: 10px;
@@ -52,13 +52,13 @@ header > h1{
 .receta_cargada{
   grid-area: img_receta;
   background-color: lawngreen;
-  flex-flow: column;
+  /* flex-flow: column; */
   width: 500px;
   height: 333px;
   
 }
 
-#footer{
+.footer{
   /* grid-area: footer; */
   background-color: lightcoral;
 }
@@ -74,9 +74,10 @@ header > h1{
 
 .contenido{
   display: grid;
-  /* grid-template-columns: 3fr 1fr; */
+  grid-template-columns: 3fr 1fr;
   /* grid-template-rows: 100vh min-content 1fr max-content; */
   grid-template-areas: 
   'form_cargado img_receta';
+  /* 'footer'; */
   background-color: rgb(0, 110, 199);
 }

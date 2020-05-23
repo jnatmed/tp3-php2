@@ -1,6 +1,6 @@
 
 <section class="cabecera">
-    <img src="css/fonts/veramedica.png" alt="logo veramedica" id="logo">
+    <img src="css/fonts/veramedica.png" alt="logo veramedica" class="logo">
     <nav>
         <ul class="panel">
             <li>

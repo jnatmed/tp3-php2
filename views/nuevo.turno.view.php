@@ -11,12 +11,15 @@
 <body>
   <main>  
     <?php include "views/estructura/cabecera.view.php"; ?>
-    <header>
-      <h1>Nombre del Paciente</h1>
-    </header>
+      <section class="contenedor_principal">
+        <section>
+        <header>
+          <h1>Nombre del Paciente</h1>
+        </header>
         <form action="/save_formulario" method = 'POST' enctype="multipart/form-data">
+          <!-- <filesets> -->
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
-            <p>
+           
             <label for  ="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>
             <?php if($campo['tipo'] == 'date'){ ?>  <!-- FECHA NACIMIENTO o FECHA TURNO-->
               <input type="date" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' <?= $campo['obligatorio']?>>
@@ -24,9 +27,9 @@
               <input type="text" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' pattern = <?= $campo['restriccion']?> placeholder = "ej: pepej@servidor.com" <?= $campo['obligatorio']?>>
              <?php }else if($campo['tipo'] == 'tel'){ ?>    <!-- TELEFONO -->
             
-              <label for="phone">Ingrese el Nro de Telefono:</label><br><br>
-              <input type="tel" id="<?= $campo['nombre_campo']?>" name="<?= $campo['nombre_campo']?>" placeholder="11-3438-7233" pattern="<?= $campo['restriccion']?>" <?= $campo['obligatorio']?>><br><br>
-              <small>Formato: 11-3438-7233</small><br><br>
+              <label for="phone">Ingrese el Nro de Telefono:</label>
+              <input class="telefono" type="tel" id="<?= $campo['nombre_campo']?>" name="<?= $campo['nombre_campo']?>" placeholder="11-3438-7233" pattern="<?= $campo['restriccion']?>" <?= $campo['obligatorio']?>>
+              <small>Formato: 11-3438-7233</small>
 
             <?php }else if($campo['tipo'] == 'altura'){   // ALTURA
               list($min,$max) = explode("-",$campo['restriccion'])
@@ -57,14 +60,17 @@
             <?php }else{ ?>
               <input type="text" name='<?= $campo['nombre_campo']?>' id='<?= $campo['nombre_campo']?>' <?= $campo['obligatorio']?>>
             <?php } ?>                
-            </p>
+        
             <?php  endforeach?>  
             
-            <input type="file" name="imagen_receta" id="imagen_receta"> <br><br>
+            <input type="file" name="imagen_receta" id="imagen_receta"> 
 
             <input type="submit" name='enviar' value="Enviar">
             <input type="reset" name='limpiar' value="Limpiar">
         </form>
+        </section>
+
+        </section>  
     </main>
     <?php include "views/estructura/footer.view.php"; ?>
 

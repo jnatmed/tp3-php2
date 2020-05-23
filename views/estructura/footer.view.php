@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer>
     <h2>
         Av. 16 de Septiembre No. 1002 A<br>
         Col. Ricardo Flores Magón. Veracruz, Ver. C.P. 91900<br>

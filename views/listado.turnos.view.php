@@ -11,6 +11,8 @@
     <body>
         <main>
             <?php include "views/estructura/cabecera.view.php"; ?>
+            <section class="contenedor_principal"> 
+
             <form action="/ver_turno_reservado" method='POST'>
             <h1>Planilla de Turnos de Pacientes</h1>
             <table id="turnos">
@@ -35,6 +37,8 @@
                 <?php endforeach ?>
             </table>
             </form>
+        </section>
+    
         </main>
         <?php include "views/estructura/footer.view.php"; ?>
 

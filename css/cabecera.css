@@ -3,7 +3,7 @@
   grid-area: panel;
 }
 
-#logo{
+.logo{
   grid-area: logo;
   width: 90%;
 
@@ -18,7 +18,8 @@
 
 ul.panel{
     list-style-type: none;
-    background-color: rgb(0, 150, 69);
+    /* background-color: #009645; */
+    background: rgba(0,150,69,0.91);
     color: white;
 }
 
@@ -29,6 +30,7 @@ nav ul {
 nav > ul {
     display: flex;
     flex-flow: row;
+    margin : 0;
   }
 
   nav li {

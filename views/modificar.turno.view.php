@@ -14,12 +14,12 @@
      <header id="nombre_paciente">
          <h1>Turno del Paciente: <?= $this->lista_datos[0]['valor']?></h1>
      </header>
-      <section class="formulario_e_imagen">
+      <section class="contenedor_principal">
        <article class="formulario_cargado">
 
         <form action="/guardar_modificacion_turno" method = 'POST' enctype="multipart/form-data">
           <?php foreach($this->lista_datos as $id_campo => $campo):?>  
-            <p>
+            
             <label for  ="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>
             <?php if($campo['tipo'] == 'date'){ ?>  <!-- FECHA NACIMIENTO o FECHA TURNO-->
               <input type="date" name='<?= $campo['nombre_campo']?>' value = '<?= $campo['valor']?>' id='<?= $campo['nombre_campo']?>' <?= $campo['obligatorio']?>>
@@ -27,9 +27,9 @@
               <input type="text" name='<?= $campo['nombre_campo']?>' value = '<?= $campo['valor']?>' id='<?= $campo['nombre_campo']?>' pattern = <?= $campo['restriccion']?> placeholder = "ej: pepe@servidor.com" <?= $campo['obligatorio']?>>
              <?php }else if($campo['tipo'] == 'tel'){ ?>    <!-- TELEFONO -->
             
-              <label for="phone">Ingrese el Nro de Telefono:</label><br><br>
-              <input type="tel" id="<?= $campo['nombre_campo']?>" name="<?= $campo['nombre_campo']?>" value = '<?= $campo['valor']?>' placeholder="11-3438-7233" pattern="<?= $campo['restriccion']?>" <?= $campo['obligatorio']?>><br><br>
-              <small>Formato: 11-3438-7233</small><br><br>
+              <label for="phone">Ingrese el Nro de Telefono:</label>
+              <input type="tel" id="<?= $campo['nombre_campo']?>" name="<?= $campo['nombre_campo']?>" value = '<?= $campo['valor']?>' placeholder="11-3438-7233" pattern="<?= $campo['restriccion']?>" <?= $campo['obligatorio']?>>
+              
 
             <?php }else if($campo['tipo'] == 'altura'){   // ALTURA
               list($min,$max) = explode("-",$campo['restriccion'])
@@ -62,29 +62,32 @@
             <?php }else{ ?>
               <input type="text" name='<?= $campo['nombre_campo']?>' value = '<?= $campo['valor']?>' id='<?= $campo['nombre_campo']?>' <?= $campo['obligatorio']?>>
             <?php } ?>                
-            </p>
+            
             <?php  endforeach?>  
-            <input type="file" name="imagen_receta" id="imagen_receta"> <br><br> 
+            <input type="file" name="imagen_receta" id="imagen_receta">  
               <?php if($this->id_turno_update <> 0){?>
 
-                    <input type="text" name ='id' value = <?= $this->id_turno_update?> hidden = True>
+                    <input class="input_oculto" type="text" name ='id' value = <?= $this->id_turno_update?> hidden = True>
                     <input type="submit" name='corregir_turno' value= "corregir">
                   </form>
                   </article>
-                  <article class = "receta_cargada">
-                    <img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="receta_cargada" class="receta_cargada">
-                    <h4>Receta Cargada en el Sistema</h4>
-                  </article>     
+                   <section  class = "receta_cargada">  
+                   <figure>
+                      <!-- <figcaption><h3>Receta Cargada en el Sistema</h3></figcaption> -->
+                      <img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="receta_cargada" class="receta_cargada">                    
+                    </figure>  
+                   </section> 
                   </section>  
     
               <?php }else{?>
                   <input type="submit" name='corregir_turno' value= "corregir">
                 </form>
                 </article>
+
                 </section>
               <?php }?> 
+              <?php include "views/estructura/footer.view.php"; ?>
 
     </main>
-    <?php include "views/estructura/footer.view.php"; ?>
 </body>
 </html>

@@ -14,6 +14,10 @@ input, label {
     box-sizing: border-box;
   } 
 
+  .boton{
+    display: inline-block;
+  }
+
 #turnos{
     font-family: 'Swiss 721 Bold Condensed BT', 'Arial-Narrow', sans-serif;
     border-collapse: collapse;
@@ -46,10 +50,10 @@ header h1{
   text-align: center;
 }
 
-.panel{
+/* .panel{
   /* grid-area: panel; */
-  background-color: magenta;
-}
+  /* background-color: magenta;
+} */ 
 .formulario_cargado{
   /* grid-area: form_cargado; */
   /* background-color: khaki; */

@@ -65,8 +65,8 @@
             
             <input type="file" name="imagen_receta" id="imagen_receta"> 
 
-            <input type="submit" name='enviar' value="Enviar">
-            <input type="reset" name='limpiar' value="Limpiar">
+            <input class="boton" type="submit" name='enviar' value="Enviar">
+            <input class="boton" type="reset" name='limpiar' value="Limpiar">
         </form>
         </section>
 

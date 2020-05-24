@@ -53,7 +53,7 @@ class TurnosDBModel
     public function getTurnos(){
         // self::setNames();
         // var_dump($this->db);
-
+        
         $sql = "SELECT * FROM turnos";   
 
         foreach ($this->db->query($sql) as $res){

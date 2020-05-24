@@ -25,24 +25,35 @@ ul.panel{
 */
 
 li {
-  display: inline-block;
+  margin: 12px;
+  /* font-size: 16px; */
 }
 
 nav{
-  background: rgba(0,150,69,0.91);
+  /* background: #009645e8; */
+  /* background: radial-gradient(ellipse at center, rgba(0,150,69,1) 0%, rgba(164,179,87,1) 100%); */
+  background: none;
   width: 800px;
   display: flex;
   flex-direction: row;
   }
+
+ul{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
 nav ul {
   list-style-type: none;
-  background: rgba(0,150,69,0.91);
+  /* background: rgba(0,150,69,0.91); */
 }
 
 .cabecera {
     display: flex;
     flex-flow: nowrap;
     flex-direction: row;
+    justify-content: space-around;
     /* margin : 0; */
   }
 

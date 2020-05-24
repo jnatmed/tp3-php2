@@ -1,7 +1,10 @@
 @import url(fonts/swiss-721.css);
 
 
+html{
+  background: radial-gradient(ellipse at center, rgba(0,150,69,1) 0%, rgba(164,179,87,1) 100%);
 
+}
 
 html,h2, main, head, body{
   font-family: 'Swiss 721 Condensed Italic BT', 'Arial-Narrow', sans-serif;

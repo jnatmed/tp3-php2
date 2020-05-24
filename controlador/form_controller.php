@@ -13,6 +13,7 @@ use \App\controlador\planillaTurnosController;
 class form_controller
 {
     public $lista_datos = []; // lista de carga de estructura de ingreso del turno
+    public $lista_datos_del_turno = []; // 
     public $tipo_restriccion = []; // estructura de cada campo de ingreso con (su tipo, si es obligatorio, restriccion, patron y valor)
     public $datos_reserva = []; // hash que contiene los datos a cargarse en la vista de ingreso del turno
     public $planilla = []; 
@@ -59,7 +60,14 @@ class form_controller
         $this->agregar_dato('Color de pelo','required','pelo','rubio-negro-castaño-marron');
         $this->agregar_dato('Fecha del turno', 'required','date');
         $this->agregar_dato('Horario del turno', '', 'horario_turno','8-17-15');
+
+        // echo("<pre>");
+        // echo("mostrarFormulario<br>");
+        // var_dump($this->lista_datos);
+        // var_dump($this->lista_datos_del_turno);
+        // exit();
         
+
         include "views/nuevo.turno.view.php";
     }
 
@@ -102,6 +110,7 @@ class form_controller
         // echo("<pre>");
         // echo("modificacionTurno<br>");
         // var_dump($this->lista_datos);
+        // var_dump($this->lista_datos_del_turno);
         // exit();
 
         $this->id_turno_update = $_POST['modificacion_turno'];
@@ -113,17 +122,28 @@ class form_controller
             $this->imgController->devolverPathImagen($valores[0]['imagen']);
         }
 
+
+
         include "views/modificar.turno.view.php";
     }
 
     public function agregar_dato($nombre_campo, $obligatorio = '', $tipo, $restriccion='', $valor = '')
     {
+        $arreglo_nombre_campos = ['Fecha del turno','Horario del turno'];
+
         $this->tipo_restriccion['nombre_campo'] = $nombre_campo;
         $this->tipo_restriccion['obligatorio'] = $obligatorio;
         $this->tipo_restriccion['tipo'] = $tipo;
         $this->tipo_restriccion['restriccion'] = $restriccion;
         $this->tipo_restriccion['valor'] = $valor;
-        $this->lista_datos[] = $this->tipo_restriccion;
+
+
+        if (in_array($this->tipo_restriccion['nombre_campo'],$arreglo_nombre_campos)){
+            $this->lista_datos_del_turno[] = $this->tipo_restriccion;
+            
+        }else{
+            $this->lista_datos[] = $this->tipo_restriccion;
+        }
     }
 
 

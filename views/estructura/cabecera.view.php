@@ -12,3 +12,4 @@
         </ul>
     </nav>
 </section>
+<hr>

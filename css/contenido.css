@@ -57,11 +57,33 @@ header h1{
   /* grid-area: panel; */
   /* background-color: magenta;
 } */ 
+
+legend{
+  text-transform: uppercase;
+  text-shadow: mediumblue;
+}
+.datos_del_paciente{
+  grid-area: datos_del_paciente;
+}
+.datos_del_turno{
+  grid-area: datos_del_turno;
+}
+/* .btn_corregir{
+  grid-area: btn_corregir;
+} */
+.form_ingreso{
+  display: grid;
+  grid-template-areas:  
+  'datos_del_paciente datos_del_turno'
+  'btn_corregir btn_corregir';
+}
+
 .formulario_cargado{
   /* grid-area: form_cargado; */
   /* background-color: khaki; */
   /* flex-flow: column; */
-  width: auto;
+  /* width: auto; */
+
   /* align-items: center; */
   /* margin-block-end: 10px;
   padding-left: 25%;

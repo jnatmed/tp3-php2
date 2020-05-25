@@ -17,8 +17,12 @@
       <section class="contenedor_principal">
        <article class="formulario_cargado">
 
-        <form action="/guardar_modificacion_turno" method = 'POST' enctype="multipart/form-data">
-          <?php foreach($this->lista_datos as $id_campo => $campo):?>  
+        <form action="/guardar_modificacion_turno" method = 'POST' enctype="multipart/form-data" class="form_ingreso">
+        <!-- <section class="datos_del_paciente"> -->
+          <fieldset class="datos_del_paciente">
+          <legend>Datos del Paciente</legend>
+
+            <?php foreach($this->lista_datos as $id_campo => $campo):?>  
             
             <label for  ="<?= $campo['nombre_campo']?>"><?= $campo['nombre_campo']?></label>
             <?php if($campo['tipo'] == 'date'){ ?>  <!-- FECHA NACIMIENTO o FECHA TURNO-->
@@ -46,7 +50,19 @@
                           <option value="<?= $color?>"><?= $color?></option>
                 <?php  endforeach  ?>        
               </select>   
-            <?php }else if($campo['tipo'] == 'horario_turno'){ ?>  <!-- HORARIO TURNO -->
+            <?php }else{ ?>
+              <input type="text" name='<?= $campo['nombre_campo']?>' value = '<?= $campo['valor']?>' id='<?= $campo['nombre_campo']?>' <?= $campo['obligatorio']?>>
+            <?php } ?>                
+            
+            <?php  endforeach?>
+            </fieldset>
+            <!-- </section> -->
+            <!-- <section class="datos_del_turno"> -->
+            <fieldset class="datos_del_turno">
+            <legend>Datos del Turno</legend>
+              <?php foreach($this->lista_datos_del_turno as $id_campo => $campo):?>  
+               <?php if($campo['tipo'] == 'horario_turno'){ ?>  <!-- HORARIO TURNO -->
+                Horario del Turno:<br>
               <select name="<?= $campo['nombre_campo']?>">
                <?php 
                   list($desde, $hasta, $intervalo) = explode("-", $campo['restriccion']);
@@ -56,31 +72,38 @@
                 <?php  } } ?>        
                 <option value="<?= $hora?>:<?= $min?>"><?= $hora?>:00</option>       
                 <option value="<?= $campo['valor']?>" selected><?= $campo['valor']?></option>       
-
                 </select>   
 
-            <?php }else{ ?>
-              <input type="text" name='<?= $campo['nombre_campo']?>' value = '<?= $campo['valor']?>' id='<?= $campo['nombre_campo']?>' <?= $campo['obligatorio']?>>
-            <?php } ?>                
-            
-            <?php  endforeach?>  
-            <input type="file" name="imagen_receta" id="imagen_receta">  
+             <?php }?>         
+             <?php if($campo['tipo'] == 'date'){ ?>  <!-- FECHA DEL TURNO-->
+              <input type="date" name='<?= $campo['nombre_campo']?>' value = '<?= $campo['valor']?>' id='<?= $campo['nombre_campo']?>' <?= $campo['obligatorio']?>>
+              <?php }?>                
+            <?php  endforeach?>
+              
+              <br>Imagen de la Receta<br>  
+              <input type="file" name="imagen_receta" id="imagen_receta">  
+              </fieldset> 
+            <!-- </section>   -->
               <?php if($this->id_turno_update <> 0){?>
 
-                    <input class="input_oculto" type="text" name ='id' value = <?= $this->id_turno_update?> hidden = True>
-                    <input type="submit" name='corregir_turno' value= "corregir">
+                    <input class="input_oculto" type="text" name ='id' value = <?= $this->id_turno_update?>>
+                    <input type="submit" name='corregir_turno' value= "corregir" class="btn_corregir">
                   </form>
-                  </article>
+                  
+                </article>
                    <section  class = "receta_cargada">  
-                   <figure>
-                      <!-- <figcaption><h3>Receta Cargada en el Sistema</h3></figcaption> -->
-                      <img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="receta_cargada" class="receta_cargada">                    
-                    </figure>  
-                   </section> 
+                   <!-- <fieldset> -->
+                     <legend>Receta cargada en el Sistema</legend>
+                     <img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="receta_cargada" class="receta_cargada">                    
+                   <!-- </fieldset>                  -->
+                      
+                   </section>
+                   
+                   
                   </section>  
     
               <?php }else{?>
-                  <input type="submit" name='corregir_turno' value= "corregir">
+                  <input type="submit" name='corregir_turno' value= "corregir" class="btn_corregir">
                 </form>
                 </article>
 

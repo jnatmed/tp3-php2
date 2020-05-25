@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="css/contenido.css">
         <link rel="stylesheet" href="css/footer.css">
         <link rel="stylesheet" href="css/cabecera.css">
-        <link rel="Shortcut Icon" href=”img/favicon.ico” type=”image/x-icon” />
+        <link rel="Shortcut Icon" href="img/favicon.ico" type=”image/x-icon” />
 
       </head>
 <body class = "contenido"> 

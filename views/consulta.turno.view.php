@@ -11,8 +11,7 @@
     <body>
         <main>
         <?php include "views/estructura/cabecera.view.php"; ?>
-        <h1>Turno del Paciente <?php 
-            $this->turno[0]['nombre_paciente']; 
+        <h1>Turno del Paciente <?=  $this->turno[0]['nombre_paciente']; 
             // echo($this->imgController->getTamanioEnMB()); 
         ?></h1>
         <form action="edicion_turno" method='POST'>
@@ -44,6 +43,17 @@
                         <td><img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="imagen" class="receta_cargada"></td>
                     </tr>
             </table>
+                <input class="input_oculto" type="text" value="<?= $this->turno[0]['nombre_paciente']; ?>" name="nombre_paciente" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $this->turno[0]['email']; ?>" name="email" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $this->turno[0]['telefono']; ?>" name="telefono" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $this->turno[0]['edad']; ?>" name="edad" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $this->turno[0]['talla_calzado']; ?>" name="talla_calzado" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $this->turno[0]['altura']; ?>" name="altura" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $this->turno[0]['fecha_nacimiento']; ?>" name="fecha_nacimiento" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $this->turno[0]['color_pelo']; ?>" name="color_pelo" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $this->turno[0]['fecha_turno']; ?>" name="fecha_turno" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $this->turno[0]['hora_turno']; ?>" name="hora_turno" hidden="true">
+
             <button class="boton" type="submit" name='baja_turno' value="<?= $this->turno[0]['id']; ?>" >Eliminar Turno</button>
             <button class="boton" type="submit" name='modificacion_turno' value="<?= $this->turno[0]['id']; ?>" >Modificar Turno</button>
         </form>

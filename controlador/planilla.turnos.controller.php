@@ -56,7 +56,7 @@ class planillaTurnosController
         // echo("bajaTurnoReservado<br>");    
         // var_dump($_POST);
         // exit();
-        $this->turno = $this->dbturnos->bajaTurnoSeleccionado($_POST['baja_turno']);
+        $this->turno = $this->dbturnos->bajaTurnoSeleccionado($_POST);
         $this->verPlanillaTurnos();
     }
 

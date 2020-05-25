@@ -124,6 +124,8 @@ class TurnosDBModel
             // echo($consulta);
             $sql = $this->db->prepare($consulta);
             $sql->execute();    
+            unset($valores['dir_img']);
+            unset($valores['tipo_imagen']);
             // $this->logger->info();   
             $this->logger->info("ALTA TURNO: ", $valores);
         }catch(Exception $e){
@@ -159,29 +161,27 @@ class TurnosDBModel
             $sql = $this->db->prepare($consulta);
             // $sql->execute($valores);    
             $sql->execute(); 
+            unset($valores['dir_img']);
+            unset($valores['corregir_turno']);
             $this->logger->info("MODIFICACION TURNO:",$valores);   
         }catch(Exception $e){
             echo($e);        
         }
     }
 
-    public function bajaTurnoSeleccionado($id_turno){
+    public function bajaTurnoSeleccionado($post){
         $consulta = "DELETE FROM turnos WHERE id = ?;";
-        echo("id turno: ".$id_turno."<br>");
+        echo("id turno: ".$post['baja_turno']."<br>");
         // echo("<pre>");
-        // var_dump($id_turno);
+        // var_dump($post);
         // exit();
         try{
             $sql = $this->db->prepare($consulta);
             // $sql->bindColumn(':id',$id_turno);
-            if($sql->execute([$id_turno]) === TRUE){
-                echo("registro ha sido eliminado, id=>{$id_turno}");
+            if($sql->execute([$post['baja_turno']]) === TRUE){
+                echo("registro ha sido eliminado, id=>{$post['baja_turno']}");
 
-                $logBaja = [
-                    "id" => "$id_turno",
-                ];
-
-                $this->logger->info("BAJA TURNO:", $logBaja);   
+                $this->logger->info("BAJA TURNO:", $post);   
 
                 // $this->logger->guardarAccion('b',$consulta);   
             }else{

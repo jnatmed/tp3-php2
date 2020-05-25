@@ -62,7 +62,7 @@
             <legend>Datos del Turno</legend>
               <?php foreach($this->lista_datos_del_turno as $id_campo => $campo):?>  
                <?php if($campo['tipo'] == 'horario_turno'){ ?>  <!-- HORARIO TURNO -->
-                Horario del Turno:<br>
+                <label for="hora_turno"><?= $campo['nombre_campo']?></label>
               <select name="<?= $campo['nombre_campo']?>">
                <?php 
                   list($desde, $hasta, $intervalo) = explode("-", $campo['restriccion']);
@@ -76,6 +76,7 @@
 
              <?php }?>         
              <?php if($campo['tipo'] == 'date'){ ?>  <!-- FECHA DEL TURNO-->
+              <label for="fecha_turno"><?= $campo['nombre_campo']?></label>
               <input type="date" name='<?= $campo['nombre_campo']?>' value = '<?= $campo['valor']?>' id='<?= $campo['nombre_campo']?>' <?= $campo['obligatorio']?>>
               <?php }?>                
             <?php  endforeach?>

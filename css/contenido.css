@@ -46,8 +46,10 @@ table{
   width:100%;
 }
 
-header h1{
+h1{
   text-transform: uppercase;
+  color: #006ec7;
+  text-decoration: none;
 }
 #turnos td, #turnos th {
     border: 1px solid #ddd;

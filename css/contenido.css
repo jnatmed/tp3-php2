@@ -30,11 +30,20 @@ input, label {
     /* border-collapse: collapse;
     width: auto; */
     border: 20px solid transparent;
-    -moz-border-image: -moz-linear-gradient(top, #a9b5b6 0%, #009645 100%);
-    -webkit-border-image: -webkit-linear-gradient(top, #a9b5b6 0%, #009645 100%);
+    /* -moz-border-image: -moz-linear-gradient(top, #a9b5b6 0%, #009645 100%);
+    -webkit-border-image: -webkit-linear-gradient(top, #a9b5b6 0%, #009645 100%); */
     border-image: linear-gradient(to bottom, #a9b5b6 0%, #009645 100%);
     border-image-slice: 1;
+    /* overflow:scroll; */
+    /* height: 100px;
+    overflow-y: auto; */
+}
 
+table{
+  display:block;
+  overflow:auto;
+  height:80%;
+  width:100%;
 }
 
 header h1{

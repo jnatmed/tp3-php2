@@ -43,22 +43,22 @@
                     </td>
                 </tr>                                                        
             </table><br><br>
-                <input type="text" value="<?= $turno['nombre_paciente']; ?>" name="Nombre_del_Paciente" hidden="true">
-                <input type="text" value="<?= $turno['email']; ?>" name="Email" hidden="true">
-                <input type="text" value="<?= $turno['telefono']; ?>" name="Telefono" hidden="true">
-                <input type="text" value="<?= $turno['edad']; ?>" name="Edad" hidden="true">
-                <input type="text" value="<?= $turno['talla_calzado']; ?>" name="Talla_de_calzado" hidden="true">
-                <input type="text" value="<?= $turno['altura']; ?>" name="altura" hidden="true">
-                <input type="text" value="<?= $turno['fecha_nacimiento']; ?>" name="Fecha_de_nacimiento" hidden="true">
-                <input type="text" value="<?= $turno['color_pelo']; ?>" name="Color_de_pelo" hidden="true">
-                <input type="text" value="<?= $turno['fecha_turno']; ?>" name="Fecha_del_turno" hidden="true">
-                <input type="text" value="<?= $turno['hora_turno']; ?>" name="Horario_del_turno" hidden="true">
-                <input type="text" value="<?= $turno['dir_img']; ?>" name="dir_img" hidden="true">
-                <input type="text" value="<?= $turno['tipo_imagen']; ?>" name="tipo_imagen" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['nombre_paciente']; ?>" name="Nombre_del_Paciente" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['email']; ?>" name="Email" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['telefono']; ?>" name="Telefono" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['edad']; ?>" name="Edad" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['talla_calzado']; ?>" name="Talla_de_calzado" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['altura']; ?>" name="altura" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['fecha_nacimiento']; ?>" name="Fecha_de_nacimiento" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['color_pelo']; ?>" name="Color_de_pelo" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['fecha_turno']; ?>" name="Fecha_del_turno" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['hora_turno']; ?>" name="Horario_del_turno" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['dir_img']; ?>" name="dir_img" hidden="true">
+                <input class="input_oculto" type="text" value="<?= $turno['tipo_imagen']; ?>" name="tipo_imagen" hidden="true">
         <?php 
           if (!empty($this->datos_mal_cargados)){ ?>
-            <input type="submit" name='enviar' value="Confirmar Turno" disabled>
-            <input type="submit" name='corregir' value="Corregir Turno">
+            <input class="boton" type="submit" name='enviar' value="Confirmar Turno" disabled>
+            <input class="boton" type="submit" name='corregir' value="Corregir Turno">
         </form>    
 
             <ul> Errores Encontrados:
@@ -67,7 +67,7 @@
             <?php endforeach; ?>
             </ul>
         <?php }else{ ?>
-                <input type="submit" name='enviar' value="Confirmar Turno">
+                <input class="boton" type="submit" name='enviar' value="Confirmar Turno">
             </form>    
 
            <?php echo "<h1>Datos correctamente cargados</h1>";} ?>

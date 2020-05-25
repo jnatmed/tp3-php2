@@ -2,7 +2,7 @@
 
 
 html{
-  background: radial-gradient(ellipse at center, rgba(0,150,69,1) 0%, rgba(164,179,87,1) 100%);
+  background: radial-gradient(ellipse at center, #009645 0%, rgba(164,179,87,1) 100%);
 
 }
 
@@ -17,14 +17,23 @@ input, label {
     box-sizing: border-box;
   } 
 
-  .boton{
-    display: inline-block;
-  }
+.boton{
+  display: inline-block;
+  background-color: #009645;
+  border-radius: 16px;
+  padding: 5px;
+  color: white;
+}
 
 #turnos{
     font-family: 'Swiss 721 Bold Condensed BT', 'Arial-Narrow', sans-serif;
-    border-collapse: collapse;
-    width: auto;
+    /* border-collapse: collapse;
+    width: auto; */
+    border: 20px solid transparent;
+    -moz-border-image: -moz-linear-gradient(top, #a9b5b6 0%, #009645 100%);
+    -webkit-border-image: -webkit-linear-gradient(top, #a9b5b6 0%, #009645 100%);
+    border-image: linear-gradient(to bottom, #a9b5b6 0%, #009645 100%);
+    border-image-slice: 1;
 
 }
 
@@ -68,9 +77,13 @@ legend{
 .datos_del_turno{
   grid-area: datos_del_turno;
 }
-/* .btn_corregir{
+.btn_corregir{
   grid-area: btn_corregir;
-} */
+  background-color: #009645;
+  border-radius: 16px;
+  padding: 5px;
+  color: white;
+}
 .form_ingreso{
   display: grid;
   grid-template-areas:  

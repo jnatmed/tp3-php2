@@ -44,8 +44,8 @@
                         <td><img src='<?php echo("{$this->imgController->cargarImagen()}"); ?>' alt="imagen" class="receta_cargada"></td>
                     </tr>
             </table>
-            <button type="submit" name='baja_turno' value="<?= $this->turno[0]['id']; ?>" >Eliminar Turno</button>
-            <button type="submit" name='modificacion_turno' value="<?= $this->turno[0]['id']; ?>" >Modificar Turno</button>
+            <button class="boton" type="submit" name='baja_turno' value="<?= $this->turno[0]['id']; ?>" >Eliminar Turno</button>
+            <button class="boton" type="submit" name='modificacion_turno' value="<?= $this->turno[0]['id']; ?>" >Modificar Turno</button>
         </form>
         </main>
         <?php include "views/estructura/footer.view.php"; ?>

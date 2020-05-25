@@ -32,7 +32,7 @@
                         <td><?= $turno['nombre_paciente']; ?></td> 
                         <td><?= $turno['telefono'];?></td>
                         <td><?= $turno['email']; ?></td>                    
-                        <td><button type="submit" name="id_turno" value="<?= $turno['id']; ?>" >Ver Turno</button></td>
+                        <td><button class="boton" type="submit" name="id_turno" value="<?= $turno['id']; ?>" >Ver Turno</button></td>
                     </tr>
                 <?php endforeach ?>
             </table>

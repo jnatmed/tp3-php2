@@ -4,41 +4,122 @@ namespace App\controlador;
 
 class imagenController
 {
-    public $target_dir = "recetas/";
-    public $target_file = "";
+    public $extensionImagen;
+    public $tamanioImagen;
+    public $nombreImagen;
+    public $imagenCodificada;
     public $tiposPermitidos = ['jpg','png','jpeg'];
-    public $dirTemp = "";
-    public $nombreImagenMd5 = "";
+    public $extension;
+    public $maximo_tamanio_imagen_valido;
+    const MAXIMO_TAMANIO_IMAGEN = 10;
 
-    public function __construct($array_FILES,$fechaTurno, $horaTurno)
+    public function __construct($array_FILES = NULL)
     {
-        $this->dirTemp = $array_FILES['imagen_receta']['tmp_name'];
-        $this->nombreImagenMd5 = md5($fechaTurno.$horaTurno);
-        $this->tipoImagen = strtolower(pathinfo(basename($array_FILES['imagen_receta']['name']),PATHINFO_EXTENSION));
-        $this->target_file = $this->target_dir.$this->nombreImagenMd5.'.'.$this->tipoImagen;
+        if (isset($array_FILES)){
+            $this->extensionImagen = $array_FILES['imagen_receta']['type'];
+            $this->tamanioImagen = $array_FILES['imagen_receta']['size'];
+            $this->nombreImagen = $array_FILES['imagen_receta']['tmp_name'];
+        }else{
+            $this->extensionImagen = "";
+            $this->tamanioImagen = 0;
+            $this->nombreImagen = "";
+        }
+        $this->setMaximo_tamanio_imagen_valido(floatval(self::MAXIMO_TAMANIO_IMAGEN));
+    }
+
+    public function controlTamanioMaximoImagen(){
+        
+        if (($this->getTamanioEnMB()) <= $this->getMaximo_tamanio_imagen_valido()) {
+            return true;
+        }else{
+            return false;
+        } 
+    }
+
+public function getMaximo_tamanio_imagen_valido(){
+        return $this->maximo_tamanio_imagen_valido;
+    }
+
+    public function setMaximo_tamanio_imagen_valido($val){
+        $this->maximo_tamanio_imagen_valido = $val;
+    }
+    public function codificar(){
+        $fp = fopen($this->nombreImagen,"rb");
+        $this->imagenCodificada = fread($fp, filesize($this->nombreImagen));
+        $this->imagenCodificada = base64_encode($this->imagenCodificada);
+        fclose($fp);
     }
     
-    public function tipoImagenValida()
+    public function decodificar(){
+        return base64_decode($this->getImagenCodificada());
+    }
+
+    public function setTipoImagen($tipoImg){
+        $this->extensionImagen = $tipoImg;
+    }
+    public function getTipoImagen(){
+        return $this->extensionImagen;
+    }
+
+    public function devolverPathImagen($imgBase64){
+        $decoded = base64_decode($imgBase64);
+        $this->setPathFile('img/tmp.'.$this->getExtension());
+        file_put_contents($this->getPathFile(),$decoded);
+        $this->setTamanioImagen(filesize($this->getPathFile()));
+    }
+
+    public function cargarImagen(){
+        if ($this->imagenCargada()){    
+            return $this->getPathFile();
+        }else{
+            return "img/contenido-no-disponible.jpg";
+        }
+
+    }
+
+    public function setExtension($ext){
+        $this->extension = $ext;
+    }
+    public function getExtension(){
+        return $this->extension;
+    }
+    
+    public function setPathFile($pfile){
+        $this->pathFile = $pfile;
+    }
+
+    public function getPathFile(){
+        return $this->pathFile;
+    }
+
+    public function getTamanioEnMB(){
+        return ($this->getTamanioImagen() / 1048576);
+    }
+
+    public function getImagenCodificada(){
+        return $this->imagenCodificada;
+    }
+
+    public function imagenCargada(){
+        return ($this->getTamanioImagen() <> 0);
+    }
+
+    public function setTamanioImagen($tamanio){
+        $this->tamanioImagen = $tamanio;
+    }
+    public function getTamanioImagen(){
+        return $this->tamanioImagen;
+    }
+    public function controlTipoImagenValida()
     {
         $encontrado = false;
         foreach ($this->tiposPermitidos as $extension){
-            if ($this->tipoImagen == $extension){
+            if (strpos($this->getTipoImagen(),$extension)!==false){
+                $this->setExtension($extension);
                 $encontrado = true;
             }
         }
         if ($encontrado) {return true;} else {return false;}
-    }
-    public function getDirTemp()
-    {
-        return $this->dirTemp;
-    }
-    public function getTargetFile()
-    {
-        return $this->target_file;
-    }
-    public function guardarImagen(){
-        return move_uploaded_file($this->getDirTemp(),$this->getTargetFile());
-
     }
 
 }

@@ -2,6 +2,11 @@
 
 namespace App\controlador;
 
+include "models/TurnosDBModel.php";
+
+use \App\models\TurnosDBModel;
+use \App\controlador\imagenController;
+
 class planillaTurnosController
 {
     public $planillaTurnos = [];
@@ -9,35 +14,50 @@ class planillaTurnosController
     public $tamaño_planilla = 0;
     public $archivoTurnos = "";
     public $turno = [];
+    public $dbturnos;
+    // public $nombresColumnas;
 
     public function __construct()
     {
-        $this->archivoTurnos = file_get_contents($this->pathTurnos);
-        $this->planillaTurnos = json_decode($this->archivoTurnos, true);
-    }
+        // ACA SE OBTIENE LA BASE DE DATOS   
+        $this->dbturnos = new TurnosDBModel;
 
-    public function guardarTurnoConfirmado($turno)
-    {
-        $this->planillaTurnos[count($this->planillaTurnos)+1] = $turno;
-        $json_planillaTurnos = json_encode($this->planillaTurnos);
-        file_put_contents($this->pathTurnos, $json_planillaTurnos);
+        // $this->planillaTurnos = $this->dbturnos->getTurnos();
     }
 
     public function verPlanillaTurnos()
     {
+        // echo("pre");
+        // var_dump($this->planillaTurnos);
+        $this->planillaTurnos = $this->dbturnos->getTurnos();
 
-        include "views/planilla.turnos.view.php";
-    }
-
-    public function cargarTurno($id_turno)
-    {
-        $this->turno[] = $this->planillaTurnos[intval($id_turno)];
+        include "views/listado.turnos.view.php";
     }
 
     public function verTurnoReservado()
     {
-        $this->cargarTurno($_POST['id_turno']);
-        include "views/turno.reservado.view.php";
+        $this->turno = $this->dbturnos->getTurnoSeleccionado($_POST['id_turno']);
+        $this->imgController = new imagenController();
+        if($this->turno[0]['imagen'] <> ''){
+            $this->imgController->setTipoImagen($this->turno[0]['tipo_imagen']);
+            $this->imgController->controlTipoImagenValida();
+            $this->imgController->devolverPathImagen($this->turno[0]['imagen']);
+        }
+        // echo("<pre>");    
+        // echo("verTurnoReservado<br>");    
+        // var_dump($this->turno);
+        // exit();
+
+        include "views/consulta.turno.view.php";
+    }
+    public function bajaTurnoReservado()
+    {
+        // echo("<pre>");    
+        // echo("bajaTurnoReservado<br>");    
+        // var_dump($_POST);
+        // exit();
+        $this->turno = $this->dbturnos->bajaTurnoSeleccionado($_POST);
+        $this->verPlanillaTurnos();
     }
 
     public function buscarFechaTurno($fecha_turno, $hora_turno)

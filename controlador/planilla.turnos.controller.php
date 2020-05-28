@@ -1,11 +1,14 @@
 <?php
-
 namespace App\controlador;
 
 include "models/TurnosDBModel.php";
+require_once 'vendor/autoload.php';
 
 use \App\models\TurnosDBModel;
 use \App\controlador\imagenController;
+use Twig_Loader_Filesystem;
+use Twig\Environment;
+// use Twig\Loader\FilesystemLoader;
 
 class planillaTurnosController
 {
@@ -15,12 +18,16 @@ class planillaTurnosController
     public $archivoTurnos = "";
     public $turno = [];
     public $dbturnos;
+    public $loader;
+    public $twig;
     // public $nombresColumnas;
 
     public function __construct()
     {
         // ACA SE OBTIENE LA BASE DE DATOS   
         $this->dbturnos = new TurnosDBModel;
+        $this->loader = new Twig_Loader_Filesystem('views');
+        $this->twig = new Environment($this->loader, []);
 
         // $this->planillaTurnos = $this->dbturnos->getTurnos();
     }
@@ -31,7 +38,17 @@ class planillaTurnosController
         // var_dump($this->planillaTurnos);
         $this->planillaTurnos = $this->dbturnos->getTurnos();
 
-        include "views/listado.turnos.view.php";
+        $planilla = $this->planillaTurnos;
+        // $person = [
+        //     'name' => 'Juan',
+        //     'age' => 26
+        // ];
+        // echo("pre");
+        // var_dump($planilla);
+        // exit(0);
+        echo $this->twig->render('listado.turnos.view.twig', array('lista_turnos' => $planilla));
+
+        // include "views/listado.turnos.view.php";
     }
 
     public function verTurnoReservado()

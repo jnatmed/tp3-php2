@@ -55,8 +55,9 @@ class TurnosDBModel
         // var_dump($this->db);
         
         $sql = "SELECT * FROM turnos";   
-
-        foreach ($this->db->query($sql) as $res){
+        $result = $this->db->query($sql);
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        foreach ($result as $res){
             $this->turnos[] = $res;
         }
 

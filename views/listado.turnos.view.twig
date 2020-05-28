@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>Planilla de Turnos</title>
@@ -10,7 +9,7 @@
     </head>
     <body>
         <main>
-            <?php include "views/estructura/cabecera.view.php"; ?>
+            {% include 'estructura/cabecera.view.php' %}
             <section class="contenedor_principal"> 
 
             <form action="/ver_turno_reservado" method='POST'>
@@ -23,24 +22,22 @@
                     <th>Telefono</th>
                     <th>Email</th>
                     <th>Consulta de Turno</th>
-                    <!-- <th>Eliminacion Turno</th> -->
                 </tr>
-                <?php foreach ($this->planillaTurnos as $nroTurno => $turno):?>
+                {% for item, value in lista_turnos %}            
                     <tr>
-                        <td><?= $turno['fecha_turno'];?></td>
-                        <td><?= $turno['hora_turno'];?></td> 
-                        <td><?= $turno['nombre_paciente']; ?></td> 
-                        <td><?= $turno['telefono'];?></td>
-                        <td><?= $turno['email']; ?></td>                    
-                        <td><button class="boton" type="submit" name="id_turno" value="<?= $turno['id']; ?>" >Ver Turno</button></td>
-                    </tr>
-                <?php endforeach ?>
+                        <td>{{ lista_turnos[item].fecha_turno }}</td>
+                        <td>{{ lista_turnos[item].hora_turno}}</td> 
+                        <td>{{ lista_turnos[item].nombre_paciente}}</td> 
+                        <td>{{ lista_turnos[item].telefono}}</td> 
+                        <td>{{ lista_turnos[item].email}}</td> 
+                        <td><button class="boton" type="submit" name="id_turno" value='{{ lista_turnos[item].id }}' >Ver Turno</button></td>
+                    </tr>                    
+                {% endfor %}
             </table>
             </form>
         </section>
     
         </main>
-        <?php include "views/estructura/footer.view.php"; ?>
-
+        {% include "estructura/footer.view.php" %}
     </body>
 </html>

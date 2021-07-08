@@ -12,7 +12,7 @@ use \Monolog\Handler\BrowserConsoleHandler;
 
 class TurnosDBModel
 {
-   
+
     public $turnos;
     private $db, $dsn, $conexion;
     public $params = [
@@ -21,7 +21,7 @@ class TurnosDBModel
         'pwd' => 'y00s4d14',
         'db' => 'dbturnos'
     ];
-    
+
     public function motrarMsj($msj){
         // echo($msj);
     }
@@ -29,7 +29,7 @@ class TurnosDBModel
     public function __construct(){
     /**
      * Cargo el objeto Logger
-     *  */    
+     *  */
 
         $this->logger = new Logger('LogABMTurnosDataBase');
         $this->logger->pushHandler(new RotatingFileHandler('logs/LogABMTurnosDataBase.log'), 7);
@@ -37,14 +37,14 @@ class TurnosDBModel
 
         $this->dsn = sprintf("mysql:host=%s;dbname=%s", $this->params['host'], $this->params['db']);
         try {
-            $this->db = new PDO($this->dsn, $this->params['user'],$this->params['pwd']);    
+            $this->db = new PDO($this->dsn, $this->params['user'],$this->params['pwd']);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (\Throwable $th) {
             echo ("<pre>");
             var_dump($th);
-            exit(0);   
+            exit(0);
         }
-    }   
+    }
 
     private function setNames(){
         return $this->db->query("SET NAMES 'utf8'");
@@ -53,8 +53,8 @@ class TurnosDBModel
     public function getTurnos(){
         // self::setNames();
         // var_dump($this->db);
-        
-        $sql = "SELECT * FROM turnos";   
+
+        $sql = "SELECT * FROM turnos";
 
         foreach ($this->db->query($sql) as $res){
             $this->turnos[] = $res;
@@ -62,7 +62,7 @@ class TurnosDBModel
 
         return $this->turnos;
         $this->db = NULL;
-    }       
+    }
 
     public function getTurnoSeleccionado($id_turno){
 
@@ -73,7 +73,7 @@ class TurnosDBModel
         try{
             foreach ($this->db->query($sql) as $res){
                 $resu[] = $res;
-            }    
+            }
 
         // echo("<pre>");
         // echo("getTurnoSeleccionado<br>");
@@ -81,7 +81,7 @@ class TurnosDBModel
         // exit();
 
             return $resu;
-            $this->db = NULL;    
+            $this->db = NULL;
         }catch(Exception $e){
             echo($e);
         }
@@ -91,20 +91,20 @@ class TurnosDBModel
         // echo("<pre>");
         // echo("insertarTurno<br>");
         // var_dump($valores);
-        // exit(); 
+        // exit();
         // $this->imgController = new imagenController();
         // $this->imgController->codificar($valores['dir_img']);
-        $consulta = "INSERT INTO `turnos`(`id`, 
-                                        `fecha_turno`, 
-                                        `hora_turno`, 
-                                        `nombre_paciente`, 
-                                        `email`, 
-                                        `telefono`, 
-                                        `fecha_nacimiento`, 
-                                        `edad`, 
-                                        `talla_calzado`, 
-                                        `altura`, 
-                                        `color_pelo`, 
+        $consulta = "INSERT INTO `turnos`(`id`,
+                                        `fecha_turno`,
+                                        `hora_turno`,
+                                        `nombre_paciente`,
+                                        `email`,
+                                        `telefono`,
+                                        `fecha_nacimiento`,
+                                        `edad`,
+                                        `talla_calzado`,
+                                        `altura`,
+                                        `color_pelo`,
                                         `imagen`,
                                         `tipo_imagen`) VALUES (NULL,
                                                         '{$valores['fecha_turno']}',
@@ -123,25 +123,25 @@ class TurnosDBModel
             $this->motrarMsj($consulta);
             // echo($consulta);
             $sql = $this->db->prepare($consulta);
-            $sql->execute();    
+            $sql->execute();
             unset($valores['dir_img']);
             unset($valores['tipo_imagen']);
-            // $this->logger->info();   
+            // $this->logger->info();
             $this->logger->info("ALTA TURNO: ", $valores);
         }catch(Exception $e){
-            echo($e);        
+            echo($e);
         }
     }
     public function actualizarTurno($valores,$img_receta){
         // echo("<pre>");
         // echo("insertarTurno<br>");
         // var_dump($img_receta);
-        // exit(); 
+        // exit();
         $this->imgController = new imagenController($img_receta);
         if($this->imgController->imagenCargada()){
             $this->imgController->codificar();
         }
-        $consulta = "UPDATE `turnos` SET 
+        $consulta = "UPDATE `turnos` SET
                             `fecha_turno`='{$valores['Fecha_del_turno']}',
                             `hora_turno`='{$valores['Horario_del_turno']}',
                             `nombre_paciente`='{$valores['Nombre_del_Paciente']}',
@@ -151,7 +151,7 @@ class TurnosDBModel
                             `edad`='{$valores['Edad']}',
                             `talla_calzado`='{$valores['Talla_de_calzado']}',
                             `altura`='{$valores['altura']}',
-                            `color_pelo`='{$valores['Color_de_pelo']}', 
+                            `color_pelo`='{$valores['Color_de_pelo']}',
                             `imagen`='{$this->imgController->getImagenCodificada()}',
                             `tipo_imagen`='{$this->imgController->getTipoImagen()}' WHERE id = '{$valores['id']}'";
         try{
@@ -159,13 +159,13 @@ class TurnosDBModel
             // $p = explode("'imagen'",$consulta);
             // echo($p[0]);
             $sql = $this->db->prepare($consulta);
-            // $sql->execute($valores);    
-            $sql->execute(); 
+            // $sql->execute($valores);
+            $sql->execute();
             unset($valores['dir_img']);
             unset($valores['corregir_turno']);
-            $this->logger->info("MODIFICACION TURNO:",$valores);   
+            $this->logger->info("MODIFICACION TURNO:",$valores);
         }catch(Exception $e){
-            echo($e);        
+            echo($e);
         }
     }
 
@@ -181,12 +181,12 @@ class TurnosDBModel
             if($sql->execute([$post['baja_turno']]) === TRUE){
                 echo("registro ha sido eliminado, id=>{$post['baja_turno']}");
 
-                $this->logger->info("BAJA TURNO:", $post);   
+                $this->logger->info("BAJA TURNO:", $post);
 
-                // $this->logger->guardarAccion('b',$consulta);   
+                // $this->logger->guardarAccion('b',$consulta);
             }else{
                 echo("No se pudo eliminar el registro<br>");
-            }    
+            }
         }catch(Exception $e){
             echo($e);
         }
